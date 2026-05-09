@@ -62,3 +62,14 @@
   lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 })();
+
+// Mobile menu toggle
+(function menu() {
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navLinks');
+  if (!toggle || !links) return;
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => links.classList.remove('open'));
+  });
+})();

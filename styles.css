@@ -733,3 +733,73 @@ footer {
   transition: color 0.3s, border-color 0.3s;
 }
 .lightbox-close:hover { color: var(--bone); border-color: var(--pounamu-light); }
+
+/* ─── STICKY MOBILE CTA ─── */
+.mobile-cta {
+  display: none;
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 200;
+  background: var(--ember);
+  color: var(--ink);
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  padding: 1rem 1.4rem;
+  font-weight: 500;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  :root { --gutter: 1.5rem; --section-y: 5rem; }
+
+  nav { padding: 1.1rem 1.5rem; }
+  nav.scrolled { padding: 0.8rem 1.5rem; }
+
+  .menu-toggle { display: block; }
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: rgba(14, 13, 11, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--line);
+    display: none;
+    align-items: stretch;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 0.4rem 0; }
+  .nav-enquire { text-align: center; }
+
+  .hero { padding: 5rem 1.5rem 0; min-height: 600px; }
+  .hero-h1 { font-size: clamp(2.2rem, 9vw, 3.6rem); }
+  .hero-meta { flex-wrap: wrap; justify-content: center; gap: 0.6rem; padding: 0.8rem 1rem; }
+  .hero-meta .dot { display: none; }
+
+  .practice-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .practice-facts { grid-template-columns: 1fr 1fr; }
+  .fact:nth-child(2) { border-right: none; }
+  .fact:nth-child(3), .fact:nth-child(4) { border-top: 1px solid var(--line); }
+
+  .work-list { gap: 4rem; }
+  .work-card,
+  .work-card.reverse { grid-template-columns: 1fr; gap: 2rem; }
+  .work-card.reverse .work-img { order: 0; }
+
+  .record-grid { grid-template-columns: 1fr; }
+  .record-item { border-right: 1px solid var(--line); }
+
+  .commission-process li { grid-template-columns: 3rem 1fr; gap: 1rem; }
+
+  .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+
+  .mobile-cta { display: block; }
+  body { padding-bottom: 3.4rem; }
+}
