@@ -1,0 +1,66 @@
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=DM+Serif+Display:ital@0;1&family=Libre+Baskerville:ital,wght@0,400;1,400&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+<style>
+  .font-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+  .font-card { cursor: pointer; border: 3px solid transparent; border-radius: 3px; background: #fff; overflow: hidden; transition: border-color 0.2s; }
+  .font-card.selected { border-color: #6366f1; }
+  .font-label { padding: 0.5rem 1rem; font-size: 0.72rem; font-weight: 600; background: #F4F4F4; color: #444; font-family: sans-serif; letter-spacing: 0.05em; text-transform: uppercase; border-bottom: 1px solid #E8E8E8; }
+  .font-preview { padding: 1.4rem 1.4rem 1.2rem; border-bottom: 1px solid #F0F0F0; }
+  .font-eye { font-size: 8px; letter-spacing: 0.4em; text-transform: uppercase; color: #AAA; margin-bottom: 0.7rem; font-family: sans-serif; }
+  .font-hed { font-size: 36px; font-weight: 300; line-height: 1.05; color: #0A0A0A; margin-bottom: 0.5rem; }
+  .font-hed em { font-style: italic; }
+  .font-sub { font-size: 9.5px; color: #777; line-height: 1.7; font-family: sans-serif; }
+  .font-body-sample { padding: 0.9rem 1.4rem; font-size: 10px; color: #555; line-height: 1.8; border-bottom: 1px solid #F0F0F0; }
+  .font-meta { padding: 0.6rem 1.4rem; font-size: 8px; color: #999; font-family: sans-serif; }
+</style>
+
+<h2>Which typeface?</h2>
+<p class="subtitle">Same layout, same words — four very different characters. The heading font sets the entire tone.</p>
+
+<div class="font-grid">
+
+  <div class="font-card" data-choice="cormorant" onclick="toggleSelect(this)">
+    <div class="font-label">Cormorant Garamond</div>
+    <div class="font-preview" style="font-family:'Cormorant Garamond',serif">
+      <div class="font-eye">Dan Ross · Private Commissions</div>
+      <div class="font-hed" style="font-family:'Cormorant Garamond',serif">The work<br><em>tells first.</em></div>
+      <div class="font-sub">Architectural pieces and objects that amplify the story already held in a place.</div>
+    </div>
+    <div class="font-body-sample" style="font-family:'Cormorant Garamond',serif;font-size:12px">He will visit the site before he agrees to anything. He will notice things about the space that you stopped seeing years ago.</div>
+    <div class="font-meta">Elegant · literary · refined · slightly old-world</div>
+  </div>
+
+  <div class="font-card" data-choice="fraunces" onclick="toggleSelect(this)">
+    <div class="font-label">Fraunces</div>
+    <div class="font-preview" style="font-family:'Fraunces',serif">
+      <div class="font-eye">Dan Ross · Private Commissions</div>
+      <div class="font-hed" style="font-family:'Fraunces',serif">The work<br><em>tells first.</em></div>
+      <div class="font-sub">Architectural pieces and objects that amplify the story already held in a place.</div>
+    </div>
+    <div class="font-body-sample" style="font-family:'Fraunces',serif;font-size:12px">He will visit the site before he agrees to anything. He will notice things about the space that you stopped seeing years ago.</div>
+    <div class="font-meta">Distinctive · optical · warm · slightly unconventional</div>
+  </div>
+
+  <div class="font-card" data-choice="dm-serif" onclick="toggleSelect(this)">
+    <div class="font-label">DM Serif Display</div>
+    <div class="font-preview" style="font-family:'DM Serif Display',serif">
+      <div class="font-eye">Dan Ross · Private Commissions</div>
+      <div class="font-hed" style="font-family:'DM Serif Display',serif">The work<br><em>tells first.</em></div>
+      <div class="font-sub">Architectural pieces and objects that amplify the story already held in a place.</div>
+    </div>
+    <div class="font-body-sample" style="font-family:'DM Serif Display',serif;font-size:12px">He will visit the site before he agrees to anything. He will notice things about the space that you stopped seeing years ago.</div>
+    <div class="font-meta">Modern editorial · crisp · magazine-feeling · confident</div>
+  </div>
+
+  <div class="font-card" data-choice="lora" onclick="toggleSelect(this)">
+    <div class="font-label">Lora</div>
+    <div class="font-preview" style="font-family:'Lora',serif">
+      <div class="font-eye">Dan Ross · Private Commissions</div>
+      <div class="font-hed" style="font-family:'Lora',serif">The work<br><em>tells first.</em></div>
+      <div class="font-sub">Architectural pieces and objects that amplify the story already held in a place.</div>
+    </div>
+    <div class="font-body-sample" style="font-family:'Lora',serif;font-size:12px">He will visit the site before he agrees to anything. He will notice things about the space that you stopped seeing years ago.</div>
+    <div class="font-meta">Grounded · sturdy · approachable · quietly authoritative</div>
+  </div>
+
+</div>

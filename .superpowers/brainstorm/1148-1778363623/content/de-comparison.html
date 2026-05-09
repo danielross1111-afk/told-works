@@ -1,0 +1,106 @@
+<style>
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+  .card { cursor: pointer; border: 3px solid transparent; border-radius: 3px; overflow: hidden; transition: border-color 0.2s; }
+  .card.selected { border-color: #6366f1; }
+  .card-label { padding: 0.6rem 1rem; font-size: 0.78rem; font-weight: 600; }
+  .mockup-body { font-family: Georgia, serif; }
+
+  /* D */
+  .d { background: #FFFFFF; color: #0A0A0A; }
+  .d .nav { display:flex; justify-content:space-between; align-items:center; padding: 1rem 1.4rem; border-bottom: 1px solid #E8E8E8; }
+  .d .brand { font-size: 10px; letter-spacing: 0.38em; text-transform: uppercase; }
+  .d .links { display:flex; gap:1.2rem; }
+  .d .links span { font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase; color: #999; font-family: sans-serif; }
+  .d .hero { padding: 2rem 1.4rem 1.4rem; border-bottom: 1px solid #E8E8E8; }
+  .d .eye { font-size: 7.5px; letter-spacing: 0.42em; text-transform: uppercase; color: #AAAAAA; margin-bottom: 0.8rem; font-family: sans-serif; }
+  .d .hed { font-size: 34px; font-weight: 300; line-height: 1.02; }
+  .d .hed em { font-style: italic; }
+  .d .rule { width: 2rem; height: 2px; background: #0A0A0A; margin: 1rem 0; }
+  .d .sub { font-size: 9px; color: #777; line-height: 1.75; font-family: sans-serif; max-width: 280px; }
+  .d .works { border-top: 1px solid #E8E8E8; }
+  .d .work-row { display:flex; justify-content:space-between; align-items:center; padding: 0.85rem 1.4rem; border-bottom: 1px solid #E8E8E8; }
+  .d .work-title { font-size: 11px; }
+  .d .work-tag { font-size: 7px; letter-spacing: 0.15em; text-transform: uppercase; color: #999; font-family: sans-serif; }
+  .d .work-arrow { font-size: 11px; color: #CCC; }
+  .d .img-strip { background: #0A0A0A; height: 90px; display:flex; align-items:flex-end; padding: 0.8rem 1.4rem; }
+  .d .img-strip span { font-size: 7.5px; letter-spacing: 0.15em; color: rgba(255,255,255,0.4); font-family: sans-serif; text-transform: uppercase; }
+  .d-label { background: #F0F0F0; color: #0A0A0A; }
+
+  /* E */
+  .e { background: #FAFAFA; color: #111; }
+  .e .nav { display:flex; justify-content:space-between; align-items:center; padding: 1rem 1.4rem; border-bottom: 1px solid #E4E4E0; }
+  .e .brand { font-size: 10px; letter-spacing: 0.38em; text-transform: uppercase; }
+  .e .links { display:flex; gap:1.2rem; }
+  .e .links span { font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase; color: #888; font-family: sans-serif; }
+  .e .hero { padding: 2rem 1.4rem 1.4rem; border-bottom: 1px solid #E4E4E0; }
+  .e .eye { font-size: 7.5px; letter-spacing: 0.42em; text-transform: uppercase; color: #2B4E38; margin-bottom: 0.8rem; font-family: sans-serif; }
+  .e .hed { font-size: 34px; font-weight: 300; line-height: 1.02; }
+  .e .hed em { font-style: italic; color: #2B4E38; }
+  .e .rule { width: 2rem; height: 1px; background: #2B4E38; margin: 1rem 0; }
+  .e .sub { font-size: 9px; color: #777; line-height: 1.75; font-family: sans-serif; max-width: 280px; }
+  .e .works { border-top: 1px solid #E4E4E0; }
+  .e .work-row { display:flex; justify-content:space-between; align-items:center; padding: 0.85rem 1.4rem; border-bottom: 1px solid #E4E4E0; }
+  .e .work-title { font-size: 11px; }
+  .e .work-tag { font-size: 7px; letter-spacing: 0.15em; text-transform: uppercase; color: #2B4E38; font-family: sans-serif; }
+  .e .work-arrow { font-size: 11px; color: #BBB; }
+  .e .img-strip { background: #1C2B22; height: 90px; display:flex; align-items:flex-end; padding: 0.8rem 1.4rem; }
+  .e .img-strip span { font-size: 7.5px; letter-spacing: 0.15em; color: rgba(255,255,255,0.38); font-family: sans-serif; text-transform: uppercase; }
+  .e-label { background: #EBF0EC; color: #2B4E38; }
+
+  .note { margin-top: 1.2rem; font-size: 0.8rem; color: #888; }
+  .note strong { color: #555; }
+</style>
+
+<h2>D vs E — the final two</h2>
+<p class="subtitle">D is pure monochrome — the work carries all the colour. E introduces one accent: deep forest green.</p>
+
+<div class="split">
+
+  <div class="card" data-choice="d" onclick="toggleSelect(this)">
+    <div class="card-label d-label">D — Pure white · monochrome</div>
+    <div class="mockup-body d">
+      <div class="nav">
+        <div class="brand">Told Works</div>
+        <div class="links"><span>Work</span><span>About</span><span>Enquire</span></div>
+      </div>
+      <div class="hero">
+        <div class="eye">Dan Ross · Private Commissions · Queenstown</div>
+        <div class="hed">The work<br><em>tells first.</em></div>
+        <div class="rule"></div>
+        <div class="sub">Architectural pieces, installations and objects that amplify the story already held in a place.</div>
+      </div>
+      <div class="img-strip"><span>The Sixteen — ironbark sentinels · Lake Hayes</span></div>
+      <div class="works">
+        <div class="work-row"><span class="work-title">The Cellar &amp; The Racks</span><span class="work-tag">Commission</span><span class="work-arrow">→</span></div>
+        <div class="work-row"><span class="work-title">The Sixteen</span><span class="work-tag">Legacy</span><span class="work-arrow">→</span></div>
+        <div class="work-row"><span class="work-title">The Threshold</span><span class="work-tag">Commission</span><span class="work-arrow">→</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-choice="e" onclick="toggleSelect(this)">
+    <div class="card-label e-label">E — White · forest green accent</div>
+    <div class="mockup-body e">
+      <div class="nav">
+        <div class="brand">Told Works</div>
+        <div class="links"><span>Work</span><span>About</span><span>Enquire</span></div>
+      </div>
+      <div class="hero">
+        <div class="eye">Dan Ross · Private Commissions · Queenstown</div>
+        <div class="hed">The work<br><em>tells first.</em></div>
+        <div class="rule"></div>
+        <div class="sub">Architectural pieces, installations and objects that amplify the story already held in a place.</div>
+      </div>
+      <div class="img-strip"><span>The Sixteen — ironbark sentinels · Lake Hayes</span></div>
+      <div class="works">
+        <div class="work-row"><span class="work-title">The Cellar &amp; The Racks</span><span class="work-tag">Commission</span><span class="work-arrow">→</span></div>
+        <div class="work-row"><span class="work-title">The Sixteen</span><span class="work-tag">Legacy</span><span class="work-arrow">→</span></div>
+        <div class="work-row"><span class="work-title">The Threshold</span><span class="work-tag">Commission</span><span class="work-arrow">→</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p class="note"><strong>D:</strong> Stark, pure — the photography and craftsmanship do all the talking. Feels like a gallery.<br>
+<strong>E:</strong> The green echoes the NZ landscape and timber/stone palette. Adds warmth without losing crispness.</p>

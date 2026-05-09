@@ -1,0 +1,84 @@
+<style>
+  .options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+  .option { cursor: pointer; border: 3px solid transparent; border-radius: 4px; overflow: hidden; transition: border-color 0.2s; background: #fff; }
+  .option.selected { border-color: #6366f1; }
+  .opt-label { padding: 0.7rem 1rem; font-size: 0.78rem; font-weight: 600; background: #F4F4F4; color: #222; font-family: sans-serif; }
+  .diagram { padding: 1.4rem; background: #FAFAFA; min-height: 280px; font-family: sans-serif; }
+  .page { background: #fff; border: 1px solid #DDD; border-radius: 2px; padding: 0.5rem 0.7rem; margin-bottom: 0.4rem; font-size: 0.7rem; }
+  .page-main { font-weight: 600; color: #1a1a1a; }
+  .page-sub { color: #888; font-size: 0.65rem; margin-top: 0.15rem; }
+  .arrow { text-align: center; color: #BBB; font-size: 0.7rem; margin: 0.3rem 0; }
+  .nest { margin-left: 1rem; }
+  .anchor { color: #2B4E38; }
+  .desc { padding: 1rem 1.4rem; background: #fff; font-size: 0.82rem; color: #555; line-height: 1.6; border-top: 1px solid #EEE; }
+  .desc strong { color: #222; }
+</style>
+
+<h2>Site structure — three options</h2>
+<p class="subtitle">All three use the same content. They differ in how a visitor moves through the work.</p>
+
+<div class="options">
+
+  <div class="option" data-choice="single" onclick="toggleSelect(this)">
+    <div class="opt-label">A — Single page (current Soulcraft)</div>
+    <div class="diagram">
+      <div class="page page-main">/ — Told Works
+        <div class="page-sub anchor">↓ Practice  ↓ Work  ↓ Standard  ↓ Commission</div>
+      </div>
+      <div class="arrow">↓ scroll</div>
+      <div class="page">Practice (bio)</div>
+      <div class="page">The Cellar & Racks</div>
+      <div class="page">The Sixteen</div>
+      <div class="page">The Threshold</div>
+      <div class="page">Workshop pieces</div>
+      <div class="page">The Standard</div>
+      <div class="page">Commission (enquire)</div>
+    </div>
+    <div class="desc"><strong>Continuous read.</strong> One long story. Same pattern as both Soulcraft files. Familiar.</div>
+  </div>
+
+  <div class="option" data-choice="multi" onclick="toggleSelect(this)">
+    <div class="opt-label">B — Multi-page (each work its own page)</div>
+    <div class="diagram">
+      <div class="page page-main">/ — Told Works
+        <div class="page-sub">Hero · Practice · Featured Work · Standard · Enquire</div>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="page page-main">/work
+        <div class="page-sub">All commissions index</div>
+      </div>
+      <div class="nest">
+        <div class="page">/work/the-cellar</div>
+        <div class="page">/work/the-sixteen</div>
+        <div class="page">/work/the-threshold</div>
+        <div class="page">/work/workshop</div>
+      </div>
+      <div class="page page-main">/practice — Dan's full story</div>
+      <div class="page page-main">/enquire — Commission process</div>
+    </div>
+    <div class="desc"><strong>Gallery model.</strong> Each work is a destination. Slower, more contemplative. Better URLs to share. Scales as Dan adds new pieces.</div>
+  </div>
+
+  <div class="option" data-choice="hybrid" onclick="toggleSelect(this)">
+    <div class="opt-label">C — Hybrid (best of both)</div>
+    <div class="diagram">
+      <div class="page page-main">/ — Told Works
+        <div class="page-sub anchor">↓ Practice  ↓ Work  ↓ Standard  ↓ Commission</div>
+      </div>
+      <div class="arrow">↓ scroll</div>
+      <div class="page">Practice (bio)</div>
+      <div class="page">Work — preview of all 4 commissions
+        <div class="page-sub anchor">→ "View the full piece" leads to dedicated page</div>
+      </div>
+      <div class="page">The Standard</div>
+      <div class="page">Commission</div>
+      <div class="arrow">↓ for deeper exploration</div>
+      <div class="page page-main">/work/the-cellar</div>
+      <div class="page page-main">/work/the-sixteen</div>
+      <div class="page page-main">/work/the-threshold</div>
+      <div class="page page-main">/work/workshop</div>
+    </div>
+    <div class="desc"><strong>One-page first, deeper if curious.</strong> Casual visitors get the full story scrolling. Serious visitors can go deep on any work.</div>
+  </div>
+
+</div>

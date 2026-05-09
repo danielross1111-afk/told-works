@@ -1,0 +1,84 @@
+<style>
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
+  .card { cursor: pointer; border: 2px solid transparent; border-radius: 4px; overflow: hidden; transition: border-color 0.2s; }
+  .card.selected { border-color: var(--accent, #6366f1); }
+  .preview-box { height: 220px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+
+  /* A: Dark editorial — like the original but more refined */
+  .preview-a { background: #0F0D0A; color: #EDE4D6; font-family: Georgia, serif; }
+  .preview-a .nav { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: #B87333; margin-bottom: auto; }
+  .preview-a .hed { font-size: 28px; font-weight: 300; line-height: 1.1; color: #EDE4D6; }
+  .preview-a .hed em { color: #B87333; font-style: italic; }
+  .preview-a .sub { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: #6B5E50; margin-top: 0.5rem; }
+  .preview-a .rule { width: 40px; height: 1px; background: #B87333; margin: 0.75rem 0; }
+
+  /* B: Warm cream editorial — light, refined, luxury print */
+  .preview-b { background: #F5F0E8; color: #1A1410; font-family: Georgia, serif; }
+  .preview-b .nav { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: #8A7560; margin-bottom: auto; }
+  .preview-b .hed { font-size: 28px; font-weight: 300; line-height: 1.1; color: #1A1410; }
+  .preview-b .hed em { font-style: italic; color: #6B4F2A; }
+  .preview-b .sub { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: #9A8A78; margin-top: 0.5rem; }
+  .preview-b .rule { width: 40px; height: 1px; background: #C4A882; margin: 0.75rem 0; }
+
+  /* C: Stone & slate — cool, architectural, structural */
+  .preview-c { background: #F2F1EE; color: #1C1C1A; font-family: Georgia, serif; }
+  .preview-c .nav { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: #5A6B60; margin-bottom: auto; }
+  .preview-c .hed { font-size: 28px; font-weight: 300; line-height: 1.1; color: #1C1C1A; }
+  .preview-c .hed em { font-style: italic; color: #3D5A47; }
+  .preview-c .sub { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: #888880; margin-top: 0.5rem; }
+  .preview-c .rule { width: 40px; height: 1px; background: #3D5A47; margin: 0.75rem 0; }
+
+  .card-body { padding: 0.75rem 1rem 1rem; background: var(--bg, white); }
+  .card-body h3 { font-size: 0.9rem; margin: 0 0 0.25rem; }
+  .card-body p { font-size: 0.78rem; color: #666; margin: 0; line-height: 1.5; }
+</style>
+
+<h2>Aesthetic direction</h2>
+<p class="subtitle">Dan said "clean editorial modern" — here are three takes. All use the same serif typography and considered layout, they differ in palette and feel.</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="preview-box preview-a">
+      <div class="nav">Told Works</div>
+      <div>
+        <div class="hed">The work<br><em>tells first.</em></div>
+        <div class="rule"></div>
+        <div class="sub">Private commissions · Queenstown</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Dark &amp; warm</h3>
+      <p>Ink background, copper accents. Evolved from Soulcraft — same gravitas, cleaner execution.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="preview-box preview-b">
+      <div class="nav">Told Works</div>
+      <div>
+        <div class="hed">The work<br><em>tells first.</em></div>
+        <div class="rule"></div>
+        <div class="sub">Private commissions · Queenstown</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Warm cream</h3>
+      <p>Parchment background, warm brown tones. Luxury print aesthetic — like a fine art monograph.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="preview-box preview-c">
+      <div class="nav">Told Works</div>
+      <div>
+        <div class="hed">The work<br><em>tells first.</em></div>
+        <div class="rule"></div>
+        <div class="sub">Private commissions · Queenstown</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Stone &amp; slate</h3>
+      <p>Cool off-white, forest green accents. Architectural, structural — feels like the material palette of the work itself.</p>
+    </div>
+  </div>
+</div>

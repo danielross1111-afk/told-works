@@ -1,0 +1,134 @@
+<style>
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+  .card { cursor: pointer; border: 3px solid transparent; border-radius: 3px; overflow: hidden; transition: border-color 0.2s; }
+  .card.selected { border-color: #6366f1; }
+  .mockup-body { font-family: Georgia, serif; }
+  .card-label { padding: 0.6rem 1rem; font-size: 0.75rem; font-weight: 600; }
+
+  /* ── D: Pure white, black, single copper-black accent ── */
+  .d { background: #FFFFFF; color: #0A0A0A; }
+  .d .nav { display:flex; justify-content:space-between; align-items:center; padding: 0.9rem 1.2rem; border-bottom: 1px solid #E8E8E8; }
+  .d .brand { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; }
+  .d .links { display:flex; gap:1rem; }
+  .d .links span { font-size: 7px; letter-spacing: 0.25em; text-transform: uppercase; color: #999; font-family: sans-serif; }
+  .d .hero { padding: 1.8rem 1.2rem 1.2rem; }
+  .d .eye { font-size: 7px; letter-spacing: 0.45em; text-transform: uppercase; color: #999; margin-bottom: 0.7rem; font-family: sans-serif; }
+  .d .hed { font-size: 30px; font-weight: 300; line-height: 1.05; color: #0A0A0A; }
+  .d .hed em { font-style: italic; color: #0A0A0A; }
+  .d .rule { width: 1.5rem; height: 2px; background: #0A0A0A; margin: 0.8rem 0; }
+  .d .sub { font-size: 8.5px; color: #666; line-height: 1.75; font-family: sans-serif; font-weight: 400; }
+  .d .img { background: #111; height: 75px; display:flex; align-items:flex-end; padding: 0.6rem 0.9rem; }
+  .d .img span { font-size: 7px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); font-family: sans-serif; }
+  .d .footer-strip { display:flex; gap:0; border-top: 1px solid #E8E8E8; }
+  .d .strip-item { flex:1; padding: 0.7rem 0.9rem; border-right: 1px solid #E8E8E8; }
+  .d .strip-item:last-child { border-right: none; }
+  .d .strip-n { font-size: 9px; font-weight: 500; letter-spacing: 0.05em; }
+  .d .strip-l { font-size: 7px; color: #999; letter-spacing: 0.1em; text-transform: uppercase; font-family: sans-serif; margin-top: 2px; }
+  .d-label { background: #F4F4F4; color: #111; }
+
+  /* ── E: Bright white, charcoal, forest green accent ── */
+  .e { background: #FAFAFA; color: #141414; }
+  .e .nav { display:flex; justify-content:space-between; align-items:center; padding: 0.9rem 1.2rem; border-bottom: 1px solid #E4E4E4; }
+  .e .brand { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; }
+  .e .links { display:flex; gap:1rem; }
+  .e .links span { font-size: 7px; letter-spacing: 0.25em; text-transform: uppercase; color: #888; font-family: sans-serif; }
+  .e .hero { padding: 1.8rem 1.2rem 1.2rem; }
+  .e .eye { font-size: 7px; letter-spacing: 0.45em; text-transform: uppercase; color: #2B4E38; margin-bottom: 0.7rem; font-family: sans-serif; }
+  .e .hed { font-size: 30px; font-weight: 300; line-height: 1.05; }
+  .e .hed em { font-style: italic; color: #2B4E38; }
+  .e .rule { width: 1.5rem; height: 1px; background: #2B4E38; margin: 0.8rem 0; }
+  .e .sub { font-size: 8.5px; color: #666; line-height: 1.75; font-family: sans-serif; }
+  .e .img { background: #1C2B22; height: 75px; display:flex; align-items:flex-end; padding: 0.6rem 0.9rem; }
+  .e .img span { font-size: 7px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.45); font-family: sans-serif; }
+  .e .footer-strip { display:flex; border-top: 1px solid #E4E4E4; }
+  .e .strip-item { flex:1; padding: 0.7rem 0.9rem; border-right: 1px solid #E4E4E4; }
+  .e .strip-item:last-child { border-right: none; }
+  .e .strip-n { font-size: 9px; font-weight: 500; }
+  .e .strip-l { font-size: 7px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; font-family: sans-serif; margin-top: 2px; }
+  .e-label { background: #EEF3F0; color: #2B4E38; }
+
+  /* ── F: Light grey, black type, rust/terracotta accent ── */
+  .f { background: #F5F5F3; color: #111110; }
+  .f .nav { display:flex; justify-content:space-between; align-items:center; padding: 0.9rem 1.2rem; border-bottom: 1px solid #E2E2DF; }
+  .f .brand { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; }
+  .f .links { display:flex; gap:1rem; }
+  .f .links span { font-size: 7px; letter-spacing: 0.25em; text-transform: uppercase; color: #888; font-family: sans-serif; }
+  .f .hero { padding: 1.8rem 1.2rem 1.2rem; }
+  .f .eye { font-size: 7px; letter-spacing: 0.45em; text-transform: uppercase; color: #A04830; margin-bottom: 0.7rem; font-family: sans-serif; }
+  .f .hed { font-size: 30px; font-weight: 300; line-height: 1.05; }
+  .f .hed em { font-style: italic; color: #A04830; }
+  .f .rule { width: 1.5rem; height: 1px; background: #A04830; margin: 0.8rem 0; }
+  .f .sub { font-size: 8.5px; color: #666; line-height: 1.75; font-family: sans-serif; }
+  .f .img { background: #2A2A28; height: 75px; display:flex; align-items:flex-end; padding: 0.6rem 0.9rem; }
+  .f .img span { font-size: 7px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); font-family: sans-serif; }
+  .f .footer-strip { display:flex; border-top: 1px solid #E2E2DF; }
+  .f .strip-item { flex:1; padding: 0.7rem 0.9rem; border-right: 1px solid #E2E2DF; }
+  .f .strip-item:last-child { border-right: none; }
+  .f .strip-n { font-size: 9px; font-weight: 500; }
+  .f .strip-l { font-size: 7px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; font-family: sans-serif; margin-top: 2px; }
+  .f-label { background: #EDE9E6; color: #A04830; }
+</style>
+
+<h2>Crisp & clean — three directions</h2>
+<p class="subtitle">All light backgrounds, sharp contrast, high-end editorial. Differ only in accent colour.</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="d" onclick="toggleSelect(this)">
+    <div class="card-label d-label">D — Pure white · monochrome</div>
+    <div class="mockup-body d">
+      <div class="nav"><div class="brand">Told Works</div><div class="links"><span>Work</span><span>About</span><span>Enquire</span></div></div>
+      <div class="hero">
+        <div class="eye">Dan Ross · Private Commissions</div>
+        <div class="hed">The work<br><em>tells first.</em></div>
+        <div class="rule"></div>
+        <div class="sub">Architectural pieces, installations and objects that amplify the story already held in a place.</div>
+      </div>
+      <div class="img"><span>The Sixteen — ironbark sentinels</span></div>
+      <div class="footer-strip">
+        <div class="strip-item"><div class="strip-n">25 yrs</div><div class="strip-l">Building & Making</div></div>
+        <div class="strip-item"><div class="strip-n">2 NZIA</div><div class="strip-l">Recognised builds</div></div>
+        <div class="strip-item"><div class="strip-n">By referral</div><div class="strip-l">Only</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-choice="e" onclick="toggleSelect(this)">
+    <div class="card-label e-label">E — White · forest green</div>
+    <div class="mockup-body e">
+      <div class="nav"><div class="brand">Told Works</div><div class="links"><span>Work</span><span>About</span><span>Enquire</span></div></div>
+      <div class="hero">
+        <div class="eye">Dan Ross · Private Commissions</div>
+        <div class="hed">The work<br><em>tells first.</em></div>
+        <div class="rule"></div>
+        <div class="sub">Architectural pieces, installations and objects that amplify the story already held in a place.</div>
+      </div>
+      <div class="img"><span>The Sixteen — ironbark sentinels</span></div>
+      <div class="footer-strip">
+        <div class="strip-item"><div class="strip-n">25 yrs</div><div class="strip-l">Building & Making</div></div>
+        <div class="strip-item"><div class="strip-n">2 NZIA</div><div class="strip-l">Recognised builds</div></div>
+        <div class="strip-item"><div class="strip-n">By referral</div><div class="strip-l">Only</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-choice="f" onclick="toggleSelect(this)">
+    <div class="card-label f-label">F — Light grey · terracotta</div>
+    <div class="mockup-body f">
+      <div class="nav"><div class="brand">Told Works</div><div class="links"><span>Work</span><span>About</span><span>Enquire</span></div></div>
+      <div class="hero">
+        <div class="eye">Dan Ross · Private Commissions</div>
+        <div class="hed">The work<br><em>tells first.</em></div>
+        <div class="rule"></div>
+        <div class="sub">Architectural pieces, installations and objects that amplify the story already held in a place.</div>
+      </div>
+      <div class="img"><span>The Sixteen — ironbark sentinels</span></div>
+      <div class="footer-strip">
+        <div class="strip-item"><div class="strip-n">25 yrs</div><div class="strip-l">Building & Making</div></div>
+        <div class="strip-item"><div class="strip-n">2 NZIA</div><div class="strip-l">Recognised builds</div></div>
+        <div class="strip-item"><div class="strip-n">By referral</div><div class="strip-l">Only</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>

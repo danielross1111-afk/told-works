@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Told Works</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Epilogue:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #F7F4EE;
+      --ink:      #0D0D0A;
+      --mid:      #6B6457;
+      --line:     #D9D4C8;
+      --accent:   #2E4E3C;
+      --warm:     #C4873A;
+      --dark-bg:  #17170F;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Epilogue', sans-serif;
+      font-weight: 300;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 3rem;
+      background: var(--bg);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-color: var(--line); }
+
+    .wordmark {
+      font-family: 'Fraunces', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      padding: 9rem 3rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 0;
+      align-items: end;
+    }
+
+    .hero-headline {
+      grid-column: 1 / 3;
+      font-family: 'Fraunces', serif;
+      font-size: clamp(3.5rem, 8vw, 8rem);
+      font-weight: 300;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .drop-s {
+      font-size: 1.22em;
+      font-weight: 500;
+      line-height: 0.85;
+      display: inline-block;
+      vertical-align: baseline;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      padding-top: 2.5rem;
+      max-width: 380px;
+    }
+
+    .hero-sub p {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.75;
+    }
+
+    .hero-meta {
+      padding-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1rem;
+    }
+
+    .hero-number {
+      font-family: 'Fraunces', serif;
+      font-size: 7rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--line);
+      line-height: 1;
+    }
+
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .cta-link:hover { color: var(--accent); border-color: var(--accent); }
+    .cta-link svg { transition: transform 0.2s; }
+    .cta-link:hover svg { transform: translateX(3px); }
+
+    /* ─── SECTION SHARED ─── */
+    section { padding: 6rem 3rem; }
+
+    .label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .label::after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 3rem;
+      background: var(--line);
+    }
+
+    .section-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .section-heading em { font-style: italic; }
+
+    /* ─── APPROACH ─── */
+    .approach {
+      border-top: 1px solid var(--line);
+    }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .approach-items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .approach-item {
+      padding: 2.5rem 2rem 2.5rem 0;
+      border-bottom: 1px solid var(--line);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .approach-item:nth-child(even) { padding-left: 2rem; border-left: 1px solid var(--line); }
+    .approach-item.visible { opacity: 1; transform: translateY(0); }
+    .approach-item:nth-child(2) { transition-delay: 0.1s; }
+    .approach-item:nth-child(3) { transition-delay: 0.2s; }
+    .approach-item:nth-child(4) { transition-delay: 0.3s; }
+
+    .approach-item-num {
+      font-family: 'Fraunces', serif;
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--warm);
+      margin-bottom: 1rem;
+    }
+
+    .approach-item h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+    }
+
+    .approach-item p {
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+
+    /* ─── WORK ─── */
+    .work {
+      border-top: 1px solid var(--line);
+    }
+
+    .work-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3.5rem;
+    }
+
+    .work-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .work-item {
+      display: grid;
+      grid-template-columns: 4rem 1fr auto auto;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      opacity: 0;
+      transform: translateX(-15px);
+      transition: opacity 0.5s ease, transform 0.5s ease, background 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .work-item.visible { opacity: 1; transform: translateX(0); }
+    .work-item:nth-child(2) { transition-delay: 0.08s; }
+    .work-item:nth-child(3) { transition-delay: 0.16s; }
+    .work-item:nth-child(4) { transition-delay: 0.24s; }
+
+    .work-item:hover .work-title { color: var(--accent); }
+    .work-item:hover .work-arrow { transform: translateX(4px); color: var(--accent); }
+
+    .work-num {
+      font-family: 'Fraunces', serif;
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--line);
+    }
+
+    .work-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+
+    .work-tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      background: var(--line);
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+    }
+
+    .work-arrow {
+      font-size: 1.1rem;
+      color: var(--mid);
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    /* ─── MANIFESTO (dark section) ─── */
+    .manifesto {
+      background: var(--dark-bg);
+      color: #F7F4EE;
+    }
+
+    .manifesto .label { color: #6B6457; }
+    .manifesto .label::after { background: #333; }
+
+    .manifesto-text {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      max-width: 860px;
+    }
+
+    .manifesto-text em {
+      font-style: italic;
+      color: var(--warm);
+    }
+
+    .manifesto-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid #2A2A22;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .manifesto-footer p {
+      font-size: 0.85rem;
+      color: #6B6457;
+      max-width: 360px;
+      line-height: 1.65;
+    }
+
+    .manifesto .cta-link { color: #F7F4EE; border-color: #F7F4EE; }
+    .manifesto .cta-link:hover { color: var(--warm); border-color: var(--warm); }
+
+    /* ─── ABOUT ─── */
+    .about {
+      border-top: 1px solid var(--line);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+      aspect-ratio: 4/5;
+      background: var(--accent);
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.97);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .about-visual.visible { opacity: 1; transform: scale(1); }
+
+    .about-visual-inner {
+      position: absolute;
+      inset: 1.5rem;
+      border: 1px solid rgba(247,244,238,0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+    }
+
+    .about-visual-quote {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(247,244,238,0.8);
+      line-height: 1.4;
+    }
+
+    .about-visual-attr {
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(247,244,238,0.4);
+    }
+
+    .about-content {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
+    }
+    .about-content.visible { opacity: 1; transform: translateY(0); }
+
+    .about-content p {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+
+    .about-content p strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 3rem;
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .stat { }
+    .stat-number {
+      font-family: 'Fraunces', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      line-height: 1;
+    }
+    .stat-desc {
+      font-size: 0.8rem;
+      color: var(--mid);
+      letter-spacing: 0.05em;
+      margin-top: 0.3rem;
+    }
+
+    /* ─── CONTACT ─── */
+    .contact {
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .contact-heading {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .contact-heading em { font-style: italic; color: var(--accent); }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      font-family: 'Epilogue', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--line);
+      padding: 0.6rem 0;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--line); }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+
+    .form-group textarea { min-height: 100px; }
+
+    .submit-btn {
+      align-self: flex-start;
+      font-family: 'Epilogue', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--ink);
+      border: none;
+      padding: 0.9rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .submit-btn:hover { background: var(--accent); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-size: 0.78rem;
+      color: var(--mid);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.78rem;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--ink); }
+
+    /* ─── REVEAL ANIMATION ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 1.5rem; }
+      section { padding: 4.5rem 1.5rem; }
+      .hero { padding: 7rem 1.5rem 4rem; grid-template-columns: 1fr; }
+      .hero-headline { grid-column: 1; }
+      .hero-meta { align-items: flex-start; }
+      .hero-number { font-size: 5rem; }
+      .approach-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .approach-items { grid-template-columns: 1fr; }
+      .approach-item:nth-child(even) { padding-left: 0; border-left: none; }
+      .work-item { grid-template-columns: 3rem 1fr auto; }
+      .work-arrow { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .contact { grid-template-columns: 1fr; gap: 3rem; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="wordmark">Told Works</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <h1 class="hero-headline">
+      <span class="drop-s">S</span>tories that<br/>
+      make things<br/>
+      <em>move.</em>
+    </h1>
+    <div class="hero-sub">
+      <p>Told Works is a narrative studio. We craft the words, voices and ideas that connect people to what matters — with clarity, intention, and craft.</p>
+    </div>
+    <div class="hero-meta">
+      <span class="hero-number">01</span>
+      <a href="#work" class="cta-link">
+        See the work
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- APPROACH -->
+  <section class="approach">
+    <div class="approach-grid">
+      <div>
+        <p class="label">Our approach</p>
+        <h2 class="section-heading reveal">Every word<br/>earns its <em>place.</em></h2>
+      </div>
+      <div class="approach-items">
+        <div class="approach-item">
+          <p class="approach-item-num">i.</p>
+          <h3>Brand Narrative</h3>
+          <p>We find the story only you can tell — and make sure it lands with the people who need to hear it.</p>
+        </div>
+        <div class="approach-item">
+          <p class="approach-item-num">ii.</p>
+          <h3>Editorial Content</h3>
+          <p>Long-form, short-form, campaigns — we write with the depth and care of editors, not content mills.</p>
+        </div>
+        <div class="approach-item">
+          <p class="approach-item-num">iii.</p>
+          <h3>Voice & Tone</h3>
+          <p>Distinctive, consistent language that travels across every channel without losing itself.</p>
+        </div>
+        <div class="approach-item">
+          <p class="approach-item-num">iv.</p>
+          <h3>Strategy</h3>
+          <p>Words backed by intent. We help you know what to say, when, and why it matters to your audience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="work" id="work">
+    <div class="work-header">
+      <div>
+        <p class="label">Selected work</p>
+        <h2 class="section-heading reveal">What we've <em>built</em><br/>with words.</h2>
+      </div>
+      <a href="#contact" class="cta-link">
+        Start a project
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <div class="work-list">
+      <a href="#" class="work-item">
+        <span class="work-num">01</span>
+        <span class="work-title">The Harbour Collective</span>
+        <span class="work-tag">Brand Narrative</span>
+        <span class="work-arrow">→</span>
+      </a>
+      <a href="#" class="work-item">
+        <span class="work-num">02</span>
+        <span class="work-title">Manawa Health</span>
+        <span class="work-tag">Editorial</span>
+        <span class="work-arrow">→</span>
+      </a>
+      <a href="#" class="work-item">
+        <span class="work-num">03</span>
+        <span class="work-title">Hōhonu Capital</span>
+        <span class="work-tag">Voice & Tone</span>
+        <span class="work-arrow">→</span>
+      </a>
+      <a href="#" class="work-item">
+        <span class="work-num">04</span>
+        <span class="work-title">Okarito Institute</span>
+        <span class="work-tag">Strategy + Content</span>
+        <span class="work-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- MANIFESTO (dark) -->
+  <section class="manifesto">
+    <p class="label">Why it matters</p>
+    <p class="manifesto-text reveal">
+      Most organisations have things worth saying. Very few say them in a way that <em>sticks.</em> The gap between having a story and telling it well — that's where we work.
+    </p>
+    <div class="manifesto-footer">
+      <p>We work with founders, creative teams and institutions across Aotearoa and beyond. Small shop. High standards.</p>
+      <a href="#contact" class="cta-link">
+        Let's talk
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M1 7H13M13 7L7.5 1.5M13 7L7.5 12.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-visual-inner">
+          <p class="about-visual-quote">"Good writing doesn't announce itself. It just makes you believe."</p>
+          <p class="about-visual-attr">— Told Works</p>
+        </div>
+      </div>
+      <div class="about-content">
+        <p class="label">About</p>
+        <h2 class="section-heading" style="margin-bottom:2rem">We are a<br/><em>narrative studio.</em></h2>
+        <p>Told Works was built on the belief that <strong>language is a craft</strong> — one that takes time, taste, and genuine curiosity about the world to do well.</p>
+        <p>We don't churn. We don't template. We read your world carefully, then write our way into it — finding the specific words that will resonate with the specific people you're trying to reach.</p>
+        <p>Founded in Aotearoa New Zealand, we work with clients who understand that the right story, told well, is the most durable thing you can build.</p>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-number">60+</div>
+            <div class="stat-desc">Projects delivered</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">8</div>
+            <div class="stat-desc">Years in practice</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">4</div>
+            <div class="stat-desc">Craft disciplines</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div>
+      <p class="label">Get in touch</p>
+      <h2 class="contact-heading reveal">
+        Ready to<br/>tell your<br/><em>story?</em>
+      </h2>
+      <div style="margin-top:3rem">
+        <p style="font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);margin-bottom:0.5rem">Email</p>
+        <a href="mailto:hello@toldworks.co.nz" style="font-family:'Fraunces',serif;font-size:1.1rem;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;">hello@toldworks.co.nz</a>
+      </div>
+    </div>
+    <form class="contact-form reveal" onsubmit="return false">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Your name" />
+      </div>
+      <div class="form-group">
+        <label for="org">Organisation</label>
+        <input type="text" id="org" placeholder="Where you work" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="your@email.com" />
+      </div>
+      <div class="form-group">
+        <label for="message">What are you working on?</label>
+        <textarea id="message" placeholder="Tell us a little about your project..."></textarea>
+      </div>
+      <button class="submit-btn" type="submit">Send message</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Told Works. All rights reserved.</p>
+    <ul class="footer-links">
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">LinkedIn</a></li>
+      <li><a href="#">Privacy</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    // Nav scroll state
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Intersection observer for reveal animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal, .approach-item, .work-item, .about-visual, .about-content').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

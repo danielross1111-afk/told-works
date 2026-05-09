@@ -1,0 +1,119 @@
+<style>
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+  .mockup { border-radius: 4px; overflow: hidden; cursor: pointer; border: 3px solid transparent; transition: border-color 0.2s; }
+  .mockup.selected { border-color: #6366f1; }
+  .mockup-header { padding: 0.5rem 1rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; }
+  .mockup-body { padding: 0; }
+
+  /* ── B: Warm cream ── */
+  .b-mock { background: #F5EFE4; font-family: 'Georgia', serif; color: #1A1410; }
+  .b-mock .m-nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.4rem; border-bottom: 1px solid #DDD5C4; }
+  .b-mock .m-brand { font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: #1A1410; }
+  .b-mock .m-links { display: flex; gap: 1.2rem; }
+  .b-mock .m-links span { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: #9A8878; }
+  .b-mock .m-hero { padding: 2rem 1.4rem 1.2rem; border-bottom: 1px solid #DDD5C4; }
+  .b-mock .m-eyebrow { font-size: 7px; letter-spacing: 0.4em; text-transform: uppercase; color: #9A8878; margin-bottom: 0.8rem; font-family: sans-serif; }
+  .b-mock .m-hed { font-size: 32px; font-weight: 300; line-height: 1.05; color: #1A1410; margin-bottom: 0.6rem; }
+  .b-mock .m-hed em { font-style: italic; color: #7A5530; }
+  .b-mock .m-sub { font-size: 9px; color: #8A7B6A; line-height: 1.7; max-width: 260px; font-family: sans-serif; font-weight: 400; }
+  .b-mock .m-rule { width: 36px; height: 1px; background: #C4A882; margin: 0.9rem 0; }
+  .b-mock .m-section { display: grid; grid-template-columns: 1fr 1fr; }
+  .b-mock .m-panel { padding: 1rem 1.4rem; border-right: 1px solid #DDD5C4; }
+  .b-mock .m-panel:last-child { border-right: none; }
+  .b-mock .m-panel-label { font-size: 7px; letter-spacing: 0.35em; text-transform: uppercase; color: #9A8878; margin-bottom: 0.5rem; font-family: sans-serif; }
+  .b-mock .m-panel-text { font-size: 11px; color: #4A3D30; line-height: 1.6; }
+  .b-mock .m-img { background: #D8CDB8; height: 80px; display: flex; align-items: center; justify-content: center; }
+  .b-mock .m-img span { font-size: 7px; letter-spacing: 0.2em; text-transform: uppercase; color: #9A8878; font-family: sans-serif; }
+
+  /* ── C: Stone & slate ── */
+  .c-mock { background: #F0EFEC; font-family: 'Georgia', serif; color: #1A1A18; }
+  .c-mock .m-nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.4rem; border-bottom: 1px solid #D8D6D0; }
+  .c-mock .m-brand { font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: #1A1A18; }
+  .c-mock .m-links { display: flex; gap: 1.2rem; }
+  .c-mock .m-links span { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: #8A8A82; }
+  .c-mock .m-hero { padding: 2rem 1.4rem 1.2rem; border-bottom: 1px solid #D8D6D0; }
+  .c-mock .m-eyebrow { font-size: 7px; letter-spacing: 0.4em; text-transform: uppercase; color: #6A8070; margin-bottom: 0.8rem; font-family: sans-serif; }
+  .c-mock .m-hed { font-size: 32px; font-weight: 300; line-height: 1.05; color: #1A1A18; margin-bottom: 0.6rem; }
+  .c-mock .m-hed em { font-style: italic; color: #2E4E3C; }
+  .c-mock .m-sub { font-size: 9px; color: #707068; line-height: 1.7; max-width: 260px; font-family: sans-serif; font-weight: 400; }
+  .c-mock .m-rule { width: 36px; height: 1px; background: #3D5A47; margin: 0.9rem 0; }
+  .c-mock .m-section { display: grid; grid-template-columns: 1fr 1fr; }
+  .c-mock .m-panel { padding: 1rem 1.4rem; border-right: 1px solid #D8D6D0; }
+  .c-mock .m-panel:last-child { border-right: none; }
+  .c-mock .m-panel-label { font-size: 7px; letter-spacing: 0.35em; text-transform: uppercase; color: #6A8070; margin-bottom: 0.5rem; font-family: sans-serif; }
+  .c-mock .m-panel-text { font-size: 11px; color: #3A3A34; line-height: 1.6; }
+  .c-mock .m-img { background: #D4D2CC; height: 80px; display: flex; align-items: center; justify-content: center; }
+  .c-mock .m-img span { font-size: 7px; letter-spacing: 0.2em; text-transform: uppercase; color: #8A8A82; font-family: sans-serif; }
+
+  .mockup-header.b-head { background: #EDE3D4; color: #7A5530; }
+  .mockup-header.c-head { background: #E4E3DF; color: #2E4E3C; }
+
+  .vote { text-align: center; margin-top: 1.5rem; font-size: 0.85rem; color: #888; }
+</style>
+
+<h2>B vs C — side by side</h2>
+<p class="subtitle">Same layout, same copy. Only the palette and feeling differ. Click the one that feels right for Dan's work.</p>
+
+<div class="split">
+
+  <div class="mockup" data-choice="b" onclick="toggleSelect(this)">
+    <div class="mockup-header b-head">B — Warm cream / parchment</div>
+    <div class="mockup-body b-mock">
+      <div class="m-nav">
+        <div class="m-brand">Told Works</div>
+        <div class="m-links">
+          <span>Work</span><span>About</span><span>Enquire</span>
+        </div>
+      </div>
+      <div class="m-hero">
+        <div class="m-eyebrow">Dan Ross · Private Commissions</div>
+        <div class="m-hed">The work<br><em>tells first.</em></div>
+        <div class="m-rule"></div>
+        <div class="m-sub">Architectural pieces, installations and objects that amplify the story already held in a place. Queenstown, New Zealand.</div>
+      </div>
+      <div class="m-img"><span>The Sixteen — ironbark sentinels</span></div>
+      <div class="m-section">
+        <div class="m-panel">
+          <div class="m-panel-label">The work</div>
+          <div class="m-panel-text">One-of-one commissions. Each piece begins with listening to place, material, and the design that will surround it.</div>
+        </div>
+        <div class="m-panel">
+          <div class="m-panel-label">The practice</div>
+          <div class="m-panel-text">Dan works with a small number of clients each year. He will visit the site before agreeing to anything.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mockup" data-choice="c" onclick="toggleSelect(this)">
+    <div class="mockup-header c-head">C — Stone &amp; slate / architectural</div>
+    <div class="mockup-body c-mock">
+      <div class="m-nav">
+        <div class="m-brand">Told Works</div>
+        <div class="m-links">
+          <span>Work</span><span>About</span><span>Enquire</span>
+        </div>
+      </div>
+      <div class="m-hero">
+        <div class="m-eyebrow">Dan Ross · Private Commissions</div>
+        <div class="m-hed">The work<br><em>tells first.</em></div>
+        <div class="m-rule"></div>
+        <div class="m-sub">Architectural pieces, installations and objects that amplify the story already held in a place. Queenstown, New Zealand.</div>
+      </div>
+      <div class="m-img"><span>The Sixteen — ironbark sentinels</span></div>
+      <div class="m-section">
+        <div class="m-panel">
+          <div class="m-panel-label">The work</div>
+          <div class="m-panel-text">One-of-one commissions. Each piece begins with listening to place, material, and the design that will surround it.</div>
+        </div>
+        <div class="m-panel">
+          <div class="m-panel-label">The practice</div>
+          <div class="m-panel-text">Dan works with a small number of clients each year. He will visit the site before agreeing to anything.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p class="vote">Click to select · or tell me in the terminal</p>
