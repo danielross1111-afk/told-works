@@ -17,7 +17,7 @@
 
   <nav id="nav">
     <a href="../../" class="brand serif">TOLD<span>·</span>WORKS</a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">≡</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">≡</button>
     <ul class="nav-links" id="navLinks">
       <li><a href="../../#practice">Practice</a></li>
       <li><a href="../../#work">Work</a></li>
@@ -40,7 +40,7 @@
     <div class="container">
 
       <div class="plate reveal">
-        <div class="plate-img" data-lightbox="The original gates" data-lightbox-sub="Built by another contractor — expensive, automated, wrong">
+        <div class="plate-img" data-lightbox="The original gates" data-lightbox-sub="Built by another contractor — expensive, automated, wrong" tabindex="0" role="button" aria-label="View image: The original gates">
           <span class="plate-img-tag">01 · Before</span>
           <span class="plate-img-label">The original gates</span>
         </div>
@@ -52,7 +52,7 @@
       </div>
 
       <div class="plate reverse reveal">
-        <div class="plate-img" data-lightbox="In progress" data-lightbox-sub="New palings fitted over the existing structure">
+        <div class="plate-img" data-lightbox="In progress" data-lightbox-sub="New palings fitted over the existing structure" tabindex="0" role="button" aria-label="View image: In progress">
           <span class="plate-img-tag">02 · In progress</span>
           <span class="plate-img-label">In progress — palings fitted over the structure</span>
         </div>
@@ -64,7 +64,7 @@
       </div>
 
       <div class="plate reveal">
-        <div class="plate-img" data-lightbox="Completed — daylight" data-lightbox-sub="Aged timber · Varied heights · Finally right">
+        <div class="plate-img" data-lightbox="Completed — daylight" data-lightbox-sub="Aged timber · Varied heights · Finally right" tabindex="0" role="button" aria-label="View image: Completed — daylight">
           <span class="plate-img-tag">03 · Daylight</span>
           <span class="plate-img-label">Completed — daylight</span>
         </div>
@@ -76,7 +76,7 @@
       </div>
 
       <div class="plate reverse reveal">
-        <div class="plate-img" data-lightbox="Completed — evening" data-lightbox-sub="Mountain &amp; lake views revealed at the moment of arrival">
+        <div class="plate-img" data-lightbox="Completed — evening" data-lightbox-sub="Mountain &amp; lake views revealed at the moment of arrival" tabindex="0" role="button" aria-label="View image: Completed — evening">
           <span class="plate-img-tag">04 · Evening</span>
           <span class="plate-img-label">Completed — evening</span>
         </div>
@@ -98,7 +98,7 @@
     </div>
   </footer>
 
-  <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
     <button class="lightbox-close" id="lightboxClose" aria-label="Close">Close ✕</button>
     <div class="lightbox-content">
       <p class="lightbox-title serif" id="lightboxTitle"></p>

@@ -38,15 +38,23 @@
   const lbClose = document.getElementById('lightboxClose');
   if (!lb) return;
 
+  let previousFocus = null;
+
   const open = (title, sub) => {
+    previousFocus = document.activeElement;
     lbTitle.textContent = title;
     lbSub.textContent = sub || '';
     lb.classList.add('on');
     lb.setAttribute('aria-hidden', 'false');
+    lbClose.focus();
   };
   const close = () => {
     lb.classList.remove('on');
     lb.setAttribute('aria-hidden', 'true');
+    if (previousFocus && typeof previousFocus.focus === 'function') {
+      previousFocus.focus();
+      previousFocus = null;
+    }
   };
 
   document.querySelectorAll('[data-lightbox]').forEach(el => {
@@ -55,6 +63,15 @@
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
       e.preventDefault();
       open(el.getAttribute('data-lightbox'), el.getAttribute('data-lightbox-sub'));
+    });
+  });
+
+  document.querySelectorAll('[data-lightbox]').forEach(el => {
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        open(el.getAttribute('data-lightbox'), el.getAttribute('data-lightbox-sub'));
+      }
     });
   });
 
@@ -68,8 +85,13 @@
   const toggle = document.getElementById('menuToggle');
   const links = document.getElementById('navLinks');
   if (!toggle || !links) return;
-  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  const setOpen = (isOpen) => {
+    links.classList.toggle('open', isOpen);
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+  };
+  toggle.addEventListener('click', () => setOpen(!links.classList.contains('open')));
   links.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => links.classList.remove('open'));
+    a.addEventListener('click', () => setOpen(false));
   });
 })();

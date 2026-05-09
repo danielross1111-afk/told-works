@@ -17,7 +17,7 @@
 
   <nav id="nav">
     <a href="../../" class="brand serif">TOLD<span>·</span>WORKS</a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">≡</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">≡</button>
     <ul class="nav-links" id="navLinks">
       <li><a href="../../#practice">Practice</a></li>
       <li><a href="../../#work">Work</a></li>
@@ -40,7 +40,7 @@
     <div class="container">
 
       <div class="plate reveal">
-        <div class="plate-img" data-lightbox="Found — sixteen rotten power poles" data-lightbox-sub="Roadside ditch · Three hundred years old · Invisible to everyone who passed">
+        <div class="plate-img" data-lightbox="Found — sixteen rotten power poles" data-lightbox-sub="Roadside ditch · Three hundred years old · Invisible to everyone who passed" tabindex="0" role="button" aria-label="View image: Found — sixteen rotten power poles">
           <span class="plate-img-tag">01 · Found</span>
           <span class="plate-img-label">Found — in a roadside ditch</span>
         </div>
@@ -52,7 +52,7 @@
       </div>
 
       <div class="plate reverse reveal">
-        <div class="plate-img" data-lightbox="Hand-carving in progress" data-lightbox-sub="Scale texture cut into the timber face · Stone being fitted">
+        <div class="plate-img" data-lightbox="Hand-carving in progress" data-lightbox-sub="Scale texture cut into the timber face · Stone being fitted" tabindex="0" role="button" aria-label="View image: Hand-carving in progress">
           <span class="plate-img-tag">02 · Carving</span>
           <span class="plate-img-label">Hand-carving in progress</span>
         </div>
@@ -64,7 +64,7 @@
       </div>
 
       <div class="plate reveal">
-        <div class="plate-img" data-lightbox="The Sixteen — installed" data-lightbox-sub="Private grounds · Lake Hayes · Shoulder to shoulder">
+        <div class="plate-img" data-lightbox="The Sixteen — installed" data-lightbox-sub="Private grounds · Lake Hayes · Shoulder to shoulder" tabindex="0" role="button" aria-label="View image: The Sixteen — installed">
           <span class="plate-img-tag">03 · Installed</span>
           <span class="plate-img-label">The Sixteen — installed</span>
         </div>
@@ -76,7 +76,7 @@
       </div>
 
       <div class="plate reverse reveal">
-        <div class="plate-img" data-lightbox="The Guardians Within — entrance" data-lightbox-sub="Lake Hayes Residence · The first presence the family meets on return">
+        <div class="plate-img" data-lightbox="The Guardians Within — entrance" data-lightbox-sub="Lake Hayes Residence · The first presence the family meets on return" tabindex="0" role="button" aria-label="View image: The Guardians Within — entrance">
           <span class="plate-img-tag">04 · The Guardians Within</span>
           <span class="plate-img-label">Entrance installation — Lake Hayes</span>
         </div>
@@ -98,7 +98,7 @@
     </div>
   </footer>
 
-  <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
     <button class="lightbox-close" id="lightboxClose" aria-label="Close">Close ✕</button>
     <div class="lightbox-content">
       <p class="lightbox-title serif" id="lightboxTitle"></p>

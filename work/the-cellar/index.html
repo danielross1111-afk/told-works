@@ -17,7 +17,7 @@
 
   <nav id="nav">
     <a href="../../" class="brand serif">TOLD<span>·</span>WORKS</a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">≡</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">≡</button>
     <ul class="nav-links" id="navLinks">
       <li><a href="../../#practice">Practice</a></li>
       <li><a href="../../#work">Work</a></li>
@@ -40,7 +40,7 @@
     <div class="container">
 
       <div class="plate reveal">
-        <div class="plate-img" data-lightbox="The cellar — under construction" data-lightbox-sub="Salvaged timber · Hessian cloth · Storytelling in place">
+        <div class="plate-img" data-lightbox="The cellar — under construction" data-lightbox-sub="Salvaged timber · Hessian cloth · Storytelling in place" tabindex="0" role="button" aria-label="View image: The cellar — under construction">
           <span class="plate-img-tag">01 · Construction</span>
           <span class="plate-img-label">The cellar — under construction</span>
         </div>
@@ -52,7 +52,7 @@
       </div>
 
       <div class="plate reverse reveal">
-        <div class="plate-img" data-lightbox="The cellar — build progress" data-lightbox-sub="Driveway-bank roots · Collected at midnight · Set into the walls">
+        <div class="plate-img" data-lightbox="The cellar — build progress" data-lightbox-sub="Driveway-bank roots · Collected at midnight · Set into the walls" tabindex="0" role="button" aria-label="View image: The cellar — build progress">
           <span class="plate-img-tag">02 · Build progress</span>
           <span class="plate-img-label">Build progress — roots set into the walls</span>
         </div>
@@ -64,7 +64,7 @@
       </div>
 
       <div class="plate reveal">
-        <div class="plate-img" data-lightbox="The Cellar — completed" data-lightbox-sub="Reclaimed timber · Stone sculpture · Bespoke joinery">
+        <div class="plate-img" data-lightbox="The Cellar — completed" data-lightbox-sub="Reclaimed timber · Stone sculpture · Bespoke joinery" tabindex="0" role="button" aria-label="View image: The Cellar — completed">
           <span class="plate-img-tag">03 · Completed</span>
           <span class="plate-img-label">The Cellar — completed</span>
         </div>
@@ -76,7 +76,7 @@
       </div>
 
       <div class="plate reverse reveal">
-        <div class="plate-img" data-lightbox="The Wine Racks — installed" data-lightbox-sub="Bentwood lattice · Charred timber posts · Jute-bound joinery">
+        <div class="plate-img" data-lightbox="The Wine Racks — installed" data-lightbox-sub="Bentwood lattice · Charred timber posts · Jute-bound joinery" tabindex="0" role="button" aria-label="View image: The Wine Racks — installed">
           <span class="plate-img-tag">04 · The Racks</span>
           <span class="plate-img-label">Wine racks — bentwood lattice, charred posts</span>
         </div>
@@ -98,7 +98,7 @@
     </div>
   </footer>
 
-  <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
     <button class="lightbox-close" id="lightboxClose" aria-label="Close">Close ✕</button>
     <div class="lightbox-content">
       <p class="lightbox-title serif" id="lightboxTitle"></p>

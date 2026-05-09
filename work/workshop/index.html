@@ -17,7 +17,7 @@
 
   <nav id="nav">
     <a href="../../" class="brand serif">TOLD<span>·</span>WORKS</a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">≡</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">≡</button>
     <ul class="nav-links" id="navLinks">
       <li><a href="../../#practice">Practice</a></li>
       <li><a href="../../#work">Work</a></li>
@@ -40,7 +40,7 @@
     <div class="container">
 
       <div class="plate reveal">
-        <div class="plate-img" data-lightbox="Stone carving begins" data-lightbox-sub="Local stone · Form taking shape · Self-taught">
+        <div class="plate-img" data-lightbox="Stone carving begins" data-lightbox-sub="Local stone · Form taking shape · Self-taught" tabindex="0" role="button" aria-label="View image: Stone carving begins">
           <span class="plate-img-tag">01 · The Stone Goblet</span>
           <span class="plate-img-label">Stone carving begins</span>
         </div>
@@ -52,7 +52,7 @@
       </div>
 
       <div class="plate reverse reveal">
-        <div class="plate-img" data-lightbox="The finished goblet" data-lightbox-sub="NZ schist · Carved · Gifted · Lives in the cellar">
+        <div class="plate-img" data-lightbox="The finished goblet" data-lightbox-sub="NZ schist · Carved · Gifted · Lives in the cellar" tabindex="0" role="button" aria-label="View image: The finished goblet">
           <span class="plate-img-tag">02 · Gifted</span>
           <span class="plate-img-label">The finished goblet — gifted</span>
         </div>
@@ -64,7 +64,7 @@
       </div>
 
       <div class="plate reveal">
-        <div class="plate-img" data-lightbox="The dollshouse — finished" data-lightbox-sub="Cedar · Two storeys · Built for his daughter">
+        <div class="plate-img" data-lightbox="The dollshouse — finished" data-lightbox-sub="Cedar · Two storeys · Built for his daughter" tabindex="0" role="button" aria-label="View image: The dollshouse — finished">
           <span class="plate-img-tag">03 · The Dollshouse</span>
           <span class="plate-img-label">The dollshouse — finished</span>
         </div>
@@ -76,7 +76,7 @@
       </div>
 
       <div class="plate reverse reveal">
-        <div class="plate-img" data-lightbox="Joinery — detail" data-lightbox-sub="Mortise &amp; tenon at miniature scale">
+        <div class="plate-img" data-lightbox="Joinery — detail" data-lightbox-sub="Mortise &amp; tenon at miniature scale" tabindex="0" role="button" aria-label="View image: Joinery — detail">
           <span class="plate-img-tag">04 · Detail</span>
           <span class="plate-img-label">Joinery — detail</span>
         </div>
@@ -98,7 +98,7 @@
     </div>
   </footer>
 
-  <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
     <button class="lightbox-close" id="lightboxClose" aria-label="Close">Close ✕</button>
     <div class="lightbox-content">
       <p class="lightbox-title serif" id="lightboxTitle"></p>

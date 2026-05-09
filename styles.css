@@ -851,6 +851,12 @@ footer {
   display: flex;
   align-items: flex-end;
   padding: 1.6rem;
+  cursor: pointer;
+  outline: none;
+}
+.plate-img:focus-visible {
+  outline: 2px solid var(--pounamu-light);
+  outline-offset: 4px;
 }
 .plate-img-tag {
   position: absolute;
