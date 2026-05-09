@@ -107,7 +107,7 @@
 
       <div class="work-list">
         <article class="work-card reveal">
-          <a class="work-img placeholder" href="work/the-cellar/" aria-label="View The Cellar &amp; The Racks">
+          <a class="work-img placeholder" href="work/the-cellar/" data-lightbox="The Cellar — completed" data-lightbox-sub="Reclaimed timber · stone sculpture · bespoke joinery" aria-label="View The Cellar &amp; The Racks">
             <span class="work-img-tag">N° 01</span>
             <span class="placeholder-label">The Cellar — completed</span>
           </a>
@@ -120,7 +120,7 @@
         </article>
 
         <article class="work-card reverse reveal">
-          <a class="work-img placeholder" href="work/the-sixteen/" aria-label="View The Sixteen">
+          <a class="work-img placeholder" href="work/the-sixteen/" data-lightbox="The Sixteen — installed" data-lightbox-sub="Private grounds · Ironbark sentinels · Serpentine &amp; Aotea stone" aria-label="View The Sixteen">
             <span class="work-img-tag">N° 02 · Legacy</span>
             <span class="placeholder-label">The Sixteen — installed</span>
           </a>
@@ -133,7 +133,7 @@
         </article>
 
         <article class="work-card reveal">
-          <a class="work-img placeholder" href="work/the-threshold/" aria-label="View The Threshold">
+          <a class="work-img placeholder" href="work/the-threshold/" data-lightbox="The Threshold — completed" data-lightbox-sub="Aged timber palings · Mountain &amp; lake views revealed" aria-label="View The Threshold">
             <span class="work-img-tag">N° 03</span>
             <span class="placeholder-label">The Threshold — completed</span>
           </a>
@@ -146,7 +146,7 @@
         </article>
 
         <article class="work-card reverse reveal">
-          <a class="work-img placeholder" href="work/workshop/" aria-label="View Workshop pieces">
+          <a class="work-img placeholder" href="work/workshop/" data-lightbox="The stone goblet" data-lightbox-sub="NZ schist · Carved · Gifted · Lives in the cellar" aria-label="View Workshop pieces">
             <span class="work-img-tag">N° 04 · Workshop</span>
             <span class="placeholder-label">The stone goblet</span>
           </a>
@@ -265,6 +265,15 @@
       <div class="footer-copy">© 2026 Dan Ross · All rights reserved.</div>
     </div>
   </footer>
+
+  <!-- ───────── LIGHTBOX ───────── -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">Close ✕</button>
+    <div class="lightbox-content">
+      <p class="lightbox-title serif" id="lightboxTitle"></p>
+      <p class="lightbox-sub" id="lightboxSub"></p>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

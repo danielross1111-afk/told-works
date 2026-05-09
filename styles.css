@@ -688,3 +688,48 @@ footer {
 .stagger > .reveal:nth-child(3) { transition-delay: 160ms; }
 .stagger > .reveal:nth-child(4) { transition-delay: 240ms; }
 .stagger > .reveal:nth-child(5) { transition-delay: 320ms; }
+
+/* ─── LIGHTBOX ─── */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 7, 5, 0.97);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
+  text-align: center;
+}
+.lightbox.on { display: flex; }
+.lightbox-content { max-width: 720px; }
+.lightbox-title {
+  font-style: italic;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  color: var(--bone);
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+.lightbox-sub {
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--pounamu-light);
+}
+.lightbox-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: none;
+  border: 1px solid var(--line-strong);
+  color: var(--bone-dim);
+  font-family: inherit;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s, border-color 0.3s;
+}
+.lightbox-close:hover { color: var(--bone); border-color: var(--pounamu-light); }

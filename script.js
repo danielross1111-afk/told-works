@@ -29,3 +29,36 @@
 
   els.forEach(el => io.observe(el));
 })();
+
+// Lightbox: click anything with data-lightbox to open overlay
+(function lightbox() {
+  const lb = document.getElementById('lightbox');
+  const lbTitle = document.getElementById('lightboxTitle');
+  const lbSub = document.getElementById('lightboxSub');
+  const lbClose = document.getElementById('lightboxClose');
+  if (!lb) return;
+
+  const open = (title, sub) => {
+    lbTitle.textContent = title;
+    lbSub.textContent = sub || '';
+    lb.classList.add('on');
+    lb.setAttribute('aria-hidden', 'false');
+  };
+  const close = () => {
+    lb.classList.remove('on');
+    lb.setAttribute('aria-hidden', 'true');
+  };
+
+  document.querySelectorAll('[data-lightbox]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      // Allow modifier-click to follow the link as normal
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+      e.preventDefault();
+      open(el.getAttribute('data-lightbox'), el.getAttribute('data-lightbox-sub'));
+    });
+  });
+
+  lbClose.addEventListener('click', close);
+  lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+})();
