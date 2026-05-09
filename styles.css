@@ -53,3 +53,87 @@ body::before {
 }
 
 section { padding: var(--section-y) 0; position: relative; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(14, 13, 11, 0.6);
+  border-bottom: 1px solid transparent;
+  transition: padding 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+nav.scrolled {
+  padding: 1rem 3rem;
+  background: rgba(14, 13, 11, 0.92);
+  border-bottom-color: var(--line);
+}
+
+.brand {
+  font-size: 1.4rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--bone);
+  text-decoration: none;
+  font-weight: 400;
+}
+.brand span { color: var(--pounamu-light); }
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  align-items: center;
+}
+.nav-links a {
+  color: var(--bone-dim);
+  text-decoration: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  position: relative;
+  padding-bottom: 4px;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--pounamu-light);
+  transition: width 0.4s ease;
+}
+.nav-links a:hover { color: var(--bone); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-enquire {
+  border: 1px solid var(--ember);
+  color: var(--bone) !important;
+  padding: 0.65rem 1.4rem;
+  letter-spacing: 0.25em;
+  transition: background 0.4s, color 0.4s, letter-spacing 0.3s;
+}
+.nav-enquire::after { display: none; }
+.nav-enquire:hover {
+  background: var(--ember);
+  color: var(--ink) !important;
+  letter-spacing: 0.32em;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--bone);
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+}
