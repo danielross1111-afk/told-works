@@ -378,3 +378,94 @@ nav.scrolled {
   text-transform: uppercase;
   color: var(--bone-mute);
 }
+
+/* ─── SELECTED WORK ─── */
+.work-section { background: var(--ink-2); border-bottom: 1px solid var(--line); }
+
+.work-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7rem;
+}
+
+.work-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.work-card.reverse .work-img { order: 2; }
+
+.work-img {
+  display: block;
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  text-decoration: none;
+  border: 1px solid var(--line);
+  transition: transform 0.6s ease;
+}
+.work-img:hover { transform: translateY(-4px); }
+
+.placeholder {
+  background: linear-gradient(135deg, #1f1611 0%, #0a0604 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 1.6rem;
+}
+.placeholder-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--bone-dim);
+}
+
+.work-img-tag {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--pounamu-light);
+  border: 1px solid var(--line-strong);
+  padding: 0.35rem 0.7rem;
+  background: rgba(14, 13, 11, 0.4);
+}
+
+.work-meta {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--pounamu-light);
+  margin-bottom: 1.4rem;
+}
+
+.work-body h3 {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 1.4rem;
+  color: var(--bone);
+}
+.work-body h3 em { font-style: italic; color: var(--pounamu-light); }
+
+.work-body p {
+  color: var(--bone-dim);
+  font-size: 1rem;
+  line-height: 1.85;
+  margin-bottom: 1.8rem;
+}
+
+.work-link {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--bone);
+  text-decoration: none;
+  border-bottom: 1px solid var(--pounamu-light);
+  padding-bottom: 4px;
+  transition: color 0.3s, letter-spacing 0.3s;
+}
+.work-link:hover { color: var(--pounamu-light); letter-spacing: 0.34em; }
