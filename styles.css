@@ -259,3 +259,42 @@ nav.scrolled {
   0%, 100% { transform: scaleY(1); opacity: 0.4; }
   50%      { transform: scaleY(0.3); opacity: 1; }
 }
+
+/* ─── PRESS STRIP ─── */
+.press {
+  padding: 1.6rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--ink-2);
+}
+.press-eye {
+  text-align: center;
+  font-size: 0.62rem;
+  letter-spacing: 0.45em;
+  color: var(--pounamu-light);
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+.press-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.4rem;
+  font-family: 'Cormorant Garamond', serif;
+}
+.press-item {
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  color: var(--bone-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.press-link { color: var(--bone); border-bottom: 1px solid var(--line-strong); padding-bottom: 2px; }
+.press-link:hover { color: var(--pounamu-light); border-bottom-color: var(--pounamu-light); }
+.press-sep {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--bone-mute);
+  opacity: 0.5;
+}
