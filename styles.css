@@ -649,3 +649,27 @@ nav.scrolled {
 }
 .commission-note a { color: var(--bone-dim); text-decoration: none; transition: color 0.3s; }
 .commission-note a:hover { color: var(--bone); }
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 2.6rem 0;
+  background: var(--ink);
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.footer-tagline {
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--bone-dim);
+}
+.footer-copy {
+  font-size: 0.72rem;
+  color: var(--bone-mute);
+  letter-spacing: 0.15em;
+}
