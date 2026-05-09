@@ -549,3 +549,103 @@ nav.scrolled {
   font-size: 0.6rem;
   flex-shrink: 0;
 }
+
+/* ─── COMMISSION ─── */
+.commission {
+  background: var(--ink);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.commission::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(184, 120, 74, 0.06), transparent 70%);
+  pointer-events: none;
+}
+.commission-inner { max-width: 720px; position: relative; }
+
+.commission-h {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 1.4rem 0 2rem;
+  color: var(--bone);
+}
+.commission-h em { font-style: italic; color: var(--pounamu-light); }
+
+.commission-sub {
+  font-size: 1.05rem;
+  color: var(--bone-dim);
+  max-width: 560px;
+  margin: 0 auto 4rem;
+  line-height: 1.8;
+}
+
+.commission-process {
+  list-style: none;
+  text-align: left;
+  margin: 0 auto 4rem;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+.commission-process li {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: 1.5rem;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+.step-n {
+  font-size: 1.4rem;
+  font-style: italic;
+  color: var(--pounamu-light);
+}
+.step-t {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  color: var(--bone);
+  margin-bottom: 0.4rem;
+}
+.step-d {
+  font-size: 0.95rem;
+  color: var(--bone-dim);
+  line-height: 1.7;
+}
+
+.cta {
+  display: inline-block;
+  padding: 1.15rem 3rem;
+  border: 1px solid var(--ember);
+  color: var(--bone);
+  text-decoration: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.4s ease, color 0.4s ease, letter-spacing 0.3s ease;
+}
+.cta:hover {
+  background: var(--ember);
+  color: var(--ink);
+  letter-spacing: 0.4em;
+}
+
+.commission-note {
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--line);
+  color: var(--bone-mute);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  line-height: 1.9;
+}
+.commission-note a { color: var(--bone-dim); text-decoration: none; transition: color 0.3s; }
+.commission-note a:hover { color: var(--bone); }
