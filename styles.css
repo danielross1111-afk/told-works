@@ -469,3 +469,38 @@ nav.scrolled {
   transition: color 0.3s, letter-spacing 0.3s;
 }
 .work-link:hover { color: var(--pounamu-light); letter-spacing: 0.34em; }
+
+/* ─── WORK OF RECORD ─── */
+.record { background: var(--ink); border-bottom: 1px solid var(--line); }
+
+.record-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.record-item {
+  padding: 2.4rem 2.4rem 2.6rem;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.record-name {
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  color: var(--bone);
+  font-style: italic;
+}
+.record-item p {
+  font-size: 0.95rem;
+  color: var(--bone-dim);
+  line-height: 1.85;
+  margin-bottom: 1.4rem;
+}
+.record-meta {
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pounamu-light);
+}
