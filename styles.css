@@ -160,7 +160,7 @@ nav.scrolled {
   align-items: flex-end;
   justify-content: center;
   overflow: hidden;
-  padding: 6rem 2rem 7rem;
+  padding: 6rem 0 0;
   background: radial-gradient(ellipse at center, var(--ink-2) 0%, var(--ink) 70%);
 }
 
@@ -183,8 +183,13 @@ nav.scrolled {
   position: relative;
   z-index: 2;
   text-align: center;
-  max-width: 920px;
-  padding-bottom: 1rem;
+  width: 100%;
+  max-width: 100%;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
 }
 
 .eyebrow {
@@ -213,12 +218,12 @@ nav.scrolled {
 }
 
 .hero-mark {
-  display: inline-flex;
+  display: flex;
   align-items: baseline;
   flex-wrap: nowrap;
   justify-content: center;
   gap: clamp(0.4rem, 1.4vw, 1.2rem);
-  padding: 0.85rem clamp(1rem, 2.5vw, 2rem);
+  padding: 1.6rem clamp(1rem, 2.5vw, 2rem);
   font-size: clamp(1.15rem, 3.8vw, 3.2rem);
   font-weight: 700;
   font-style: normal;
@@ -229,8 +234,8 @@ nav.scrolled {
   color: var(--bone);
   background: rgba(8, 7, 5, 0.82);
   border-top: 1px solid var(--line-strong);
-  border-bottom: 1px solid var(--line-strong);
   white-space: nowrap;
+  width: 100%;
   max-width: 100%;
 }
 .hero-mark-title em {
@@ -251,11 +256,6 @@ nav.scrolled {
 }
 
 .hero-foot {
-  position: absolute;
-  bottom: 2.4rem;
-  left: 0;
-  right: 0;
-  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -859,8 +859,8 @@ footer {
   .nav-links a { padding: 0.4rem 0; }
   .nav-enquire { text-align: center; }
 
-  .hero { padding: 5rem 1.5rem 5rem; min-height: 600px; }
-  .hero-foot { bottom: 1.6rem; gap: 1.1rem; }
+  .hero { padding: 5rem 0 0; min-height: 600px; }
+  .hero-foot { gap: 1.1rem; }
   .hero-meta { flex-wrap: wrap; justify-content: center; gap: 0.6rem; padding: 0.7rem 1rem; }
   .hero-meta .dot { display: none; }
   .intro-h { font-size: clamp(2rem, 7vw, 3.2rem); }
