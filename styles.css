@@ -10,8 +10,8 @@ html { scroll-behavior: smooth; }
   --bone:          #E8E2D4;
   --bone-dim:      #B8B1A1;
   --bone-mute:     #6F6A5E;
-  --pounamu:       #34503D;
-  --pounamu-light: #4F7A5E;
+  --pounamu:       #4A6B54;
+  --pounamu-light: #7A9482;
   --ember:         #B8784A;
   --line:          rgba(232, 226, 212, 0.08);
   --line-strong:   rgba(232, 226, 212, 0.18);
@@ -151,7 +151,7 @@ nav.scrolled {
   align-items: flex-end;
   justify-content: center;
   overflow: hidden;
-  padding: 6rem 2rem 7rem;
+  padding: 6rem 2rem 11rem;
   background: radial-gradient(ellipse at center, var(--ink-2) 0%, var(--ink) 70%);
 }
 
@@ -210,7 +210,7 @@ nav.scrolled {
   justify-content: center;
   gap: 0.6rem 1.3rem;
   font-size: clamp(2.4rem, 6vw, 4.6rem);
-  font-weight: 500;
+  font-weight: 700;
   font-style: normal;
   line-height: 1.1;
   letter-spacing: 0.3em;
@@ -264,17 +264,29 @@ nav.scrolled {
 .hero-meta .ember { color: var(--ember); }
 
 .scroll-cue {
-  font-size: 0.7rem;
-  letter-spacing: 0.32em;
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.4em;
   text-transform: uppercase;
-  color: var(--bone-dim);
+  color: var(--ember);
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+.scroll-cue:hover,
+.scroll-cue:focus-visible {
+  color: var(--bone);
+  letter-spacing: 0.5em;
+  outline: none;
 }
 .scroll-cue::after {
   content: '';
   display: block;
   width: 1px;
   height: 44px;
-  background: var(--bone-mute);
+  background: var(--ember);
+  opacity: 0.65;
   margin: 1rem auto 0;
   animation: scrollPulse 2s ease-in-out infinite;
   transform-origin: top;
@@ -816,7 +828,7 @@ footer {
   .nav-links a { padding: 0.4rem 0; }
   .nav-enquire { text-align: center; }
 
-  .hero { padding: 5rem 1.5rem 5rem; min-height: 600px; }
+  .hero { padding: 5rem 1.5rem 8rem; min-height: 600px; }
   .hero-mark { font-size: clamp(1.6rem, 7vw, 2.6rem); gap: 0.4rem 1rem; }
   .hero-foot { bottom: 1.6rem; gap: 1.1rem; }
   .hero-meta { flex-wrap: wrap; justify-content: center; gap: 0.6rem; padding: 0.7rem 1rem; }
