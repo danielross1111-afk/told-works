@@ -409,6 +409,8 @@ nav.scrolled {
 
 .placeholder {
   background: linear-gradient(135deg, #1f1611 0%, #0a0604 100%);
+  background-origin: border-box;
+  background-clip: border-box;
   display: flex;
   align-items: flex-end;
   padding: 1.6rem;
@@ -848,6 +850,8 @@ footer {
   overflow: hidden;
   border: 1px solid var(--line);
   background: linear-gradient(135deg, #1f1611 0%, #0a0604 100%);
+  background-origin: border-box;
+  background-clip: border-box;
   display: flex;
   align-items: flex-end;
   padding: 1.6rem;
