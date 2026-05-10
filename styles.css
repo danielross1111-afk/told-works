@@ -197,25 +197,18 @@ nav.scrolled {
   background: var(--pounamu-light);
 }
 
-.hero-h1 {
-  font-size: clamp(2.6rem, 6vw, 5rem);
+.hero-mark {
+  font-size: clamp(3rem, 8vw, 5.5rem);
   font-weight: 300;
-  line-height: 1.05;
+  font-style: italic;
+  line-height: 1;
   letter-spacing: -0.01em;
-  margin-bottom: 2rem;
+  margin: 0.4rem 0 2.4rem;
   color: var(--bone);
 }
-.hero-h1 em {
+.hero-mark em {
   font-style: italic;
   color: var(--pounamu-light);
-}
-
-.hero-sub {
-  font-size: 1.05rem;
-  color: var(--bone-dim);
-  max-width: 580px;
-  margin: 0 auto 3rem;
-  line-height: 1.75;
 }
 
 .hero-meta {
@@ -258,6 +251,31 @@ nav.scrolled {
 @keyframes scrollPulse {
   0%, 100% { transform: scaleY(1); opacity: 0.4; }
   50%      { transform: scaleY(0.3); opacity: 1; }
+}
+
+/* ─── INTRO (second screen — was hero copy) ─── */
+.intro {
+  padding: var(--section-y) 0;
+  text-align: center;
+  background: radial-gradient(ellipse at center, var(--ink-2) 0%, var(--ink) 70%);
+  border-bottom: 1px solid var(--line);
+}
+.intro-h {
+  font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0 auto 2rem;
+  color: var(--bone);
+  max-width: 920px;
+}
+.intro-h em { font-style: italic; color: var(--pounamu-light); }
+.intro-sub {
+  font-size: 1.05rem;
+  color: var(--bone-dim);
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.75;
 }
 
 /* ─── PRESS STRIP ─── */
@@ -781,9 +799,10 @@ footer {
   .nav-enquire { text-align: center; }
 
   .hero { padding: 5rem 1.5rem 0; min-height: 600px; }
-  .hero-h1 { font-size: clamp(2.2rem, 9vw, 3.6rem); }
+  .hero-mark { font-size: clamp(2.4rem, 12vw, 4rem); margin: 0.4rem 0 2rem; }
   .hero-meta { flex-wrap: wrap; justify-content: center; gap: 0.6rem; padding: 0.8rem 1rem; }
   .hero-meta .dot { display: none; }
+  .intro-h { font-size: clamp(2rem, 7vw, 3.2rem); }
 
   .practice-grid { grid-template-columns: 1fr; gap: 3rem; }
   .practice-facts { grid-template-columns: 1fr 1fr; }
@@ -965,24 +984,21 @@ footer {
 
 /* Hero text waits for the image, then fades up in sequence over the top */
 .hero-content > .eyebrow,
-.hero-content > .hero-h1,
-.hero-content > .hero-sub,
+.hero-content > .hero-mark,
 .hero-content > .hero-meta {
   opacity: 0;
   transform: translateY(16px);
   transition: opacity 1.2s ease-out, transform 1.2s ease-out;
 }
 .hero.hero-loaded .hero-content > .eyebrow,
-.hero.hero-loaded .hero-content > .hero-h1,
-.hero.hero-loaded .hero-content > .hero-sub,
+.hero.hero-loaded .hero-content > .hero-mark,
 .hero.hero-loaded .hero-content > .hero-meta {
   opacity: 1;
   transform: translateY(0);
 }
 .hero.hero-loaded .hero-content > .eyebrow   { transition-delay: 1.6s; }
-.hero.hero-loaded .hero-content > .hero-h1   { transition-delay: 2.0s; }
-.hero.hero-loaded .hero-content > .hero-sub  { transition-delay: 2.6s; }
-.hero.hero-loaded .hero-content > .hero-meta { transition-delay: 3.2s; }
+.hero.hero-loaded .hero-content > .hero-mark { transition-delay: 2.1s; }
+.hero.hero-loaded .hero-content > .hero-meta { transition-delay: 2.8s; }
 
 /* Enter cue joins the image entrance, then keeps pulsing throughout */
 .hero .scroll-cue {
@@ -997,8 +1013,7 @@ footer {
     opacity: 0.22;
   }
   .hero-content > .eyebrow,
-  .hero-content > .hero-h1,
-  .hero-content > .hero-sub,
+  .hero-content > .hero-mark,
   .hero-content > .hero-meta,
   .hero .scroll-cue {
     opacity: 1;
