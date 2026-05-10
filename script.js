@@ -2,29 +2,55 @@
  * Sections added: nav scroll state, reveal-on-scroll, lightbox, mobile menu.
  */
 
-// Hero entrance: page opens dark, the title / byline / meta / Enter cue stagger
-// in first, then the photograph rises behind them. The CSS owns the reveal —
-// we just toggle classes (.hero-loaded for text, .is-loaded for the image).
+// Landing gate: lock the page on load so the user must click Enter to advance.
+// Once Enter is clicked we release the lock and smooth-scroll into the site.
+(function landingGate() {
+  const cue = document.querySelector('.scroll-cue[href="#intro"]');
+  const target = document.getElementById('intro');
+  if (!cue || !target) return;
+
+  document.documentElement.classList.add('landing-locked');
+
+  const release = (e) => {
+    if (e) e.preventDefault();
+    document.documentElement.classList.remove('landing-locked');
+    requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  };
+  cue.addEventListener('click', release);
+})();
+
+// Hero entrance: page opens dark; the title fades in first, then the
+// photograph rises behind it, then the Enter cue. Once the image is fully in,
+// the title fades back into the atmosphere and the image brightens further to
+// take over the foreground (.hero-settled). CSS owns the visuals — we toggle
+// classes on the .hero element.
 (function heroEntrance() {
   const el = document.querySelector('.hero-image');
   if (!el) return;
   const hero = el.closest('.hero');
 
-  // Text starts revealing on the next frame so the initial dark state paints.
+  // Title starts revealing on the next frame so the dark state paints first.
   requestAnimationFrame(() => {
     if (hero) hero.classList.add('hero-loaded');
   });
 
-  // Image rises behind the text — wait for the file to load AND for the title
-  // to have settled (~2s) before kicking off its 8s fade. The Enter cue then
-  // fades in over the top via CSS once the image is on its way.
-  const TEXT_SETTLE_MS = 2000;
+  const TEXT_SETTLE_MS = 2000;     // wait this long before the image rises
+  const IMAGE_FADE_MS  = 8000;     // matches the CSS opacity transition
+  const SETTLE_BUFFER_MS = 1000;   // pause once the image is in, then settle
+
   const start = Date.now();
   let imageRevealed = false;
   const showImage = () => {
     if (imageRevealed) return;
     imageRevealed = true;
     el.classList.add('is-loaded');
+    // After the image has finished fading in, dim the mark and brighten the
+    // photograph further so the picture becomes the dominant layer.
+    setTimeout(() => {
+      if (hero) hero.classList.add('hero-settled');
+    }, IMAGE_FADE_MS + SETTLE_BUFFER_MS);
   };
   const reveal = () => {
     const wait = Math.max(0, TEXT_SETTLE_MS - (Date.now() - start));
