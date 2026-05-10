@@ -15,9 +15,9 @@ html { scroll-behavior: smooth; }
   --ink:             #0E0D0B;
   --ink-2:           #14120E;
   --ink-3:           #1C1A16;
-  --bone:            #F8F4E8;
-  --bone-dim:        #E8E2D0;
-  --bone-mute:       #8A8578;
+  --bone:            #FAF7EC;
+  --bone-dim:        #F0EAD7;
+  --bone-mute:       #A29D90;
   --serpentine:      #1F3A30;
   --serpentine-sage: #5E7A66;
   --ember:           #B26239;
@@ -345,6 +345,7 @@ nav.scrolled {
 .intro-h em { font-style: italic; color: var(--serpentine-sage); font-weight: 600; }
 .intro-sub {
   font-size: 1.05rem;
+  font-weight: 500;
   color: var(--bone-dim);
   max-width: 580px;
   margin: 0 auto;
@@ -429,6 +430,7 @@ nav.scrolled {
 .practice-text p {
   color: var(--bone-dim);
   font-size: 1.05rem;
+  font-weight: 500;
   line-height: 1.85;
   margin-bottom: 1.5rem;
 }
@@ -581,6 +583,7 @@ nav.scrolled {
 .work-body p {
   color: var(--bone-dim);
   font-size: 1rem;
+  font-weight: 500;
   line-height: 1.85;
   margin-bottom: 1.8rem;
 }
@@ -639,6 +642,7 @@ nav.scrolled {
 
 .standard-text p {
   font-size: 1.05rem;
+  font-weight: 500;
   color: var(--bone-dim);
   line-height: 1.9;
   margin-bottom: 1.5rem;
@@ -718,6 +722,7 @@ nav.scrolled {
 
 .commission-sub {
   font-size: 1.05rem;
+  font-weight: 500;
   color: var(--bone-dim);
   max-width: 560px;
   margin: 0 auto 4rem;
