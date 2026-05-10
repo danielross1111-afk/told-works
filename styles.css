@@ -241,7 +241,7 @@ nav.scrolled {
   font-size: 0.7rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--bone-mute);
+  color: var(--bone-dim);
   z-index: 2;
 }
 .scroll-cue::after {
