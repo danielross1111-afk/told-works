@@ -33,6 +33,15 @@ body {
   position: relative;
 }
 
+/* While on the landing screen we lock the page; clicking Enter releases. */
+html.landing-locked,
+html.landing-locked body {
+  overflow: hidden;
+  height: 100vh;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+
 /* Grain overlay — 4% noise across the body */
 body::before {
   content: '';
@@ -325,6 +334,24 @@ nav.scrolled {
   margin: 0 auto;
   line-height: 1.75;
 }
+.intro-meta {
+  position: absolute;
+  left: 50%;
+  bottom: 3rem;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.9rem 1.4rem;
+  border-top: 1px solid var(--ember);
+  border-bottom: 1px solid var(--ember);
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ember);
+  white-space: nowrap;
+}
+.intro-meta .dot { color: var(--ember); opacity: 0.55; }
 
 /* ─── PRESS STRIP ─── */
 .press {
@@ -834,6 +861,17 @@ footer {
   .hero-meta { flex-wrap: wrap; justify-content: center; gap: 0.6rem; padding: 0.7rem 1rem; }
   .hero-meta .dot { display: none; }
   .intro-h { font-size: clamp(2rem, 7vw, 3.2rem); }
+  .intro-meta {
+    bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1rem;
+    white-space: normal;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+  }
+  .intro-meta .dot { display: none; }
 
   .practice-grid { grid-template-columns: 1fr; gap: 3rem; }
   .practice-facts { grid-template-columns: 1fr 1fr; }
@@ -1009,6 +1047,18 @@ footer {
   transition: opacity 8s ease-out 0.2s;
 }
 .hero-image.is-loaded { opacity: 0.22; }
+
+/* Once the photograph has faded in, the title fades back into the
+   atmosphere and the image brightens further to take the foreground. */
+.hero.hero-settled .hero-image {
+  opacity: 0.78;
+  filter: saturate(0.95);
+  transition: opacity 4s ease-in-out, filter 4s ease-in-out;
+}
+.hero.hero-settled .hero-content > .hero-mark {
+  opacity: 0.4;
+  transition: opacity 4s ease-in-out 0s;
+}
 
 /* Sequence: title fades in first, then the image rises behind, then the
    Enter cue appears once the image is on its way in. */
