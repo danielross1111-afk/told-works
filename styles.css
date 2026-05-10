@@ -963,9 +963,46 @@ footer {
 }
 .hero-image.is-loaded { opacity: 0.22; }
 
+/* Hero text waits for the image, then fades up in sequence over the top */
+.hero-content > .eyebrow,
+.hero-content > .hero-h1,
+.hero-content > .hero-sub,
+.hero-content > .hero-meta {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+.hero.hero-loaded .hero-content > .eyebrow,
+.hero.hero-loaded .hero-content > .hero-h1,
+.hero.hero-loaded .hero-content > .hero-sub,
+.hero.hero-loaded .hero-content > .hero-meta {
+  opacity: 1;
+  transform: translateY(0);
+}
+.hero.hero-loaded .hero-content > .eyebrow   { transition-delay: 1.6s; }
+.hero.hero-loaded .hero-content > .hero-h1   { transition-delay: 2.0s; }
+.hero.hero-loaded .hero-content > .hero-sub  { transition-delay: 2.6s; }
+.hero.hero-loaded .hero-content > .hero-meta { transition-delay: 3.2s; }
+
+/* Enter cue joins the image entrance, then keeps pulsing throughout */
+.hero .scroll-cue {
+  opacity: 0;
+  transition: opacity 2s ease-out 0.6s;
+}
+.hero.hero-loaded .scroll-cue { opacity: 1; }
+
 @media (prefers-reduced-motion: reduce) {
   .hero-image {
     transition: none;
     opacity: 0.22;
+  }
+  .hero-content > .eyebrow,
+  .hero-content > .hero-h1,
+  .hero-content > .hero-sub,
+  .hero-content > .hero-meta,
+  .hero .scroll-cue {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

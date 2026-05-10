@@ -2,20 +2,30 @@
  * Sections added: nav scroll state, reveal-on-scroll, lightbox, mobile menu.
  */
 
-// Hero image: trigger the slow fade once the background image has actually loaded.
-// (CSS-only animation can complete before the image arrives on slower mobile networks,
-// so the user sees the image snap in at the end with no perceptible fade.)
-(function heroImageFade() {
+// Hero entrance: hold the page dark until the hero photograph has loaded, then
+// fade the image in (8s) and stagger the headline / sub / meta over the top.
+// The CSS does the actual reveal — we just toggle classes once the image is ready.
+(function heroEntrance() {
   const el = document.querySelector('.hero-image');
   if (!el) return;
+  const hero = el.closest('.hero');
+  let revealed = false;
+  const reveal = () => {
+    if (revealed) return;
+    revealed = true;
+    el.classList.add('is-loaded');
+    if (hero) hero.classList.add('hero-loaded');
+  };
   const bg = el.style.backgroundImage;
   const match = bg && bg.match(/url\((['"]?)(.*?)\1\)/);
-  if (!match) { el.classList.add('is-loaded'); return; }
+  if (!match) { reveal(); return; }
   const img = new Image();
-  img.onload = () => el.classList.add('is-loaded');
-  img.onerror = () => el.classList.add('is-loaded');
+  img.onload = reveal;
+  img.onerror = reveal;
   img.src = match[2];
-  if (img.complete) el.classList.add('is-loaded');
+  if (img.complete) reveal();
+  // Safety net: never leave the page dark for more than a few seconds
+  setTimeout(reveal, 5000);
 })();
 
 // Nav: add .scrolled class once user has scrolled past the hero apex
