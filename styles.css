@@ -959,7 +959,7 @@ footer {
   background-repeat: no-repeat;
   opacity: 0;
   filter: saturate(0.5);
-  animation: heroImageReveal 4s ease-out 0.8s forwards;
+  animation: heroImageReveal 8s ease-out 0.8s forwards;
 }
 
 @keyframes heroImageReveal {
