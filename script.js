@@ -3,20 +3,29 @@
  */
 
 // Landing gate: lock the page on load so the user must click Enter to advance.
-// Once Enter is clicked we release the lock and smooth-scroll into the site.
+// Clicking Enter slides the intro panel up over the hero, then releases the
+// lock with the document scroll positioned at the intro section.
 (function landingGate() {
   const cue = document.querySelector('.scroll-cue[href="#intro"]');
   const target = document.getElementById('intro');
   if (!cue || !target) return;
 
-  document.documentElement.classList.add('landing-locked');
+  const html = document.documentElement;
+  html.classList.add('landing-locked');
+
+  const SLIDE_MS = 950;
+  let releasing = false;
 
   const release = (e) => {
     if (e) e.preventDefault();
-    document.documentElement.classList.remove('landing-locked');
-    requestAnimationFrame(() => {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    if (releasing) return;
+    releasing = true;
+    html.classList.add('landing-releasing');
+    setTimeout(() => {
+      html.classList.remove('landing-locked');
+      html.classList.remove('landing-releasing');
+      target.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }, SLIDE_MS);
   };
   cue.addEventListener('click', release);
 })();
