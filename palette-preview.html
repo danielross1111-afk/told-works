@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palette Preview — Told Works</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      background: #07060a;
+      color: #d9d4c5;
+      -webkit-font-smoothing: antialiased;
+    }
+    .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+    /* ─── PAGE INTRO ─── */
+    .page-intro {
+      padding: 5rem 2rem 3rem;
+      max-width: 920px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .page-intro h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      margin-bottom: 1.2rem;
+      color: #efe6d2;
+    }
+    .page-intro h1 em { font-style: italic; color: #b26239; font-weight: 600; }
+    .page-intro p {
+      max-width: 640px;
+      margin: 0 auto 1rem;
+      font-size: 1rem;
+      line-height: 1.85;
+      color: #b6ad9a;
+    }
+    .page-intro .recommendation {
+      margin-top: 2rem;
+      padding: 1.4rem 1.8rem;
+      border: 1px solid rgba(178, 98, 57, 0.35);
+      background: rgba(178, 98, 57, 0.06);
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: #d9d4c5;
+      text-align: left;
+    }
+    .page-intro .recommendation strong {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #b26239;
+      margin-bottom: 0.6rem;
+      font-weight: 500;
+    }
+
+    /* ─── PALETTE CARD (one per option) ─── */
+    .palette {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+    .palette-head {
+      display: flex;
+      align-items: baseline;
+      gap: 1.4rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.4rem;
+      padding-left: 0.2rem;
+    }
+    .palette-num {
+      font-size: 0.7rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #b6ad9a;
+    }
+    .palette-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: #efe6d2;
+    }
+    .palette-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #8a8578;
+    }
+    .palette-desc {
+      max-width: 720px;
+      margin: 0 0 2rem 0.2rem;
+      color: #b6ad9a;
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    /* ─── SCOPED SLICE (the actual mock-up, styled with the palette's vars) ─── */
+    .slice {
+      border: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden;
+    }
+    .slice-inner {
+      background: var(--ink);
+      color: var(--bone);
+      padding: 4rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .slice-inner::before {
+      content: none;
+    }
+
+    /* HERO MARK */
+    .mock-hero {
+      padding: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.6rem;
+    }
+    .mock-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--accent-cool);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .mock-eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--accent-cool);
+    }
+    .mock-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bone);
+      padding: 0.7rem 1.2rem;
+      background: var(--ink-2);
+      border-top: 1px solid var(--line-strong);
+      border-bottom: 1px solid var(--line-strong);
+      display: inline-flex;
+      gap: 0.7rem;
+      align-items: baseline;
+    }
+    .mock-mark em {
+      font-style: normal;
+      color: var(--accent-cool);
+    }
+    .mock-mark .dot { color: var(--accent-cool); }
+    .mock-mark .pipe { color: var(--bone-mute); font-weight: 200; }
+
+    .mock-h {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+      line-height: 1.1;
+      letter-spacing: -0.005em;
+      color: var(--bone);
+      max-width: 18ch;
+    }
+    .mock-h em { font-style: italic; color: var(--accent-cool); font-weight: 600; }
+
+    .mock-sub {
+      font-size: 0.95rem;
+      color: var(--bone-dim);
+      line-height: 1.85;
+      max-width: 38ch;
+    }
+    .mock-sub em { font-style: italic; color: var(--bone); }
+
+    .mock-cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 0.4rem;
+    }
+    .mock-cta {
+      display: inline-block;
+      padding: 0.95rem 2rem;
+      border: 1px solid var(--accent-warm);
+      color: var(--bone);
+      font-size: 0.72rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      cursor: default;
+      transition: background 0.4s, color 0.4s;
+    }
+    .mock-cta:hover { background: var(--accent-warm); color: var(--ink); }
+    .mock-link {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 0.72rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--bone);
+      border-bottom: 1px solid var(--accent-cool);
+      padding-bottom: 4px;
+    }
+
+    /* WORK CARD (right column) */
+    .mock-work {
+      border: 1px solid var(--line);
+      background: var(--ink-2);
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+    .mock-work-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--accent-cool);
+      border: 1px solid var(--line-strong);
+      padding: 0.32rem 0.7rem;
+      align-self: flex-start;
+      background: var(--ink);
+    }
+    .mock-work-meta {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent-cool);
+    }
+    .mock-work-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.6rem;
+      color: var(--bone);
+      line-height: 1.15;
+    }
+    .mock-work-title em { font-style: italic; color: var(--accent-cool); font-weight: 600; }
+    .mock-work-body {
+      color: var(--bone-dim);
+      font-size: 0.92rem;
+      line-height: 1.8;
+    }
+    .mock-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--bone);
+      padding-left: 1.2rem;
+      border-left: 1px solid var(--accent-cool);
+      margin-top: 0.6rem;
+    }
+    .mock-quote-cite {
+      display: block;
+      font-style: normal;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      color: var(--accent-cool);
+      text-transform: uppercase;
+      margin-top: 0.6rem;
+    }
+
+    /* SWATCH STRIP */
+    .swatch-row {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      background: #0b0a0e;
+    }
+    .swatch {
+      padding: 1.4rem 1rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      border-right: 1px solid rgba(255,255,255,0.05);
+      min-height: 110px;
+    }
+    .swatch:last-child { border-right: none; }
+    .swatch-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+    .swatch-hex {
+      font-family: 'Inter', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.85);
+      margin-top: auto;
+    }
+
+    /* ─── PALETTE 1: Pounamu Twilight ─── */
+    .p1 {
+      --ink: #0E0D0B;
+      --ink-2: #14120E;
+      --ink-3: #1C1A16;
+      --bone: #EFE6D2;
+      --bone-dim: #C9BFA9;
+      --bone-mute: #847B6A;
+      --accent-cool: #5E7A66;       /* muted forest sage — replaces pounamu-light */
+      --accent-cool-deep: #1F3A30;  /* deep bush green */
+      --accent-warm: #B26239;        /* burnt copper — replaces ember */
+      --line: rgba(232, 226, 212, 0.08);
+      --line-strong: rgba(232, 226, 212, 0.18);
+    }
+    .p1 .swatch.s1 { background: #0E0D0B; color: #EFE6D2; }
+    .p1 .swatch.s2 { background: #14120E; color: #EFE6D2; }
+    .p1 .swatch.s3 { background: #1F3A30; color: #EFE6D2; }
+    .p1 .swatch.s4 { background: #5E7A66; color: #0E0D0B; }
+    .p1 .swatch.s5 { background: #B26239; color: #0E0D0B; }
+    .p1 .swatch.s6 { background: #C9BFA9; color: #0E0D0B; }
+    .p1 .swatch.s7 { background: #EFE6D2; color: #0E0D0B; }
+
+    /* ─── PALETTE 2: Schist & Tussock ─── */
+    .p2 {
+      --ink: #14110D;
+      --ink-2: #1B1813;
+      --ink-3: #2A241D;
+      --bone: #EBDFC7;
+      --bone-dim: #C7BBA1;
+      --bone-mute: #82776A;
+      --accent-cool: #A89177;        /* dusty schist taupe — no green at all */
+      --accent-cool-deep: #5A4A3A;
+      --accent-warm: #B0612F;        /* deeper burnt sienna */
+      --line: rgba(235, 223, 199, 0.07);
+      --line-strong: rgba(235, 223, 199, 0.18);
+    }
+    .p2 .swatch.s1 { background: #14110D; color: #EBDFC7; }
+    .p2 .swatch.s2 { background: #2A241D; color: #EBDFC7; }
+    .p2 .swatch.s3 { background: #5A4A3A; color: #EBDFC7; }
+    .p2 .swatch.s4 { background: #A89177; color: #14110D; }
+    .p2 .swatch.s5 { background: #B0612F; color: #14110D; }
+    .p2 .swatch.s6 { background: #C7BBA1; color: #14110D; }
+    .p2 .swatch.s7 { background: #EBDFC7; color: #14110D; }
+
+    /* ─── PALETTE 3: Lake & Ember ─── */
+    .p3 {
+      --ink: #0C0E0D;
+      --ink-2: #111513;
+      --ink-3: #1A2422;
+      --bone: #F0E7D3;
+      --bone-dim: #C7BCA5;
+      --bone-mute: #847B6A;
+      --accent-cool: #5C8079;        /* deep lake-teal sage */
+      --accent-cool-deep: #1A3833;
+      --accent-warm: #B5673A;        /* warm copper */
+      --line: rgba(240, 231, 211, 0.07);
+      --line-strong: rgba(240, 231, 211, 0.18);
+    }
+    .p3 .swatch.s1 { background: #0C0E0D; color: #F0E7D3; }
+    .p3 .swatch.s2 { background: #11211D; color: #F0E7D3; }
+    .p3 .swatch.s3 { background: #1A3833; color: #F0E7D3; }
+    .p3 .swatch.s4 { background: #5C8079; color: #0C0E0D; }
+    .p3 .swatch.s5 { background: #B5673A; color: #0C0E0D; }
+    .p3 .swatch.s6 { background: #C7BCA5; color: #0C0E0D; }
+    .p3 .swatch.s7 { background: #F0E7D3; color: #0C0E0D; }
+
+    /* ─── PALETTE 4: Full Moon Night ─── */
+    .p4 {
+      --ink: #14110F;
+      --ink-2: #1F1916;
+      --ink-3: #2B242C;
+      --bone: #EBDDC7;
+      --bone-dim: #C9B8A0;
+      --bone-mute: #847365;
+      --accent-cool: #C99988;        /* dusty rose — replaces pounamu */
+      --accent-cool-deep: #4E2C30;
+      --accent-warm: #B75740;        /* rust */
+      --line: rgba(235, 221, 199, 0.07);
+      --line-strong: rgba(235, 221, 199, 0.18);
+    }
+    .p4 .swatch.s1 { background: #14110F; color: #EBDDC7; }
+    .p4 .swatch.s2 { background: #2B242C; color: #EBDDC7; }
+    .p4 .swatch.s3 { background: #4E2C30; color: #EBDDC7; }
+    .p4 .swatch.s4 { background: #C99988; color: #14110F; }
+    .p4 .swatch.s5 { background: #B75740; color: #14110F; }
+    .p4 .swatch.s6 { background: #C9B8A0; color: #14110F; }
+    .p4 .swatch.s7 { background: #EBDDC7; color: #14110F; }
+
+    /* ─── CURRENT (for comparison) ─── */
+    .pCurrent {
+      --ink: #0E0D0B;
+      --ink-2: #15130F;
+      --ink-3: #1C1A16;
+      --bone: #F6F2E6;
+      --bone-dim: #D4CDBC;
+      --bone-mute: #8A8578;
+      --accent-cool: #5FB07A;
+      --accent-cool-deep: #2F7A48;
+      --accent-warm: #B8784A;
+      --line: rgba(232, 226, 212, 0.08);
+      --line-strong: rgba(232, 226, 212, 0.18);
+    }
+    .pCurrent .swatch.s1 { background: #0E0D0B; color: #F6F2E6; }
+    .pCurrent .swatch.s2 { background: #15130F; color: #F6F2E6; }
+    .pCurrent .swatch.s3 { background: #2F7A48; color: #F6F2E6; }
+    .pCurrent .swatch.s4 { background: #5FB07A; color: #0E0D0B; }
+    .pCurrent .swatch.s5 { background: #B8784A; color: #0E0D0B; }
+    .pCurrent .swatch.s6 { background: #D4CDBC; color: #0E0D0B; }
+    .pCurrent .swatch.s7 { background: #F6F2E6; color: #0E0D0B; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .slice-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 3rem 1.6rem;
+      }
+      .swatch-row { grid-template-columns: repeat(4, 1fr); }
+      .swatch:nth-child(4) { border-right: none; }
+      .swatch:nth-child(n+5) { border-top: 1px solid rgba(255,255,255,0.05); }
+      .palette { padding: 0 1rem; margin: 3rem auto; }
+      .page-intro { padding: 3.5rem 1.5rem 2rem; }
+    }
+
+    /* footer */
+    .page-foot {
+      padding: 4rem 2rem 6rem;
+      text-align: center;
+      color: #6e6859;
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="page-intro">
+    <h1 class="serif">Palette <em>study</em></h1>
+    <p>Four directions, each tuned against the references you sent — moodier greens, deeper coppers, warmer bones. The current palette sits at the bottom for direct comparison.</p>
+    <p>Each option is rendered against the actual UI patterns from the site so we can judge them in situ rather than as abstract swatches.</p>
+    <div class="recommendation">
+      <strong>My read</strong>
+      Of the four, <em>N° 01 — Pounamu Twilight</em> is the one I'd push you toward. It keeps the cultural anchor of pounamu (the green is still there, still meaningful), but pulls it from the slightly clean "kiwiana" brightness into a deeper bush-at-dusk forest tone — the green you actually see at the edge of native bush after sundown. Paired with a true burnt copper in place of the current tan ember, it reads exactly like the references: rich, restrained, naturally luxurious. <em>N° 02 — Schist &amp; Tussock</em> is the boldest move (drops green entirely for Otago's autumn-grass and stone palette) and is the most locally truthful to Queenstown specifically. <em>N° 03 — Lake &amp; Ember</em> is the most editorial / magazine-like. <em>N° 04 — Full Moon Night</em> is moody but probably too dusty-rose and away from the "made by hand from raw materials" feel.
+    </div>
+  </section>
+
+  <!-- ─── PALETTE 1 ─── -->
+  <article class="palette p1">
+    <div class="palette-head">
+      <span class="palette-num">N° 01</span>
+      <span class="palette-name">Pounamu Twilight</span>
+      <span class="palette-tag">Recommended</span>
+    </div>
+    <p class="palette-desc">The current spirit, deepened. Pounamu drops from leaf-green to bush-at-dusk forest. Ember becomes a true burnt copper. Bone warms a touch. Reads as: <em>the bush at last light, fire in the workshop.</em></p>
+    <div class="slice">
+      <div class="slice-inner">
+        <div class="mock-hero">
+          <div class="mock-eyebrow">Dan Ross · Selected Works</div>
+          <div class="mock-mark"><span><em>Told</em><span class="dot">·</span>Works</span><span class="pipe">|</span><span>Dan Ross</span></div>
+          <h2 class="mock-h">Pieces that tell<br>the story <em>the place</em><br>is already telling.</h2>
+          <p class="mock-sub">Bespoke architectural pieces, installations and objects from a Queenstown workshop. The work amplifies what is already there — <em>the design, the material, the lives that will unfold around it.</em></p>
+          <div class="mock-cta-row">
+            <a href="#" class="mock-cta">Enquire</a>
+            <a href="#" class="mock-link">View the full piece →</a>
+          </div>
+        </div>
+        <div class="mock-work">
+          <span class="mock-work-tag">N° 02 · Legacy</span>
+          <div class="mock-work-meta">Private commission · Lake Hayes</div>
+          <h3 class="mock-work-title">The <em>Sixteen.</em></h3>
+          <p class="mock-work-body">Sixteen ironbark figures reclaimed from a roadside ditch — 300-year-old Western Australian timber. Stripped to heartwood, refined by fire, crowned with hand-carved serpentine and Aotea stone.</p>
+          <div class="mock-quote">"Timber passes through many hands. By the time it reaches us, it has already lived a long life."<span class="mock-quote-cite">— Dan Ross</span></div>
+        </div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch s1"><span class="swatch-label">Ink</span><span class="swatch-hex">#0E0D0B</span></div>
+        <div class="swatch s2"><span class="swatch-label">Ink 2</span><span class="swatch-hex">#14120E</span></div>
+        <div class="swatch s3"><span class="swatch-label">Forest deep</span><span class="swatch-hex">#1F3A30</span></div>
+        <div class="swatch s4"><span class="swatch-label">Forest sage</span><span class="swatch-hex">#5E7A66</span></div>
+        <div class="swatch s5"><span class="swatch-label">Copper</span><span class="swatch-hex">#B26239</span></div>
+        <div class="swatch s6"><span class="swatch-label">Bone dim</span><span class="swatch-hex">#C9BFA9</span></div>
+        <div class="swatch s7"><span class="swatch-label">Bone</span><span class="swatch-hex">#EFE6D2</span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ─── PALETTE 2 ─── -->
+  <article class="palette p2">
+    <div class="palette-head">
+      <span class="palette-num">N° 02</span>
+      <span class="palette-name">Schist &amp; Tussock</span>
+      <span class="palette-tag">Most local</span>
+    </div>
+    <p class="palette-desc">Drops green entirely. Leans into the dry-grass / schist-stone / autumn-copper palette of Central Otago — what's actually outside the workshop window. Boldest move; most place-specific. Some risk it reads more "earth" than "luxury" without careful typography.</p>
+    <div class="slice">
+      <div class="slice-inner">
+        <div class="mock-hero">
+          <div class="mock-eyebrow">Dan Ross · Selected Works</div>
+          <div class="mock-mark"><span><em>Told</em><span class="dot">·</span>Works</span><span class="pipe">|</span><span>Dan Ross</span></div>
+          <h2 class="mock-h">Pieces that tell<br>the story <em>the place</em><br>is already telling.</h2>
+          <p class="mock-sub">Bespoke architectural pieces, installations and objects from a Queenstown workshop. The work amplifies what is already there — <em>the design, the material, the lives that will unfold around it.</em></p>
+          <div class="mock-cta-row">
+            <a href="#" class="mock-cta">Enquire</a>
+            <a href="#" class="mock-link">View the full piece →</a>
+          </div>
+        </div>
+        <div class="mock-work">
+          <span class="mock-work-tag">N° 02 · Legacy</span>
+          <div class="mock-work-meta">Private commission · Lake Hayes</div>
+          <h3 class="mock-work-title">The <em>Sixteen.</em></h3>
+          <p class="mock-work-body">Sixteen ironbark figures reclaimed from a roadside ditch — 300-year-old Western Australian timber. Stripped to heartwood, refined by fire, crowned with hand-carved serpentine and Aotea stone.</p>
+          <div class="mock-quote">"Timber passes through many hands. By the time it reaches us, it has already lived a long life."<span class="mock-quote-cite">— Dan Ross</span></div>
+        </div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch s1"><span class="swatch-label">Ink</span><span class="swatch-hex">#14110D</span></div>
+        <div class="swatch s2"><span class="swatch-label">Schist deep</span><span class="swatch-hex">#2A241D</span></div>
+        <div class="swatch s3"><span class="swatch-label">Schist</span><span class="swatch-hex">#5A4A3A</span></div>
+        <div class="swatch s4"><span class="swatch-label">Tussock</span><span class="swatch-hex">#A89177</span></div>
+        <div class="swatch s5"><span class="swatch-label">Sienna</span><span class="swatch-hex">#B0612F</span></div>
+        <div class="swatch s6"><span class="swatch-label">Bone dim</span><span class="swatch-hex">#C7BBA1</span></div>
+        <div class="swatch s7"><span class="swatch-label">Bone</span><span class="swatch-hex">#EBDFC7</span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ─── PALETTE 3 ─── -->
+  <article class="palette p3">
+    <div class="palette-head">
+      <span class="palette-num">N° 03</span>
+      <span class="palette-name">Lake &amp; Ember</span>
+      <span class="palette-tag">Most editorial</span>
+    </div>
+    <p class="palette-desc">Closest to the deep-teal &amp; copper inspirations (palettes 2 &amp; 3 of your set). Pulls the green toward water rather than bush — Wakatipu under cloud. A small step away from "pounamu" semantically, but the most directly luxurious / magazine-like of the four.</p>
+    <div class="slice">
+      <div class="slice-inner">
+        <div class="mock-hero">
+          <div class="mock-eyebrow">Dan Ross · Selected Works</div>
+          <div class="mock-mark"><span><em>Told</em><span class="dot">·</span>Works</span><span class="pipe">|</span><span>Dan Ross</span></div>
+          <h2 class="mock-h">Pieces that tell<br>the story <em>the place</em><br>is already telling.</h2>
+          <p class="mock-sub">Bespoke architectural pieces, installations and objects from a Queenstown workshop. The work amplifies what is already there — <em>the design, the material, the lives that will unfold around it.</em></p>
+          <div class="mock-cta-row">
+            <a href="#" class="mock-cta">Enquire</a>
+            <a href="#" class="mock-link">View the full piece →</a>
+          </div>
+        </div>
+        <div class="mock-work">
+          <span class="mock-work-tag">N° 02 · Legacy</span>
+          <div class="mock-work-meta">Private commission · Lake Hayes</div>
+          <h3 class="mock-work-title">The <em>Sixteen.</em></h3>
+          <p class="mock-work-body">Sixteen ironbark figures reclaimed from a roadside ditch — 300-year-old Western Australian timber. Stripped to heartwood, refined by fire, crowned with hand-carved serpentine and Aotea stone.</p>
+          <div class="mock-quote">"Timber passes through many hands. By the time it reaches us, it has already lived a long life."<span class="mock-quote-cite">— Dan Ross</span></div>
+        </div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch s1"><span class="swatch-label">Ink</span><span class="swatch-hex">#0C0E0D</span></div>
+        <div class="swatch s2"><span class="swatch-label">Lake deep</span><span class="swatch-hex">#11211D</span></div>
+        <div class="swatch s3"><span class="swatch-label">Lake</span><span class="swatch-hex">#1A3833</span></div>
+        <div class="swatch s4"><span class="swatch-label">Sage-teal</span><span class="swatch-hex">#5C8079</span></div>
+        <div class="swatch s5"><span class="swatch-label">Copper</span><span class="swatch-hex">#B5673A</span></div>
+        <div class="swatch s6"><span class="swatch-label">Bone dim</span><span class="swatch-hex">#C7BCA5</span></div>
+        <div class="swatch s7"><span class="swatch-label">Bone</span><span class="swatch-hex">#F0E7D3</span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ─── PALETTE 4 ─── -->
+  <article class="palette p4">
+    <div class="palette-head">
+      <span class="palette-num">N° 04</span>
+      <span class="palette-name">Full Moon Night</span>
+      <span class="palette-tag">Moodiest</span>
+    </div>
+    <p class="palette-desc">From the "Dark Autumn" reference. Drops green for mahogany &amp; rust. Atmospherically rich but reads more <em>velvet &amp; wine</em> than <em>workshop &amp; stone</em> — probably the wrong frame for a maker's hands-on practice. Included for completeness.</p>
+    <div class="slice">
+      <div class="slice-inner">
+        <div class="mock-hero">
+          <div class="mock-eyebrow">Dan Ross · Selected Works</div>
+          <div class="mock-mark"><span><em>Told</em><span class="dot">·</span>Works</span><span class="pipe">|</span><span>Dan Ross</span></div>
+          <h2 class="mock-h">Pieces that tell<br>the story <em>the place</em><br>is already telling.</h2>
+          <p class="mock-sub">Bespoke architectural pieces, installations and objects from a Queenstown workshop. The work amplifies what is already there — <em>the design, the material, the lives that will unfold around it.</em></p>
+          <div class="mock-cta-row">
+            <a href="#" class="mock-cta">Enquire</a>
+            <a href="#" class="mock-link">View the full piece →</a>
+          </div>
+        </div>
+        <div class="mock-work">
+          <span class="mock-work-tag">N° 02 · Legacy</span>
+          <div class="mock-work-meta">Private commission · Lake Hayes</div>
+          <h3 class="mock-work-title">The <em>Sixteen.</em></h3>
+          <p class="mock-work-body">Sixteen ironbark figures reclaimed from a roadside ditch — 300-year-old Western Australian timber. Stripped to heartwood, refined by fire, crowned with hand-carved serpentine and Aotea stone.</p>
+          <div class="mock-quote">"Timber passes through many hands. By the time it reaches us, it has already lived a long life."<span class="mock-quote-cite">— Dan Ross</span></div>
+        </div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch s1"><span class="swatch-label">Ink</span><span class="swatch-hex">#14110F</span></div>
+        <div class="swatch s2"><span class="swatch-label">Mahogany</span><span class="swatch-hex">#2B242C</span></div>
+        <div class="swatch s3"><span class="swatch-label">Wine</span><span class="swatch-hex">#4E2C30</span></div>
+        <div class="swatch s4"><span class="swatch-label">Dust rose</span><span class="swatch-hex">#C99988</span></div>
+        <div class="swatch s5"><span class="swatch-label">Rust</span><span class="swatch-hex">#B75740</span></div>
+        <div class="swatch s6"><span class="swatch-label">Bone dim</span><span class="swatch-hex">#C9B8A0</span></div>
+        <div class="swatch s7"><span class="swatch-label">Bone</span><span class="swatch-hex">#EBDDC7</span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ─── CURRENT (control) ─── -->
+  <article class="palette pCurrent">
+    <div class="palette-head">
+      <span class="palette-num">Current</span>
+      <span class="palette-name">Pounamu &amp; Ember</span>
+      <span class="palette-tag">For comparison</span>
+    </div>
+    <p class="palette-desc">The palette in production right now — bright pounamu green and warm tan ember. Worth seeing it lined up directly against the four options above to feel the difference in "weight".</p>
+    <div class="slice">
+      <div class="slice-inner">
+        <div class="mock-hero">
+          <div class="mock-eyebrow">Dan Ross · Selected Works</div>
+          <div class="mock-mark"><span><em>Told</em><span class="dot">·</span>Works</span><span class="pipe">|</span><span>Dan Ross</span></div>
+          <h2 class="mock-h">Pieces that tell<br>the story <em>the place</em><br>is already telling.</h2>
+          <p class="mock-sub">Bespoke architectural pieces, installations and objects from a Queenstown workshop. The work amplifies what is already there — <em>the design, the material, the lives that will unfold around it.</em></p>
+          <div class="mock-cta-row">
+            <a href="#" class="mock-cta">Enquire</a>
+            <a href="#" class="mock-link">View the full piece →</a>
+          </div>
+        </div>
+        <div class="mock-work">
+          <span class="mock-work-tag">N° 02 · Legacy</span>
+          <div class="mock-work-meta">Private commission · Lake Hayes</div>
+          <h3 class="mock-work-title">The <em>Sixteen.</em></h3>
+          <p class="mock-work-body">Sixteen ironbark figures reclaimed from a roadside ditch — 300-year-old Western Australian timber. Stripped to heartwood, refined by fire, crowned with hand-carved serpentine and Aotea stone.</p>
+          <div class="mock-quote">"Timber passes through many hands. By the time it reaches us, it has already lived a long life."<span class="mock-quote-cite">— Dan Ross</span></div>
+        </div>
+      </div>
+      <div class="swatch-row">
+        <div class="swatch s1"><span class="swatch-label">Ink</span><span class="swatch-hex">#0E0D0B</span></div>
+        <div class="swatch s2"><span class="swatch-label">Ink 2</span><span class="swatch-hex">#15130F</span></div>
+        <div class="swatch s3"><span class="swatch-label">Pounamu</span><span class="swatch-hex">#2F7A48</span></div>
+        <div class="swatch s4"><span class="swatch-label">Pounamu lt</span><span class="swatch-hex">#5FB07A</span></div>
+        <div class="swatch s5"><span class="swatch-label">Ember</span><span class="swatch-hex">#B8784A</span></div>
+        <div class="swatch s6"><span class="swatch-label">Bone dim</span><span class="swatch-hex">#D4CDBC</span></div>
+        <div class="swatch s7"><span class="swatch-label">Bone</span><span class="swatch-hex">#F6F2E6</span></div>
+      </div>
+    </div>
+  </article>
+
+  <div class="page-foot">Told Works · Palette Study · Draft</div>
+
+</body>
+</html>
