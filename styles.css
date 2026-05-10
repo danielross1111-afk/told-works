@@ -427,6 +427,27 @@ nav.scrolled {
 .practice-text p:last-child { margin-bottom: 0; }
 .practice-text em { font-style: italic; color: var(--bone); }
 
+.practice-text .practice-beat {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.45rem;
+  line-height: 1.4;
+  color: var(--bone);
+  margin: 0.5rem 0 2rem;
+}
+.practice-text .practice-coda {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  color: var(--bone);
+  margin-top: 0.6rem;
+  margin-bottom: 1.2rem;
+}
+.practice-text .practice-coda em {
+  font-style: italic;
+  color: var(--bone);
+}
+
 .pull-quote {
   padding: 0.4rem 0 0.4rem 2rem;
   border-left: 1px solid var(--pounamu-light);
