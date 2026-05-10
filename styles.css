@@ -160,7 +160,7 @@ nav.scrolled {
   align-items: flex-end;
   justify-content: center;
   overflow: hidden;
-  padding: 6rem 2rem 11rem;
+  padding: 6rem 2rem 7rem;
   background: radial-gradient(ellipse at center, var(--ink-2) 0%, var(--ink) 70%);
 }
 
@@ -215,17 +215,23 @@ nav.scrolled {
 .hero-mark {
   display: inline-flex;
   align-items: baseline;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
-  gap: 0.6rem 1.3rem;
-  font-size: clamp(2.4rem, 6vw, 4.6rem);
+  gap: clamp(0.4rem, 1.4vw, 1.2rem);
+  padding: 0.85rem clamp(1rem, 2.5vw, 2rem);
+  font-size: clamp(1.15rem, 3.8vw, 3.2rem);
   font-weight: 700;
   font-style: normal;
   line-height: 1.1;
-  letter-spacing: 0.3em;
+  letter-spacing: clamp(0.15em, 0.22em, 0.25em);
   text-transform: uppercase;
   margin: 0;
   color: var(--bone);
+  background: rgba(8, 7, 5, 0.82);
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  white-space: nowrap;
+  max-width: 100%;
 }
 .hero-mark-title em {
   font-style: normal;
@@ -855,8 +861,7 @@ footer {
   .nav-links a { padding: 0.4rem 0; }
   .nav-enquire { text-align: center; }
 
-  .hero { padding: 5rem 1.5rem 8rem; min-height: 600px; }
-  .hero-mark { font-size: clamp(1.6rem, 7vw, 2.6rem); gap: 0.4rem 1rem; }
+  .hero { padding: 5rem 1.5rem 5rem; min-height: 600px; }
   .hero-foot { bottom: 1.6rem; gap: 1.1rem; }
   .hero-meta { flex-wrap: wrap; justify-content: center; gap: 0.6rem; padding: 0.7rem 1rem; }
   .hero-meta .dot { display: none; }
@@ -1048,16 +1053,13 @@ footer {
 }
 .hero-image.is-loaded { opacity: 0.22; }
 
-/* Once the photograph has faded in, the title fades back into the
-   atmosphere and the image brightens further to take the foreground. */
+/* Once the photograph has faded in, it brightens further to take the
+   foreground while the title settles onto a dark filled plate so the green
+   TOLD stays legible against the now-bright image. */
 .hero.hero-settled .hero-image {
-  opacity: 0.78;
-  filter: saturate(0.95);
+  opacity: 0.85;
+  filter: saturate(1);
   transition: opacity 4s ease-in-out, filter 4s ease-in-out;
-}
-.hero.hero-settled .hero-content > .hero-mark {
-  opacity: 0.4;
-  transition: opacity 4s ease-in-out 0s;
 }
 
 /* Sequence: title fades in first, then the image rises behind, then the
