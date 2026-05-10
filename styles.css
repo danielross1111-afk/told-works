@@ -925,3 +925,34 @@ footer {
   .plate, .plate.reverse { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 4rem; }
   .plate.reverse .plate-img { order: 0; }
 }
+
+/* ─── IMAGE OVERLAY (caption legibility on top of real photographs) ─── */
+.work-img::after,
+.plate-img::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  background: linear-gradient(to top, rgba(14, 13, 11, 0.85) 0%, rgba(14, 13, 11, 0) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.placeholder-label,
+.plate-img-label {
+  position: relative;
+  z-index: 2;
+}
+
+/* ─── HERO IMAGE BACKDROP ─── */
+.hero-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.22;
+  filter: saturate(0.5);
+}
