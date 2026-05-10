@@ -10,8 +10,8 @@ html { scroll-behavior: smooth; }
   --bone:          #E8E2D4;
   --bone-dim:      #B8B1A1;
   --bone-mute:     #6F6A5E;
-  --pounamu:       #4A6B54;
-  --pounamu-light: #7A9482;
+  --pounamu:       #34503D;
+  --pounamu-light: #4F7A5E;
   --ember:         #B8784A;
   --line:          rgba(232, 226, 212, 0.08);
   --line-strong:   rgba(232, 226, 212, 0.18);
@@ -67,9 +67,13 @@ nav {
   -webkit-backdrop-filter: blur(12px);
   background: rgba(14, 13, 11, 0.6);
   border-bottom: 1px solid transparent;
-  transition: padding 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease, padding 0.3s ease, background 0.3s ease, border-color 0.3s ease;
 }
 nav.scrolled {
+  opacity: 1;
+  pointer-events: auto;
   padding: 1rem 3rem;
   background: rgba(14, 13, 11, 0.92);
   border-bottom-color: var(--line);
@@ -144,12 +148,13 @@ nav.scrolled {
   min-height: 720px;
   position: relative;
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: center;
   overflow: hidden;
-  padding: 9rem 2rem 0;
+  padding: 6rem 2rem 7rem;
   background: radial-gradient(ellipse at center, var(--ink-2) 0%, var(--ink) 70%);
 }
+
 
 .hero-bg {
   position: absolute;
@@ -170,6 +175,7 @@ nav.scrolled {
   z-index: 2;
   text-align: center;
   max-width: 920px;
+  padding-bottom: 1rem;
 }
 
 .eyebrow {
@@ -198,25 +204,35 @@ nav.scrolled {
 }
 
 .hero-mark {
-  font-size: clamp(3.4rem, 9vw, 6.5rem);
-  font-weight: 600;
-  font-style: italic;
-  line-height: 1;
-  letter-spacing: -0.015em;
-  margin: 0 0 1.4rem;
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem 1.3rem;
+  font-size: clamp(2.4rem, 6vw, 4.6rem);
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.1;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin: 0;
   color: var(--bone);
 }
-.hero-mark em {
-  font-style: italic;
+.hero-mark-title em {
+  font-style: normal;
   color: var(--pounamu-light);
 }
-
-.hero-byline {
-  font-size: 0.78rem;
-  letter-spacing: 0.45em;
-  text-transform: uppercase;
-  color: var(--bone-dim);
-  font-weight: 400;
+.hero-mark-dot {
+  color: var(--pounamu-light);
+  margin: 0 0.05em;
+}
+.hero-mark-pipe {
+  font-weight: 200;
+  color: var(--bone-mute);
+  letter-spacing: 0;
+}
+.hero-mark-name {
+  color: var(--bone);
 }
 
 .hero-foot {
@@ -800,8 +816,8 @@ footer {
   .nav-links a { padding: 0.4rem 0; }
   .nav-enquire { text-align: center; }
 
-  .hero { padding: 7rem 1.5rem 0; min-height: 600px; }
-  .hero-mark { font-size: clamp(2.4rem, 12vw, 4rem); margin: 0 0 1rem; }
+  .hero { padding: 5rem 1.5rem 5rem; min-height: 600px; }
+  .hero-mark { font-size: clamp(1.6rem, 7vw, 2.6rem); gap: 0.4rem 1rem; }
   .hero-foot { bottom: 1.6rem; gap: 1.1rem; }
   .hero-meta { flex-wrap: wrap; justify-content: center; gap: 0.6rem; padding: 0.7rem 1rem; }
   .hero-meta .dot { display: none; }
@@ -982,26 +998,21 @@ footer {
 }
 .hero-image.is-loaded { opacity: 0.22; }
 
-/* Text fades in first, then the image rises behind it. */
+/* Sequence: title fades in first, then the image rises behind, then the
+   Enter cue appears once the image is on its way in. */
 .hero-content > .hero-mark,
-.hero-content > .hero-byline,
-.hero-foot > .hero-meta,
 .hero-foot > .scroll-cue {
   opacity: 0;
   transform: translateY(16px);
   transition: opacity 1.2s ease-out, transform 1.2s ease-out;
 }
 .hero.hero-loaded .hero-content > .hero-mark,
-.hero.hero-loaded .hero-content > .hero-byline,
-.hero.hero-loaded .hero-foot > .hero-meta,
 .hero.hero-loaded .hero-foot > .scroll-cue {
   opacity: 1;
   transform: translateY(0);
 }
-.hero.hero-loaded .hero-content > .hero-mark   { transition-delay: 0.3s; }
-.hero.hero-loaded .hero-content > .hero-byline { transition-delay: 0.9s; }
-.hero.hero-loaded .hero-foot    > .hero-meta   { transition-delay: 1.5s; }
-.hero.hero-loaded .hero-foot    > .scroll-cue  { transition-delay: 1.8s; }
+.hero.hero-loaded .hero-content > .hero-mark  { transition-delay: 0.5s; }
+.hero.hero-loaded .hero-foot    > .scroll-cue { transition-delay: 3.6s; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-image {
@@ -1009,8 +1020,6 @@ footer {
     opacity: 0.22;
   }
   .hero-content > .hero-mark,
-  .hero-content > .hero-byline,
-  .hero-foot > .hero-meta,
   .hero-foot > .scroll-cue {
     opacity: 1;
     transform: none;
