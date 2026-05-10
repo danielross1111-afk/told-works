@@ -271,10 +271,14 @@ nav.scrolled {
 
 /* ─── INTRO (second screen — was hero copy) ─── */
 .intro {
+  min-height: 100vh;
   padding: var(--section-y) 0;
   text-align: center;
   background: radial-gradient(ellipse at center, var(--ink-2) 0%, var(--ink) 70%);
   border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .intro-h {
   font-size: clamp(2.4rem, 5.5vw, 4.5rem);
