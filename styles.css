@@ -186,10 +186,6 @@ nav.scrolled {
   width: 100%;
   max-width: 100%;
   padding-bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2.5rem;
 }
 
 .eyebrow {
@@ -256,6 +252,12 @@ nav.scrolled {
 }
 
 .hero-foot {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -280,19 +282,21 @@ nav.scrolled {
 
 .scroll-cue {
   display: inline-block;
-  font-size: 0.78rem;
-  letter-spacing: 0.4em;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5em;
   text-transform: uppercase;
-  color: var(--ember);
+  color: var(--bone);
   text-decoration: none;
   cursor: pointer;
-  padding: 0.4rem 0.6rem;
+  padding: 0.6rem 0.9rem;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.7);
   transition: color 0.3s ease, letter-spacing 0.3s ease;
 }
 .scroll-cue:hover,
 .scroll-cue:focus-visible {
-  color: var(--bone);
-  letter-spacing: 0.5em;
+  color: var(--ember);
+  letter-spacing: 0.6em;
   outline: none;
 }
 .scroll-cue::after {
@@ -300,8 +304,8 @@ nav.scrolled {
   display: block;
   width: 1px;
   height: 44px;
-  background: var(--ember);
-  opacity: 0.65;
+  background: var(--bone);
+  opacity: 0.85;
   margin: 1rem auto 0;
   animation: scrollPulse 2s ease-in-out infinite;
   transform-origin: top;
