@@ -15,9 +15,10 @@
     if (hero) hero.classList.add('hero-loaded');
   });
 
-  // Image rises behind the text — wait for the file to load AND for the text
-  // sequence to have settled (~3s) before kicking off its 8s fade.
-  const TEXT_SETTLE_MS = 3000;
+  // Image rises behind the text — wait for the file to load AND for the title
+  // to have settled (~2s) before kicking off its 8s fade. The Enter cue then
+  // fades in over the top via CSS once the image is on its way.
+  const TEXT_SETTLE_MS = 2000;
   const start = Date.now();
   let imageRevealed = false;
   const showImage = () => {
@@ -42,12 +43,16 @@
   setTimeout(showImage, 8000);
 })();
 
-// Nav: add .scrolled class once user has scrolled past the hero apex
+// Nav: hidden on the landing hero, fades in once the user starts leaving it.
 (function navScroll() {
   const nav = document.getElementById('nav');
   if (!nav) return;
-  const update = () => nav.classList.toggle('scrolled', window.scrollY > 60);
+  const update = () => {
+    const trigger = Math.max(120, window.innerHeight * 0.5);
+    nav.classList.toggle('scrolled', window.scrollY > trigger);
+  };
   window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
   update();
 })();
 

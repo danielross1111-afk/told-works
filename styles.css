@@ -67,9 +67,13 @@ nav {
   -webkit-backdrop-filter: blur(12px);
   background: rgba(14, 13, 11, 0.6);
   border-bottom: 1px solid transparent;
-  transition: padding 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease, padding 0.3s ease, background 0.3s ease, border-color 0.3s ease;
 }
 nav.scrolled {
+  opacity: 1;
+  pointer-events: auto;
   padding: 1rem 3rem;
   background: rgba(14, 13, 11, 0.92);
   border-bottom-color: var(--line);
@@ -200,25 +204,41 @@ nav.scrolled {
 }
 
 .hero-mark {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.9rem 1.3rem;
   font-size: clamp(3.6rem, 10vw, 7rem);
   font-weight: 700;
   font-style: italic;
   line-height: 1;
   letter-spacing: -0.02em;
-  margin: 0 0 1.4rem;
+  margin: 0;
   color: var(--bone);
 }
+.hero-mark-title { font-style: italic; }
 .hero-mark em {
   font-style: italic;
   color: var(--pounamu-light);
 }
-
-.hero-byline {
-  font-size: 0.78rem;
-  letter-spacing: 0.45em;
-  text-transform: uppercase;
-  color: var(--bone-dim);
+.hero-mark-pipe {
+  font-style: normal;
+  font-weight: 200;
+  font-size: 0.62em;
+  color: var(--bone-mute);
+  transform: translateY(-0.05em);
+}
+.hero-mark-name {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-style: normal;
   font-weight: 400;
+  font-size: 0.3em;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--bone);
+  padding-left: 0.21em;
+  transform: translateY(-0.18em);
 }
 
 .hero-foot {
@@ -984,23 +1004,21 @@ footer {
 }
 .hero-image.is-loaded { opacity: 0.22; }
 
-/* Text fades in first, then the image rises behind it. */
+/* Sequence: title fades in first, then the image rises behind, then the
+   Enter cue appears once the image is on its way in. */
 .hero-content > .hero-mark,
-.hero-content > .hero-byline,
 .hero-foot > .scroll-cue {
   opacity: 0;
   transform: translateY(16px);
   transition: opacity 1.2s ease-out, transform 1.2s ease-out;
 }
 .hero.hero-loaded .hero-content > .hero-mark,
-.hero.hero-loaded .hero-content > .hero-byline,
 .hero.hero-loaded .hero-foot > .scroll-cue {
   opacity: 1;
   transform: translateY(0);
 }
-.hero.hero-loaded .hero-content > .hero-mark   { transition-delay: 0.3s; }
-.hero.hero-loaded .hero-content > .hero-byline { transition-delay: 0.9s; }
-.hero.hero-loaded .hero-foot    > .scroll-cue  { transition-delay: 1.5s; }
+.hero.hero-loaded .hero-content > .hero-mark  { transition-delay: 0.5s; }
+.hero.hero-loaded .hero-foot    > .scroll-cue { transition-delay: 3.6s; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-image {
@@ -1008,8 +1026,6 @@ footer {
     opacity: 0.22;
   }
   .hero-content > .hero-mark,
-  .hero-content > .hero-byline,
-  .hero-foot > .hero-meta,
   .hero-foot > .scroll-cue {
     opacity: 1;
     transform: none;
