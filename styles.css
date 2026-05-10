@@ -19,8 +19,8 @@ html { scroll-behavior: smooth; }
   --bone-dim:        #F0EAD7;
   --bone-mute:       #A29D90;
   --serpentine:      #1F3A30;
-  --serpentine-sage: #5E7A66;
-  --ember:           #B26239;
+  --serpentine-sage: #728F7A;
+  --ember:           #C5754A;
   --line:            rgba(232, 226, 212, 0.08);
   --line-strong:     rgba(232, 226, 212, 0.18);
 
@@ -65,6 +65,16 @@ html.landing-locked .intro {
 }
 html.landing-releasing .intro {
   transform: translateY(0);
+}
+
+/* Keyboard focus — visible outline for all interactive elements unless
+   a more specific rule overrides it below. */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--serpentine-sage);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 /* Grain overlay — 4% noise across the body */
@@ -605,6 +615,51 @@ nav.scrolled {
 }
 .work-link:hover { color: var(--serpentine-sage); letter-spacing: 0.34em; }
 
+/* ─── WORKSHOP CODA ─── */
+/* Sits after Selected Work as a smaller, separate note — the pieces here
+   were made outside obligation, so they don't belong in the commissioned
+   portfolio grid. Restrained treatment to read as coda, not headline. */
+.workshop-coda {
+  background: var(--ink);
+  padding: 6rem 0;
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+}
+.workshop-coda-h {
+  font-size: clamp(1.8rem, 3.8vw, 2.6rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  color: var(--bone);
+  margin: 0 auto 3rem;
+}
+.workshop-coda-h em { font-style: italic; color: var(--serpentine-sage); font-weight: 600; }
+.workshop-coda-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 860px;
+  margin: 0 auto;
+  align-items: center;
+  text-align: left;
+}
+.workshop-coda-img {
+  display: block;
+  aspect-ratio: 4 / 3;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.6s ease;
+}
+.workshop-coda-img:hover { transform: translateY(-4px); }
+.workshop-coda-body p {
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--bone-dim);
+  line-height: 1.85;
+  margin-bottom: 1.6rem;
+}
+
 /* ─── WORK OF RECORD ─── */
 .record { background: var(--ink); border-bottom: 1px solid var(--line); }
 
@@ -935,6 +990,9 @@ footer {
   .work-card,
   .work-card.reverse { grid-template-columns: 1fr; gap: 2rem; }
   .work-card.reverse .work-img { order: 0; }
+
+  .workshop-coda { padding: 4rem 0; }
+  .workshop-coda-grid { grid-template-columns: 1fr; gap: 2rem; }
 
   .record-grid { grid-template-columns: 1fr; }
   .record-item { border-right: 1px solid var(--line); }
