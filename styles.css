@@ -218,6 +218,7 @@ nav.scrolled {
   flex-wrap: nowrap;
   justify-content: center;
   gap: clamp(0.4rem, 1.4vw, 1.2rem);
+  padding: 0.85rem clamp(1rem, 2.5vw, 2rem);
   font-size: clamp(1.15rem, 3.8vw, 3.2rem);
   font-weight: 700;
   font-style: normal;
@@ -226,6 +227,9 @@ nav.scrolled {
   text-transform: uppercase;
   margin: 0;
   color: var(--bone);
+  background: rgba(8, 7, 5, 0.82);
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
   white-space: nowrap;
   max-width: 100%;
 }
@@ -1049,33 +1053,13 @@ footer {
 }
 .hero-image.is-loaded { opacity: 0.22; }
 
-/* Darker pool around the title — intensifies once the hero settles so the
-   green TOLD stays readable against the brightening photograph. */
-.hero::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 65%;
-  background: linear-gradient(to top, rgba(14, 13, 11, 0.85) 0%, rgba(14, 13, 11, 0.45) 50%, rgba(14, 13, 11, 0) 100%);
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 4s ease-in-out;
-}
-.hero.hero-settled::after { opacity: 1; }
-
-/* Once the photograph has faded in, the title fades back into the
-   atmosphere and the image brightens further to take the foreground. */
+/* Once the photograph has faded in, it brightens further to take the
+   foreground while the title settles onto a dark filled plate so the green
+   TOLD stays legible against the now-bright image. */
 .hero.hero-settled .hero-image {
-  opacity: 0.78;
-  filter: saturate(0.95);
+  opacity: 0.85;
+  filter: saturate(1);
   transition: opacity 4s ease-in-out, filter 4s ease-in-out;
-}
-.hero.hero-settled .hero-content > .hero-mark {
-  opacity: 0.55;
-  transition: opacity 4s ease-in-out 0s;
 }
 
 /* Sequence: title fades in first, then the image rises behind, then the
