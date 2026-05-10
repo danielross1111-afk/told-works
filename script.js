@@ -2,20 +2,34 @@
  * Sections added: nav scroll state, reveal-on-scroll, lightbox, mobile menu.
  */
 
-// Hero entrance: hold the page dark until the hero photograph has loaded, then
-// fade the image in (8s) and stagger the headline / sub / meta over the top.
-// The CSS does the actual reveal — we just toggle classes once the image is ready.
+// Hero entrance: page opens dark, the title / byline / meta / Enter cue stagger
+// in first, then the photograph rises behind them. The CSS owns the reveal —
+// we just toggle classes (.hero-loaded for text, .is-loaded for the image).
 (function heroEntrance() {
   const el = document.querySelector('.hero-image');
   if (!el) return;
   const hero = el.closest('.hero');
-  let revealed = false;
-  const reveal = () => {
-    if (revealed) return;
-    revealed = true;
-    el.classList.add('is-loaded');
+
+  // Text starts revealing on the next frame so the initial dark state paints.
+  requestAnimationFrame(() => {
     if (hero) hero.classList.add('hero-loaded');
+  });
+
+  // Image rises behind the text — wait for the file to load AND for the text
+  // sequence to have settled (~3s) before kicking off its 8s fade.
+  const TEXT_SETTLE_MS = 3000;
+  const start = Date.now();
+  let imageRevealed = false;
+  const showImage = () => {
+    if (imageRevealed) return;
+    imageRevealed = true;
+    el.classList.add('is-loaded');
   };
+  const reveal = () => {
+    const wait = Math.max(0, TEXT_SETTLE_MS - (Date.now() - start));
+    setTimeout(showImage, wait);
+  };
+
   const bg = el.style.backgroundImage;
   const match = bg && bg.match(/url\((['"]?)(.*?)\1\)/);
   if (!match) { reveal(); return; }
@@ -24,8 +38,8 @@
   img.onerror = reveal;
   img.src = match[2];
   if (img.complete) reveal();
-  // Safety net: never leave the page dark for more than a few seconds
-  setTimeout(reveal, 5000);
+  // Safety net: never leave the photograph hidden indefinitely.
+  setTimeout(showImage, 8000);
 })();
 
 // Nav: add .scrolled class once user has scrolled past the hero apex

@@ -203,12 +203,33 @@ nav.scrolled {
   font-style: italic;
   line-height: 1;
   letter-spacing: -0.01em;
-  margin: 0.4rem 0 2.4rem;
+  margin: 0 0 1.4rem;
   color: var(--bone);
 }
 .hero-mark em {
   font-style: italic;
   color: var(--pounamu-light);
+}
+
+.hero-byline {
+  font-size: 0.78rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  font-weight: 400;
+}
+
+.hero-foot {
+  position: absolute;
+  bottom: 2.4rem;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  padding: 0 1.5rem;
 }
 
 .hero-meta {
@@ -227,15 +248,10 @@ nav.scrolled {
 .hero-meta .ember { color: var(--ember); }
 
 .scroll-cue {
-  position: absolute;
-  bottom: 3rem;
-  left: 50%;
-  transform: translateX(-50%);
   font-size: 0.7rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--bone-dim);
-  z-index: 2;
 }
 .scroll-cue::after {
   content: '';
@@ -799,8 +815,9 @@ footer {
   .nav-enquire { text-align: center; }
 
   .hero { padding: 5rem 1.5rem 0; min-height: 600px; }
-  .hero-mark { font-size: clamp(2.4rem, 12vw, 4rem); margin: 0.4rem 0 2rem; }
-  .hero-meta { flex-wrap: wrap; justify-content: center; gap: 0.6rem; padding: 0.8rem 1rem; }
+  .hero-mark { font-size: clamp(2.4rem, 12vw, 4rem); margin: 0 0 1rem; }
+  .hero-foot { bottom: 1.6rem; gap: 1.1rem; }
+  .hero-meta { flex-wrap: wrap; justify-content: center; gap: 0.6rem; padding: 0.7rem 1rem; }
   .hero-meta .dot { display: none; }
   .intro-h { font-size: clamp(2rem, 7vw, 3.2rem); }
 
@@ -982,40 +999,36 @@ footer {
 }
 .hero-image.is-loaded { opacity: 0.22; }
 
-/* Hero text waits for the image, then fades up in sequence over the top */
-.hero-content > .eyebrow,
+/* Text fades in first, then the image rises behind it. */
 .hero-content > .hero-mark,
-.hero-content > .hero-meta {
+.hero-content > .hero-byline,
+.hero-foot > .hero-meta,
+.hero-foot > .scroll-cue {
   opacity: 0;
   transform: translateY(16px);
   transition: opacity 1.2s ease-out, transform 1.2s ease-out;
 }
-.hero.hero-loaded .hero-content > .eyebrow,
 .hero.hero-loaded .hero-content > .hero-mark,
-.hero.hero-loaded .hero-content > .hero-meta {
+.hero.hero-loaded .hero-content > .hero-byline,
+.hero.hero-loaded .hero-foot > .hero-meta,
+.hero.hero-loaded .hero-foot > .scroll-cue {
   opacity: 1;
   transform: translateY(0);
 }
-.hero.hero-loaded .hero-content > .eyebrow   { transition-delay: 1.6s; }
-.hero.hero-loaded .hero-content > .hero-mark { transition-delay: 2.1s; }
-.hero.hero-loaded .hero-content > .hero-meta { transition-delay: 2.8s; }
-
-/* Enter cue joins the image entrance, then keeps pulsing throughout */
-.hero .scroll-cue {
-  opacity: 0;
-  transition: opacity 2s ease-out 0.6s;
-}
-.hero.hero-loaded .scroll-cue { opacity: 1; }
+.hero.hero-loaded .hero-content > .hero-mark   { transition-delay: 0.3s; }
+.hero.hero-loaded .hero-content > .hero-byline { transition-delay: 0.9s; }
+.hero.hero-loaded .hero-foot    > .hero-meta   { transition-delay: 1.5s; }
+.hero.hero-loaded .hero-foot    > .scroll-cue  { transition-delay: 1.8s; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-image {
     transition: none;
     opacity: 0.22;
   }
-  .hero-content > .eyebrow,
   .hero-content > .hero-mark,
-  .hero-content > .hero-meta,
-  .hero .scroll-cue {
+  .hero-content > .hero-byline,
+  .hero-foot > .hero-meta,
+  .hero-foot > .scroll-cue {
     opacity: 1;
     transform: none;
     transition: none;
