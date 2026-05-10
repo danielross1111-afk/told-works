@@ -9,6 +9,12 @@
   const target = document.getElementById('intro');
   if (!cue || !target) return;
 
+  // Arriving with a section anchor (e.g. #work from a subpage Back link)
+  // means the user is returning to a specific section, not landing fresh.
+  // Skip the gate so the browser can jump them straight to it.
+  const hash = window.location.hash;
+  if (hash && hash !== '#' && hash !== '#hero') return;
+
   document.documentElement.classList.add('landing-locked');
 
   const release = (e) => {
