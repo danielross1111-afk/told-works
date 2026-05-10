@@ -10,8 +10,8 @@ html { scroll-behavior: smooth; }
   --bone:          #E8E2D4;
   --bone-dim:      #B8B1A1;
   --bone-mute:     #6F6A5E;
-  --pounamu:       #4A6B54;
-  --pounamu-light: #7A9482;
+  --pounamu:       #34503D;
+  --pounamu-light: #4F7A5E;
   --ember:         #B8784A;
   --line:          rgba(232, 226, 212, 0.08);
   --line-strong:   rgba(232, 226, 212, 0.18);
@@ -144,12 +144,13 @@ nav.scrolled {
   min-height: 720px;
   position: relative;
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: center;
   overflow: hidden;
-  padding: 9rem 2rem 0;
+  padding: 6rem 2rem 7rem;
   background: radial-gradient(ellipse at center, var(--ink-2) 0%, var(--ink) 70%);
 }
+
 
 .hero-bg {
   position: absolute;
@@ -170,6 +171,7 @@ nav.scrolled {
   z-index: 2;
   text-align: center;
   max-width: 920px;
+  padding-bottom: 1rem;
 }
 
 .eyebrow {
@@ -198,11 +200,11 @@ nav.scrolled {
 }
 
 .hero-mark {
-  font-size: clamp(3.4rem, 9vw, 6.5rem);
-  font-weight: 600;
+  font-size: clamp(3.6rem, 10vw, 7rem);
+  font-weight: 700;
   font-style: italic;
   line-height: 1;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
   margin: 0 0 1.4rem;
   color: var(--bone);
 }
@@ -800,7 +802,7 @@ footer {
   .nav-links a { padding: 0.4rem 0; }
   .nav-enquire { text-align: center; }
 
-  .hero { padding: 7rem 1.5rem 0; min-height: 600px; }
+  .hero { padding: 5rem 1.5rem 5rem; min-height: 600px; }
   .hero-mark { font-size: clamp(2.4rem, 12vw, 4rem); margin: 0 0 1rem; }
   .hero-foot { bottom: 1.6rem; gap: 1.1rem; }
   .hero-meta { flex-wrap: wrap; justify-content: center; gap: 0.6rem; padding: 0.7rem 1rem; }
@@ -985,7 +987,6 @@ footer {
 /* Text fades in first, then the image rises behind it. */
 .hero-content > .hero-mark,
 .hero-content > .hero-byline,
-.hero-foot > .hero-meta,
 .hero-foot > .scroll-cue {
   opacity: 0;
   transform: translateY(16px);
@@ -993,15 +994,13 @@ footer {
 }
 .hero.hero-loaded .hero-content > .hero-mark,
 .hero.hero-loaded .hero-content > .hero-byline,
-.hero.hero-loaded .hero-foot > .hero-meta,
 .hero.hero-loaded .hero-foot > .scroll-cue {
   opacity: 1;
   transform: translateY(0);
 }
 .hero.hero-loaded .hero-content > .hero-mark   { transition-delay: 0.3s; }
 .hero.hero-loaded .hero-content > .hero-byline { transition-delay: 0.9s; }
-.hero.hero-loaded .hero-foot    > .hero-meta   { transition-delay: 1.5s; }
-.hero.hero-loaded .hero-foot    > .scroll-cue  { transition-delay: 1.8s; }
+.hero.hero-loaded .hero-foot    > .scroll-cue  { transition-delay: 1.5s; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-image {
