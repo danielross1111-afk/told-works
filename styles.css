@@ -959,16 +959,13 @@ footer {
   background-repeat: no-repeat;
   opacity: 0;
   filter: saturate(0.5);
-  animation: heroImageReveal 8s ease-out 0.8s forwards;
+  transition: opacity 8s ease-out 0.2s;
 }
-
-@keyframes heroImageReveal {
-  to { opacity: 0.22; }
-}
+.hero-image.is-loaded { opacity: 0.22; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-image {
-    animation: none;
+    transition: none;
     opacity: 0.22;
   }
 }

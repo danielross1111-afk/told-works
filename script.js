@@ -2,6 +2,22 @@
  * Sections added: nav scroll state, reveal-on-scroll, lightbox, mobile menu.
  */
 
+// Hero image: trigger the slow fade once the background image has actually loaded.
+// (CSS-only animation can complete before the image arrives on slower mobile networks,
+// so the user sees the image snap in at the end with no perceptible fade.)
+(function heroImageFade() {
+  const el = document.querySelector('.hero-image');
+  if (!el) return;
+  const bg = el.style.backgroundImage;
+  const match = bg && bg.match(/url\((['"]?)(.*?)\1\)/);
+  if (!match) { el.classList.add('is-loaded'); return; }
+  const img = new Image();
+  img.onload = () => el.classList.add('is-loaded');
+  img.onerror = () => el.classList.add('is-loaded');
+  img.src = match[2];
+  if (img.complete) el.classList.add('is-loaded');
+})();
+
 // Nav: add .scrolled class once user has scrolled past the hero apex
 (function navScroll() {
   const nav = document.getElementById('nav');
