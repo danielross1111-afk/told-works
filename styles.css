@@ -46,6 +46,7 @@ html.landing-locked,
 html.landing-locked body {
   overflow: hidden;
   height: 100vh;
+  height: 100dvh;
   touch-action: none;
   overscroll-behavior: none;
 }
@@ -181,14 +182,15 @@ nav.scrolled {
   background: none;
   border: none;
   color: var(--bone);
-  font-size: 1.6rem;
+  font-size: 1.9rem;
   cursor: pointer;
-  padding: 0.3rem 0.6rem;
+  padding: 0.65rem 0.85rem;
 }
 
 /* ─── HERO ─── */
 .hero {
   height: 100vh;
+  height: 100dvh;
   min-height: 720px;
   position: relative;
   display: flex;
@@ -321,7 +323,7 @@ nav.scrolled {
   color: var(--ember);
   text-decoration: none;
   cursor: pointer;
-  padding: 0.85rem 2.4rem;
+  padding: 1.05rem 2.4rem;
   border: 1px solid var(--ember);
   background: rgba(8, 7, 5, 0.35);
   transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease, letter-spacing 0.3s ease;
@@ -338,6 +340,7 @@ nav.scrolled {
 /* ─── INTRO (second screen — was hero copy) ─── */
 .intro {
   min-height: 100vh;
+  min-height: 100dvh;
   padding: var(--section-y) 0;
   text-align: center;
   background: radial-gradient(ellipse at center, var(--ink-2) 0%, var(--ink) 70%);
@@ -961,7 +964,12 @@ footer {
     align-items: stretch;
   }
   .nav-links.open { display: flex; }
-  .nav-links a { padding: 0.4rem 0; }
+  .nav-links a {
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-links a:last-child { border-bottom: 0; }
+  .nav-links a::after { display: none; }
   .nav-enquire { text-align: center; }
 
   .hero { padding: 5rem 1.5rem 5rem; min-height: 600px; }
@@ -1194,4 +1202,19 @@ footer {
     transform: none;
     transition: none;
   }
+}
+
+
+/* ─── TOUCH DEVICES ─── */
+/* On devices without a hover capability, neutralise the motion-and-spacing
+   hover effects so they do not appear "stuck" after a tap. Colour-only
+   hovers are left untouched — they revert on the next tap and read as
+   subtle feedback rather than a stuck state. */
+@media (hover: none) {
+  .work-img:hover,
+  .workshop-coda-img:hover { transform: none; }
+  .work-link:hover { letter-spacing: 0.28em; }
+  .scroll-cue:hover { letter-spacing: 0.4em; }
+  .cta:hover { letter-spacing: 0.32em; }
+  .subpage-footer .back-link:hover { letter-spacing: 0.32em; }
 }
