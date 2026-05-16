@@ -1064,6 +1064,54 @@ footer {
   transition: opacity 4s ease-in-out, filter 4s ease-in-out;
 }
 
+/* Door-opening transition — when Enter is clicked, two halves of the
+   photograph slide apart from the centre seam (where the doorway in the
+   image sits), and a dark interior is revealed behind them. The page then
+   scrolls to the intro. */
+.hero-doors {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+}
+.hero-door {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.85;
+  filter: saturate(1);
+  will-change: transform;
+  transition: transform 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hero-door-left  { clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); }
+.hero-door-right { clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%); }
+
+/* At the moment of click, the doors snap to visible and the underlying
+   photograph snaps to hidden. Their styles match — same image, same opacity,
+   same saturation — so the visible result is identical. Then the doors slide. */
+.hero.hero-opening .hero-doors {
+  opacity: 1;
+  transition: opacity 0s linear;
+}
+.hero.hero-opening .hero-image {
+  opacity: 0;
+  transition: opacity 0s linear;
+}
+.hero.hero-opening .hero-door-left  { transform: translateX(-100%); }
+.hero.hero-opening .hero-door-right { transform: translateX(100%); }
+.hero.hero-opening .hero-content,
+.hero.hero-opening .hero-foot {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-door { transition: none; }
+}
+
 /* Sequence: title fades in first, then the image rises behind, then the
    Enter cue appears once the image is on its way in. */
 .hero-content > .hero-mark,

@@ -19,10 +19,23 @@
 
   const release = (e) => {
     if (e) e.preventDefault();
-    document.documentElement.classList.remove('landing-locked');
-    requestAnimationFrame(() => {
+    const hero = document.querySelector('.hero');
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const goToIntro = () => {
+      document.documentElement.classList.remove('landing-locked');
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    };
+
+    if (prefersReduced || !hero) {
+      goToIntro();
+      return;
+    }
+
+    // The two photograph halves slide apart from the centre seam, the image
+    // behind fades to dark, and the page scrolls once the doors are well open.
+    hero.classList.add('hero-opening');
+    setTimeout(goToIntro, 1100);
   };
   cue.addEventListener('click', release);
 })();
