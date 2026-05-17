@@ -598,9 +598,6 @@ nav.scrolled {
 .work-link:hover { color: var(--serpentine-sage); letter-spacing: 0.34em; }
 
 /* ─── WORKSHOP CODA ─── */
-/* Sits after Selected Work as a smaller, separate note — the pieces here
-   were made outside obligation, so they don't belong in the commissioned
-   portfolio grid. Restrained treatment to read as coda, not headline. */
 .workshop-coda {
   background: var(--ink);
   padding: 6rem 0;
@@ -868,7 +865,6 @@ footer {
 }
 .reveal.in { opacity: 1; transform: translateY(0); }
 
-/* Stagger children 80ms apart inside containers we mark with .stagger */
 .stagger > .reveal:nth-child(1) { transition-delay: 0ms; }
 .stagger > .reveal:nth-child(2) { transition-delay: 80ms; }
 .stagger > .reveal:nth-child(3) { transition-delay: 160ms; }
@@ -1155,16 +1151,17 @@ footer {
   transition: opacity 4s ease-in-out, filter 4s ease-in-out;
 }
 
-/* Door-opening transition — when Enter is clicked, two halves of the
-   photograph slide apart from the centre seam (where the doorway in the
-   image sits), and a dark interior is revealed behind them. The page then
-   scrolls to the intro. */
+/* Door-opening transition — when Enter is clicked, a single door (hinged
+   on its left edge, where the guardians stand in the photograph) swings
+   inward into the scene. The dark interior is revealed behind it, and
+   the page smooth-scrolls into the intro. */
 .hero-doors {
   position: absolute;
   inset: 0;
   pointer-events: none;
   opacity: 0;
   z-index: 1;
+  perspective: 1400px;
 }
 .hero-door {
   position: absolute;
@@ -1175,14 +1172,14 @@ footer {
   opacity: 0.85;
   filter: saturate(1);
   will-change: transform;
-  transition: transform 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backface-visibility: hidden;
+  transform-origin: 0% 50%;
+  transition: transform 2.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.hero-door-left  { clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); }
-.hero-door-right { clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%); }
 
-/* At the moment of click, the doors snap to visible and the underlying
+/* At the moment of click, the door snaps to visible and the underlying
    photograph snaps to hidden. Their styles match — same image, same opacity,
-   same saturation — so the visible result is identical. Then the doors slide. */
+   same saturation — so the visible result is identical. Then the door swings. */
 .hero.hero-opening .hero-doors {
   opacity: 1;
   transition: opacity 0s linear;
@@ -1191,8 +1188,9 @@ footer {
   opacity: 0;
   transition: opacity 0s linear;
 }
-.hero.hero-opening .hero-door-left  { transform: translateX(-100%); }
-.hero.hero-opening .hero-door-right { transform: translateX(100%); }
+.hero.hero-opening .hero-door {
+  transform: rotateY(95deg);
+}
 .hero.hero-opening .hero-content,
 .hero.hero-opening .hero-foot {
   opacity: 0;
@@ -1233,10 +1231,6 @@ footer {
 }
 
 /* ─── TOUCH DEVICES ─── */
-/* On devices without a hover capability, neutralise the motion-and-spacing
-   hover effects so they do not appear "stuck" after a tap. Colour-only
-   hovers are left untouched — they revert on the next tap and read as
-   subtle feedback rather than a stuck state. */
 @media (hover: none) {
   .work-img:hover,
   .workshop-coda-img:hover { transform: none; }
