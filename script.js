@@ -9,14 +9,34 @@
   const target = document.getElementById('intro');
   if (!cue || !target) return;
 
+  // Arriving with a section anchor (e.g. #work from a subpage Back link)
+  // means the user is returning to a specific section, not landing fresh.
+  // Skip the gate so the browser can jump them straight to it.
+  const hash = window.location.hash;
+  if (hash && hash !== '#' && hash !== '#hero') return;
+
   document.documentElement.classList.add('landing-locked');
 
   const release = (e) => {
     if (e) e.preventDefault();
-    document.documentElement.classList.remove('landing-locked');
-    requestAnimationFrame(() => {
+    const hero = document.querySelector('.hero');
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const goToIntro = () => {
+      document.documentElement.classList.remove('landing-locked');
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    };
+
+    if (prefersReduced || !hero) {
+      goToIntro();
+      return;
+    }
+
+    // The door (hinged on the left, by the guardians) swings inward —
+    // its right edge rotates back into the scene, the image behind fades
+    // to dark, and the page scrolls once the door is well open.
+    hero.classList.add('hero-opening');
+    setTimeout(goToIntro, 1900);
   };
   cue.addEventListener('click', release);
 })();
@@ -70,9 +90,15 @@
 })();
 
 // Nav: hidden on the landing hero, fades in once the user starts leaving it.
+// On subpages (no .hero) the nav stays visible so navigation is always available.
 (function navScroll() {
   const nav = document.getElementById('nav');
   if (!nav) return;
+  const hero = document.querySelector('.hero');
+  if (!hero) {
+    nav.classList.add('scrolled');
+    return;
+  }
   const update = () => {
     const trigger = Math.max(120, window.innerHeight * 0.5);
     nav.classList.toggle('scrolled', window.scrollY > trigger);
