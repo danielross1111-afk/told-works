@@ -4,7 +4,7 @@ html { scroll-behavior: smooth; }
 
 /* ─── DESIGN TOKENS ─── */
 /*
- * Palette: Serpentine
+ * Palette: Serpentine (accessibility-passed)
  *   Ink, ink-2, ink-3      — ground tones (near-black, warmed)
  *   Bone, bone-dim, bone-mute — paper / type
  *   Serpentine             — forest deep, the carved-stone green
@@ -49,23 +49,6 @@ html.landing-locked body {
   height: 100dvh;
   touch-action: none;
   overscroll-behavior: none;
-}
-
-/* Slide-over: while locked, the intro panel sits off-screen below the hero,
-   ready to rise up and cover it when Enter is clicked. */
-html.landing-locked .intro {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  transform: translateY(100%);
-  background: var(--ink);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  transition: transform 0.95s cubic-bezier(0.65, 0, 0.35, 1);
-  will-change: transform;
-}
-html.landing-releasing .intro {
-  transform: translateY(0);
 }
 
 /* Keyboard focus — visible outline for all interactive elements unless
@@ -197,7 +180,7 @@ nav.scrolled {
   align-items: flex-end;
   justify-content: center;
   overflow: hidden;
-  padding: 6rem 2rem 7rem;
+  padding: 6rem 0 0;
   background: radial-gradient(ellipse at center, var(--ink-2) 0%, var(--ink) 70%);
 }
 
@@ -220,8 +203,9 @@ nav.scrolled {
   position: relative;
   z-index: 2;
   text-align: center;
-  max-width: 920px;
-  padding-bottom: 1rem;
+  width: 100%;
+  max-width: 100%;
+  padding-bottom: 0;
 }
 
 .eyebrow {
@@ -250,12 +234,12 @@ nav.scrolled {
 }
 
 .hero-mark {
-  display: inline-flex;
+  display: flex;
   align-items: baseline;
   flex-wrap: nowrap;
   justify-content: center;
   gap: clamp(0.4rem, 1.4vw, 1.2rem);
-  padding: 0.85rem clamp(1rem, 2.5vw, 2rem);
+  padding: 1.6rem clamp(1rem, 2.5vw, 2rem);
   font-size: clamp(1.15rem, 3.8vw, 3.2rem);
   font-weight: 700;
   font-style: normal;
@@ -266,8 +250,8 @@ nav.scrolled {
   color: var(--bone);
   background: rgba(8, 7, 5, 0.82);
   border-top: 1px solid var(--line-strong);
-  border-bottom: 1px solid var(--line-strong);
   white-space: nowrap;
+  width: 100%;
   max-width: 100%;
 }
 .hero-mark-title em {
@@ -289,10 +273,11 @@ nav.scrolled {
 
 .hero-foot {
   position: absolute;
-  bottom: 7.5rem;
+  top: 50%;
   left: 0;
   right: 0;
-  z-index: 2;
+  transform: translateY(-50%);
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -317,24 +302,38 @@ nav.scrolled {
 
 .scroll-cue {
   display: inline-block;
-  font-size: 0.78rem;
-  letter-spacing: 0.4em;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5em;
   text-transform: uppercase;
-  color: var(--ember);
+  color: var(--bone);
   text-decoration: none;
   cursor: pointer;
-  padding: 1.05rem 2.4rem;
-  border: 1px solid var(--ember);
-  background: rgba(8, 7, 5, 0.35);
-  transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease, letter-spacing 0.3s ease;
+  padding: 0.6rem 0.9rem;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.7);
+  transition: color 0.3s ease, letter-spacing 0.3s ease;
 }
 .scroll-cue:hover,
 .scroll-cue:focus-visible {
-  color: var(--bone);
-  border-color: var(--bone);
-  background: rgba(8, 7, 5, 0.55);
-  letter-spacing: 0.46em;
+  color: var(--ember);
+  letter-spacing: 0.6em;
   outline: none;
+}
+.scroll-cue::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 44px;
+  background: var(--bone);
+  opacity: 0.85;
+  margin: 1rem auto 0;
+  animation: scrollPulse 2s ease-in-out infinite;
+  transform-origin: top;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { transform: scaleY(1); opacity: 0.4; }
+  50%      { transform: scaleY(0.3); opacity: 1; }
 }
 
 /* ─── INTRO (second screen — was hero copy) ─── */
@@ -455,27 +454,6 @@ nav.scrolled {
 .practice-text p:last-child { margin-bottom: 0; }
 .practice-text em { font-style: italic; color: var(--bone); }
 
-.practice-text .practice-beat {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 1.45rem;
-  line-height: 1.4;
-  color: var(--bone);
-  margin: 0.5rem 0 2rem;
-}
-.practice-text .practice-coda {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem;
-  line-height: 1.5;
-  color: var(--bone);
-  margin-top: 0.6rem;
-  margin-bottom: 1.2rem;
-}
-.practice-text .practice-coda em {
-  font-style: italic;
-  color: var(--bone);
-}
-
 .pull-quote {
   padding: 0.4rem 0 0.4rem 2rem;
   border-left: 1px solid var(--serpentine-sage);
@@ -548,6 +526,7 @@ nav.scrolled {
   aspect-ratio: 4 / 5;
   overflow: hidden;
   text-decoration: none;
+  border: 1px solid var(--line);
   transition: transform 0.6s ease;
 }
 .work-img:hover { transform: translateY(-4px); }
@@ -972,8 +951,8 @@ footer {
   .nav-links a::after { display: none; }
   .nav-enquire { text-align: center; }
 
-  .hero { padding: 5rem 1.5rem 5rem; min-height: 600px; }
-  .hero-foot { bottom: 5rem; gap: 1.1rem; }
+  .hero { padding: 5rem 0 0; min-height: 600px; }
+  .hero-foot { gap: 1.1rem; }
   .hero-meta { flex-wrap: wrap; justify-content: center; gap: 0.6rem; padding: 0.7rem 1rem; }
   .hero-meta .dot { display: none; }
   .intro-h { font-size: clamp(2rem, 7vw, 3.2rem); }
@@ -1052,6 +1031,7 @@ footer {
   position: relative;
   aspect-ratio: 4 / 3;
   overflow: hidden;
+  border: 1px solid var(--line);
   background: linear-gradient(135deg, #1f1611 0%, #0a0604 100%);
   background-origin: border-box;
   background-clip: border-box;
@@ -1170,9 +1150,57 @@ footer {
    foreground while the title settles onto a dark filled plate so the green
    TOLD stays legible against the now-bright image. */
 .hero.hero-settled .hero-image {
-  opacity: 0.62;
-  filter: saturate(0.85);
+  opacity: 0.85;
+  filter: saturate(1);
   transition: opacity 4s ease-in-out, filter 4s ease-in-out;
+}
+
+/* Door-opening transition — when Enter is clicked, two halves of the
+   photograph slide apart from the centre seam (where the doorway in the
+   image sits), and a dark interior is revealed behind them. The page then
+   scrolls to the intro. */
+.hero-doors {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+}
+.hero-door {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.85;
+  filter: saturate(1);
+  will-change: transform;
+  transition: transform 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hero-door-left  { clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); }
+.hero-door-right { clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%); }
+
+/* At the moment of click, the doors snap to visible and the underlying
+   photograph snaps to hidden. Their styles match — same image, same opacity,
+   same saturation — so the visible result is identical. Then the doors slide. */
+.hero.hero-opening .hero-doors {
+  opacity: 1;
+  transition: opacity 0s linear;
+}
+.hero.hero-opening .hero-image {
+  opacity: 0;
+  transition: opacity 0s linear;
+}
+.hero.hero-opening .hero-door-left  { transform: translateX(-100%); }
+.hero.hero-opening .hero-door-right { transform: translateX(100%); }
+.hero.hero-opening .hero-content,
+.hero.hero-opening .hero-foot {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-door { transition: none; }
 }
 
 /* Sequence: title fades in first, then the image rises behind, then the
@@ -1204,7 +1232,6 @@ footer {
   }
 }
 
-
 /* ─── TOUCH DEVICES ─── */
 /* On devices without a hover capability, neutralise the motion-and-spacing
    hover effects so they do not appear "stuck" after a tap. Colour-only
@@ -1214,7 +1241,7 @@ footer {
   .work-img:hover,
   .workshop-coda-img:hover { transform: none; }
   .work-link:hover { letter-spacing: 0.28em; }
-  .scroll-cue:hover { letter-spacing: 0.4em; }
+  .scroll-cue:hover { letter-spacing: 0.5em; }
   .cta:hover { letter-spacing: 0.32em; }
   .subpage-footer .back-link:hover { letter-spacing: 0.32em; }
 }

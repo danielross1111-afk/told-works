@@ -3,29 +3,39 @@
  */
 
 // Landing gate: lock the page on load so the user must click Enter to advance.
-// Clicking Enter slides the intro panel up over the hero, then releases the
-// lock with the document scroll positioned at the intro section.
+// Once Enter is clicked we release the lock and smooth-scroll into the site.
 (function landingGate() {
   const cue = document.querySelector('.scroll-cue[href="#intro"]');
   const target = document.getElementById('intro');
   if (!cue || !target) return;
 
-  const html = document.documentElement;
-  html.classList.add('landing-locked');
+  // Arriving with a section anchor (e.g. #work from a subpage Back link)
+  // means the user is returning to a specific section, not landing fresh.
+  // Skip the gate so the browser can jump them straight to it.
+  const hash = window.location.hash;
+  if (hash && hash !== '#' && hash !== '#hero') return;
 
-  const SLIDE_MS = 950;
-  let releasing = false;
+  document.documentElement.classList.add('landing-locked');
 
   const release = (e) => {
     if (e) e.preventDefault();
-    if (releasing) return;
-    releasing = true;
-    html.classList.add('landing-releasing');
-    setTimeout(() => {
-      html.classList.remove('landing-locked');
-      html.classList.remove('landing-releasing');
-      target.scrollIntoView({ behavior: 'auto', block: 'start' });
-    }, SLIDE_MS);
+    const hero = document.querySelector('.hero');
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const goToIntro = () => {
+      document.documentElement.classList.remove('landing-locked');
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    if (prefersReduced || !hero) {
+      goToIntro();
+      return;
+    }
+
+    // The two photograph halves slide apart from the centre seam, the image
+    // behind fades to dark, and the page scrolls once the doors are well open.
+    hero.classList.add('hero-opening');
+    setTimeout(goToIntro, 1100);
   };
   cue.addEventListener('click', release);
 })();
