@@ -32,10 +32,11 @@
       return;
     }
 
-    // The two photograph halves slide apart from the centre seam, the image
-    // behind fades to dark, and the page scrolls once the doors are well open.
+    // The door (hinged on the left, by the guardians) swings inward —
+    // its right edge rotates back into the scene, the image behind fades
+    // to dark, and the page scrolls once the door is well open.
     hero.classList.add('hero-opening');
-    setTimeout(goToIntro, 1100);
+    setTimeout(goToIntro, 1900);
   };
   cue.addEventListener('click', release);
 })();
