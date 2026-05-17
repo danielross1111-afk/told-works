@@ -89,9 +89,15 @@
 })();
 
 // Nav: hidden on the landing hero, fades in once the user starts leaving it.
+// On subpages (no .hero) the nav stays visible so navigation is always available.
 (function navScroll() {
   const nav = document.getElementById('nav');
   if (!nav) return;
+  const hero = document.querySelector('.hero');
+  if (!hero) {
+    nav.classList.add('scrolled');
+    return;
+  }
   const update = () => {
     const trigger = Math.max(120, window.innerHeight * 0.5);
     nav.classList.toggle('scrolled', window.scrollY > trigger);
