@@ -1135,17 +1135,50 @@ footer {
    darkened) and .hero-door (door.png, the door itself, transparent around)
    fill this wrapper at 100% × 100% — so the door's pixel coordinates in
    the source PNG map directly to percentages of .hero-photo, and
-   transform-origin lands on the actual door pixels regardless of viewport. */
+   transform-origin lands on the actual door pixels regardless of viewport.
+
+   The wrapper also carries the camera motion: a slow scale-up while the
+   photograph is fading in (approach — walking toward the door), and then
+   a larger scale-up after the door opens (walk-through — passing through
+   the open doorway into the next page). Origin anchored on the doorway
+   so the zoom always feels like motion forward, not a flat scale. */
 .hero-photo {
   position: absolute;
   left: 50%;
   top: 50%;
   width: max(100vw, calc(100vh * 6988 / 3930));
   height: max(100vh, calc(100vw * 3930 / 6988));
-  transform: translate(-50%, -50%);
+  transform-origin: 49.7% 36.9%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 12s linear;
   perspective: 1800px;
   perspective-origin: 47% 37%;
 }
+/* Approach: while the photograph fades in, the camera drifts forward
+   imperceptibly. ~5% over 12s — felt, not seen. */
+.hero.hero-loaded .hero-photo {
+  transform: translate(-50%, -50%) scale(1.05);
+}
+/* Walk-through: once the door is open, push forward into the doorway
+   over 1.2s — fast enough to feel like motion, slow enough to read. */
+.hero.hero-entering .hero-photo {
+  transform: translate(-50%, -50%) scale(2.8);
+  transition: transform 1.2s cubic-bezier(0.5, 0, 0.7, 1);
+}
+
+/* Fade-to-dark overlay layered above the photo, used during the walk-through
+   so the scene transitions cleanly into the intro section below. */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  opacity: 0;
+  z-index: 20;
+  pointer-events: none;
+  transition: opacity 1.2s ease-in;
+}
+.hero.hero-entering::after { opacity: 1; }
 
 .hero-image,
 .hero-door {
@@ -1183,11 +1216,11 @@ footer {
 
 /* On Enter click, the door swings inward on its left hinge. Positive
    rotateY pivots the right edge back into the scene (away from the viewer),
-   revealing the dark interior of the door-open.jpg behind. The rest of
-   the photograph stays put. */
+   revealing the dark interior of the door-open.jpg behind. The swing eases
+   to a soft stop — slow enough to be felt as a door, not a wipe. */
 .hero.hero-opening .hero-door {
   transform: rotateY(92deg);
-  transition: transform 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 2.2s cubic-bezier(0.3, 0, 0.2, 1);
 }
 .hero.hero-opening .hero-content,
 .hero.hero-opening .hero-foot {
@@ -1196,7 +1229,11 @@ footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-door { transition: none; }
+  .hero-door,
+  .hero-photo,
+  .hero::after { transition: none; }
+  .hero.hero-loaded .hero-photo,
+  .hero.hero-entering .hero-photo { transform: translate(-50%, -50%) scale(1); }
 }
 
 /* Sequence: title fades in first, then the image rises behind, then the

@@ -32,11 +32,14 @@
       return;
     }
 
-    // The door (hinged on the left, by the guardians) swings inward —
-    // its right edge rotates back into the scene, the image behind fades
-    // to dark, and the page scrolls once the door is well open.
+    // Cinematic three-beat sequence:
+    //   1. Door swings inward (2.2s) — slow, deliberate
+    //   2. Hold (0.3s) — let the viewer see through the open doorway
+    //   3. Walk-through (1.2s) — camera pushes forward through the door
+    //      while the scene fades to dark, then we scroll into the intro
     hero.classList.add('hero-opening');
-    setTimeout(goToIntro, 1900);
+    setTimeout(() => hero.classList.add('hero-entering'), 2500); // 2.2s swing + 0.3s hold
+    setTimeout(goToIntro, 3700); // + 1.2s walk-through
   };
   cue.addEventListener('click', release);
 })();
