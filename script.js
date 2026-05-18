@@ -60,8 +60,8 @@
   });
 
   const TEXT_SETTLE_MS = 2000;     // wait this long before the image rises
-  const IMAGE_FADE_MS  = 8000;     // matches the CSS opacity transition
-  const SETTLE_BUFFER_MS = 1000;   // pause once the image is in, then settle
+  const IMAGE_FADE_MS  = 4000;     // matches the CSS opacity transition
+  const SETTLE_BUFFER_MS = 800;    // pause once the image is in, then settle
 
   const door = document.querySelector('.hero-door');
 
@@ -92,7 +92,7 @@
   img.src = match[2];
   if (img.complete) reveal();
   // Safety net: never leave the photograph hidden indefinitely.
-  setTimeout(showImage, 8000);
+  setTimeout(showImage, 5000);
 })();
 
 // Nav: hidden on the landing hero, fades in once the user starts leaving it.

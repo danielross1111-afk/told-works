@@ -273,7 +273,7 @@ nav.scrolled {
 
 .hero-foot {
   position: absolute;
-  top: 50%;
+  top: 32%;
   left: 0;
   right: 0;
   transform: translateY(-50%);
@@ -302,38 +302,28 @@ nav.scrolled {
 
 .scroll-cue {
   display: inline-block;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.5em;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.42em;
   text-transform: uppercase;
   color: var(--bone);
   text-decoration: none;
   cursor: pointer;
-  padding: 0.6rem 0.9rem;
-  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.7);
-  transition: color 0.3s ease, letter-spacing 0.3s ease;
+  padding: 1rem 2.6rem 1rem 3rem;
+  border: 1px solid var(--bone);
+  background: rgba(8, 7, 5, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.65);
+  transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease, letter-spacing 0.3s ease;
 }
 .scroll-cue:hover,
 .scroll-cue:focus-visible {
+  background: rgba(8, 7, 5, 0.9);
+  border-color: var(--ember);
   color: var(--ember);
-  letter-spacing: 0.6em;
+  letter-spacing: 0.5em;
   outline: none;
-}
-.scroll-cue::after {
-  content: '';
-  display: block;
-  width: 1px;
-  height: 44px;
-  background: var(--bone);
-  opacity: 0.85;
-  margin: 1rem auto 0;
-  animation: scrollPulse 2s ease-in-out infinite;
-  transform-origin: top;
-}
-
-@keyframes scrollPulse {
-  0%, 100% { transform: scaleY(1); opacity: 0.4; }
-  50%      { transform: scaleY(0.3); opacity: 1; }
 }
 
 /* ─── INTRO (second screen — was hero copy) ─── */
@@ -1150,12 +1140,12 @@ footer {
   height: max(100vh, calc(100vw * 3930 / 6988));
   transform-origin: 49.7% 36.9%;
   transform: translate(-50%, -50%) scale(1);
-  transition: transform 12s linear;
+  transition: transform 7s linear;
   perspective: 1800px;
   perspective-origin: 47% 37%;
 }
 /* Approach: while the photograph fades in, the camera drifts forward
-   imperceptibly. ~5% over 12s — felt, not seen. */
+   imperceptibly. ~5% over 7s — felt, not seen. */
 .hero.hero-loaded .hero-photo {
   transform: translate(-50%, -50%) scale(1.05);
 }
@@ -1189,7 +1179,7 @@ footer {
   background-repeat: no-repeat;
   opacity: 0;
   filter: saturate(0.5);
-  transition: opacity 8s ease-out 0.2s;
+  transition: opacity 4s ease-out 0.2s;
 }
 .hero-image.is-loaded,
 .hero-door.is-loaded { opacity: 0.22; }
@@ -1250,7 +1240,7 @@ footer {
   transform: translateY(0);
 }
 .hero.hero-loaded .hero-content > .hero-mark  { transition-delay: 0.5s; }
-.hero.hero-loaded .hero-foot    > .scroll-cue { transition-delay: 3.6s; }
+.hero.hero-loaded .hero-foot    > .scroll-cue { transition-delay: 2.4s; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-image {
