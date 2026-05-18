@@ -60,12 +60,15 @@
   const IMAGE_FADE_MS  = 8000;     // matches the CSS opacity transition
   const SETTLE_BUFFER_MS = 1000;   // pause once the image is in, then settle
 
+  const door = document.querySelector('.hero-door');
+
   const start = Date.now();
   let imageRevealed = false;
   const showImage = () => {
     if (imageRevealed) return;
     imageRevealed = true;
     el.classList.add('is-loaded');
+    if (door) door.classList.add('is-loaded');
     // After the image has finished fading in, dim the mark and brighten the
     // photograph further so the picture becomes the dominant layer.
     setTimeout(() => {

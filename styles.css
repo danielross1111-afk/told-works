@@ -1130,66 +1130,64 @@ footer {
 }
 
 /* ─── HERO IMAGE BACKDROP ─── */
-.hero-image {
+/* .hero-photo sizes itself to the image's aspect ratio, cover-fitting the
+   viewport. Both .hero-image (door-open.jpg, the entryway with the doorway
+   darkened) and .hero-door (door.png, the door itself, transparent around)
+   fill this wrapper at 100% × 100% — so the door's pixel coordinates in
+   the source PNG map directly to percentages of .hero-photo, and
+   transform-origin lands on the actual door pixels regardless of viewport. */
+.hero-photo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100vw, calc(100vh * 6988 / 3930));
+  height: max(100vh, calc(100vw * 3930 / 6988));
+  transform: translate(-50%, -50%);
+  perspective: 1800px;
+  perspective-origin: 47% 37%;
+}
+
+.hero-image,
+.hero-door {
   position: absolute;
   inset: 0;
-  background-size: cover;
+  background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
   filter: saturate(0.5);
   transition: opacity 8s ease-out 0.2s;
 }
-.hero-image.is-loaded { opacity: 0.22; }
+.hero-image.is-loaded,
+.hero-door.is-loaded { opacity: 0.22; }
 
 /* Once the photograph has faded in, it brightens further to take the
-   foreground while the title settles onto a dark filled plate so the green
-   TOLD stays legible against the now-bright image. */
-.hero.hero-settled .hero-image {
-  opacity: 0.85;
+   foreground while the title settles onto a dark filled plate. */
+.hero.hero-settled .hero-image,
+.hero.hero-settled .hero-door {
+  opacity: 0.9;
   filter: saturate(1);
   transition: opacity 4s ease-in-out, filter 4s ease-in-out;
 }
 
-/* Door-opening transition — when Enter is clicked, a single door (hinged
-   on its left edge, where the guardians stand in the photograph) swings
-   inward into the scene. The dark interior is revealed behind it, and
-   the page smooth-scrolls into the intro. */
-.hero-doors {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0;
-  z-index: 1;
-  perspective: 1400px;
-}
+/* The door is initially perfectly aligned with the dark doorway in the
+   image behind, completing the scene. Hinge: pixel-measured at the door's
+   left edge (43.62%) and vertical midpoint (36.86%) of the source canvas. */
 .hero-door {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.85;
-  filter: saturate(1);
+  z-index: 1;
   will-change: transform;
   backface-visibility: hidden;
-  transform-origin: 0% 50%;
-  transition: transform 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: 43.62% 36.86%;
+  transform: rotateY(0deg);
 }
 
-/* At the moment of click, the door snaps to visible and the underlying
-   photograph snaps to hidden. Their styles match — same image, same opacity,
-   same saturation — so the visible result is identical. Then the door swings. */
-.hero.hero-opening .hero-doors {
-  opacity: 1;
-  transition: opacity 0s linear;
-}
-.hero.hero-opening .hero-image {
-  opacity: 0;
-  transition: opacity 0s linear;
-}
+/* On Enter click, the door swings inward on its left hinge. Positive
+   rotateY pivots the right edge back into the scene (away from the viewer),
+   revealing the dark interior of the door-open.jpg behind. The rest of
+   the photograph stays put. */
 .hero.hero-opening .hero-door {
-  transform: rotateY(95deg);
+  transform: rotateY(92deg);
+  transition: transform 1.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .hero.hero-opening .hero-content,
 .hero.hero-opening .hero-foot {
