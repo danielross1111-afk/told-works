@@ -273,10 +273,10 @@ nav.scrolled {
 
 .hero-foot {
   position: absolute;
-  top: 32%;
+  top: 37%;
   left: 0;
   right: 0;
-  transform: translateY(-50%);
+  transform: translate(-1.45vw, -50%);
   z-index: 3;
   display: flex;
   flex-direction: column;
@@ -303,25 +303,26 @@ nav.scrolled {
 .scroll-cue {
   display: inline-block;
   font-size: 0.88rem;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0.42em;
   text-transform: uppercase;
   color: var(--bone);
   text-decoration: none;
   cursor: pointer;
-  padding: 1rem 2.6rem 1rem 3rem;
-  border: 1px solid var(--bone);
-  background: rgba(8, 7, 5, 0.55);
+  padding: 0.65rem 1.3rem 0.65rem 1.6rem;
+  border: 1px solid #B26239;
+  background: rgba(8, 7, 5, 0.6);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.65);
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.9), 0 0 18px rgba(250, 247, 236, 0.18);
+  transform: translateX(-1.5vw);
   transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease, letter-spacing 0.3s ease;
 }
 .scroll-cue:hover,
 .scroll-cue:focus-visible {
   background: rgba(8, 7, 5, 0.9);
-  border-color: var(--ember);
-  color: var(--ember);
+  border-color: #C5754A;
+  color: #C5754A;
   letter-spacing: 0.5em;
   outline: none;
 }
