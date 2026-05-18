@@ -861,6 +861,14 @@ footer {
 .stagger > .reveal:nth-child(3) { transition-delay: 160ms; }
 .stagger > .reveal:nth-child(4) { transition-delay: 240ms; }
 .stagger > .reveal:nth-child(5) { transition-delay: 320ms; }
+.stagger > .reveal:nth-child(5) { transition-delay: 320ms; }
+
+/* Intro section: fade only — no translateY. Text appears in place, as if
+   it was always there. */
+.intro .reveal {
+  transform: none;
+  transition: opacity 1.4s ease;
+}
 
 /* ─── LIGHTBOX ─── */
 .lightbox {
