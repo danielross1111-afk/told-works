@@ -28,11 +28,45 @@
 
   <link rel="canonical" href="https://toldworks.netlify.app/">
 
+  <!-- Icons -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <link rel="manifest" href="site.webmanifest">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
+  <!-- Eagerly fetch the hero photograph so the pan-out can begin without delay -->
+  <link rel="preload" as="image" href="images/guardian-heroes.webp" type="image/webp">
+
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Structured data: the person and the practice behind the work -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Told Works",
+    "image": "https://toldworks.netlify.app/images/og-share.jpg",
+    "url": "https://toldworks.netlify.app/",
+    "email": "dan@toldworks.nz",
+    "description": "Bespoke architectural commissions, installations and objects from Dan Ross's Queenstown workshop.",
+    "founder": {
+      "@type": "Person",
+      "name": "Dan Ross",
+      "jobTitle": "Maker · Builder"
+    },
+    "areaServed": "New Zealand",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "Central Otago",
+      "addressCountry": "NZ"
+    },
+    "knowsAbout": ["Bespoke joinery", "Architectural commissions", "Stone and timber objects"]
+  }
+  </script>
 </head>
 <body>
 
@@ -53,13 +87,16 @@
   <header class="hero">
     <div class="hero-bg" aria-hidden="true">
       <div class="hero-photo">
-        <div class="hero-image" style="background-image: url('images/guardian-heroes.jpeg');"></div>
+        <div class="hero-image" data-hero-src="images/guardian-heroes.webp"></div>
       </div>
+      <div class="hero-grain"></div>
+      <div class="hero-vignette"></div>
       <div class="hero-glow"></div>
     </div>
 
     <div class="hero-foot">
       <a class="scroll-cue" href="#intro" aria-label="Enter the site">Enter</a>
+      <span class="hero-chevron" aria-hidden="true"></span>
     </div>
 
     <div class="hero-content">
@@ -146,7 +183,7 @@
 
       <div class="work-list">
         <article class="work-card reveal">
-          <a class="work-img placeholder" href="work/the-cellar/" data-lightbox="The Cellar — completed" data-lightbox-sub="Reclaimed timber · stone sculpture · bespoke joinery" aria-label="View The Cellar &amp; The Racks" style="background-image: url('images/cellar-completed.jpeg'); background-size: cover; background-position: center;">
+          <a class="work-img placeholder bg-photo" href="work/the-cellar/" data-lightbox="The Cellar — completed" data-lightbox-sub="Reclaimed timber · stone sculpture · bespoke joinery" aria-label="View The Cellar &amp; The Racks" style="--img-webp: url('images/cellar-completed.webp'); --img-jpg: url('images/cellar-completed.jpeg');">
             <span class="work-img-tag">N° 01</span>
             <span class="placeholder-label">The Cellar — completed</span>
           </a>
@@ -159,7 +196,7 @@
         </article>
 
         <article class="work-card reverse reveal">
-          <a class="work-img placeholder" href="work/the-sixteen/" data-lightbox="The Sixteen — installed" data-lightbox-sub="Private grounds · Ironbark sentinels · Serpentine &amp; Aotea stone" aria-label="View The Sixteen" style="background-image: url('images/sixteen-installed.jpg'); background-size: cover; background-position: center;">
+          <a class="work-img placeholder bg-photo" href="work/the-sixteen/" data-lightbox="The Sixteen — installed" data-lightbox-sub="Private grounds · Ironbark sentinels · Serpentine &amp; Aotea stone" aria-label="View The Sixteen" style="--img-webp: url('images/sixteen-installed.webp'); --img-jpg: url('images/sixteen-installed.jpg');">
             <span class="work-img-tag">N° 02 · Legacy</span>
             <span class="placeholder-label">The Sixteen — installed</span>
           </a>
@@ -172,7 +209,7 @@
         </article>
 
         <article class="work-card reveal">
-          <a class="work-img placeholder" href="work/the-threshold/" data-lightbox="The Threshold — completed" data-lightbox-sub="Aged timber palings · Mountain &amp; lake views revealed" aria-label="View The Threshold" style="background-image: url('images/threshold-complete-evening.jpeg'); background-size: cover; background-position: center;">
+          <a class="work-img placeholder bg-photo" href="work/the-threshold/" data-lightbox="The Threshold — completed" data-lightbox-sub="Aged timber palings · Mountain &amp; lake views revealed" aria-label="View The Threshold" style="--img-webp: url('images/threshold-complete-evening.webp'); --img-jpg: url('images/threshold-complete-evening.jpeg');">
             <span class="work-img-tag">N° 03</span>
             <span class="placeholder-label">The Threshold — completed</span>
           </a>
@@ -195,7 +232,7 @@
       <h2 class="workshop-coda-h serif reveal">From <em>the workshop.</em></h2>
 
       <div class="workshop-coda-grid reveal">
-        <a class="workshop-coda-img" href="work/workshop/" aria-label="View the workshop pieces" style="background-image: url('images/the-finished-goblet.jpg'); background-size: cover; background-position: center;"></a>
+        <a class="workshop-coda-img bg-photo" href="work/workshop/" aria-label="View the workshop pieces" style="--img-webp: url('images/the-finished-goblet.webp'); --img-jpg: url('images/the-finished-goblet.jpg');"></a>
         <div class="workshop-coda-body">
           <p>A stone goblet carved from local quarry stone, gifted on completion. A two-storey dollshouse built with mortise-and-tenon joints at miniature scale, made for his daughter. Nobody asked for either; both exist at the same standard as everything else.</p>
           <a class="work-link" href="work/workshop/">View the workshop pieces →</a>

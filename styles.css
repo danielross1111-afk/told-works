@@ -199,6 +199,29 @@ nav.scrolled {
   opacity: 0.85;
 }
 
+/* Fine film grain over the photograph — deepens the cinematic, gallery feel
+   and masks any banding in the dark areas. SVG fractal noise, tiled. */
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Vignette: darkens the edges so the eye settles on the centre of the frame
+   and the brand mark reads cleanly against it. */
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse 120% 100% at 50% 42%,
+    transparent 40%, rgba(8, 7, 5, 0.35) 75%, rgba(8, 7, 5, 0.7) 100%);
+}
+
 .hero-content {
   position: relative;
   z-index: 2;
@@ -325,6 +348,26 @@ nav.scrolled {
   color: #C5754A;
   letter-spacing: 0.5em;
   outline: none;
+}
+
+/* Downward chevron beneath the Enter cue — a quiet affordance that the
+   action moves the visitor into the site. Gentle bob draws the eye. */
+.hero-chevron {
+  display: block;
+  width: 11px;
+  height: 11px;
+  margin-top: -0.4rem;
+  transform: translateX(-1.5vw) rotate(45deg);
+  border-right: 1px solid rgba(250, 247, 236, 0.55);
+  border-bottom: 1px solid rgba(250, 247, 236, 0.55);
+  animation: chevron-bob 2.4s ease-in-out infinite;
+}
+@keyframes chevron-bob {
+  0%, 100% { transform: translateX(-1.5vw) translateY(0) rotate(45deg); }
+  50%      { transform: translateX(-1.5vw) translateY(4px) rotate(45deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-chevron { animation: none; }
 }
 
 /* ─── INTRO (second screen — was hero copy) ─── */
@@ -1176,11 +1219,29 @@ footer {
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
+  /* WebP with a JPEG fallback. The plain url() is used by browsers without
+     image-set(); modern browsers take the lighter WebP. */
+  background-image: url("images/guardian-heroes.jpeg");
+  background-image: image-set(
+    url("images/guardian-heroes.webp") type("image/webp"),
+    url("images/guardian-heroes.jpeg") type("image/jpeg"));
   opacity: 0;
   filter: saturate(0.5);
   transition: opacity 4s ease-out 0.2s;
 }
 .hero-image.is-loaded { opacity: 0.22; }
+
+/* Shared WebP-with-JPEG-fallback background, driven by per-element CSS vars
+   (--img-webp / --img-jpg) set inline on each card. */
+.bg-photo {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: var(--img-jpg);
+  background-image: image-set(
+    var(--img-webp) type("image/webp"),
+    var(--img-jpg) type("image/jpeg"));
+}
 
 /* Once the photograph has faded in, it brightens further to take the
    foreground while the title settles onto a dark filled plate. */
@@ -1206,18 +1267,22 @@ footer {
 /* Sequence: title fades in first, then the image rises behind, then the
    Enter cue appears once the image is on its way in. */
 .hero-content > .hero-mark,
-.hero-foot > .scroll-cue {
+.hero-foot > .scroll-cue,
+.hero-foot > .hero-chevron {
   opacity: 0;
-  transform: translateY(16px);
   transition: opacity 1.2s ease-out, transform 1.2s ease-out;
 }
+.hero-content > .hero-mark,
+.hero-foot > .scroll-cue { transform: translateY(16px); }
 .hero.hero-loaded .hero-content > .hero-mark,
 .hero.hero-loaded .hero-foot > .scroll-cue {
   opacity: 1;
   transform: translateY(0);
 }
-.hero.hero-loaded .hero-content > .hero-mark  { transition-delay: 0.5s; }
-.hero.hero-loaded .hero-foot    > .scroll-cue { transition-delay: 2.4s; }
+.hero.hero-loaded .hero-foot > .hero-chevron { opacity: 0.85; }
+.hero.hero-loaded .hero-content > .hero-mark   { transition-delay: 0.5s; }
+.hero.hero-loaded .hero-foot    > .scroll-cue  { transition-delay: 2.4s; }
+.hero.hero-loaded .hero-foot    > .hero-chevron { transition-delay: 2.8s; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-image {
@@ -1230,6 +1295,7 @@ footer {
     transform: none;
     transition: none;
   }
+  .hero-foot > .hero-chevron { opacity: 0.85; transition: none; }
 }
 
 /* ─── TOUCH DEVICES ─── */

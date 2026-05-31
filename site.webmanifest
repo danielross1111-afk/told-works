@@ -1,0 +1,13 @@
+{
+  "name": "Told Works — Dan Ross",
+  "short_name": "Told Works",
+  "description": "Bespoke architectural commissions from a Queenstown workshop.",
+  "theme_color": "#0E0D0B",
+  "background_color": "#0E0D0B",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [
+    { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "images/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

@@ -79,16 +79,42 @@
     setTimeout(showImage, wait);
   };
 
-  const bg = el.style.backgroundImage;
-  const match = bg && bg.match(/url\((['"]?)(.*?)\1\)/);
-  if (!match) { reveal(); return; }
+  // The displayed background lives in CSS (image-set: WebP with a JPEG
+  // fallback); the load-gate preloads the same WebP named on the element so
+  // the reveal waits for the real photograph, not a guess.
+  const src = el.dataset.heroSrc;
+  if (!src) { reveal(); return; }
   const img = new Image();
   img.onload = reveal;
   img.onerror = reveal;
-  img.src = match[2];
+  img.src = src;
   if (img.complete) reveal();
   // Safety net: never leave the photograph hidden indefinitely.
   setTimeout(showImage, 5000);
+})();
+
+// Hero parallax: the photographic backdrop drifts slower than the page as
+// the visitor scrolls off the landing, giving the frame a sense of depth.
+// Applied to .hero-bg (not .hero-photo, which owns the pan-out transform)
+// so the two motions never fight. Skipped when reduced motion is requested.
+(function heroParallax() {
+  const bg = document.querySelector('.hero .hero-bg');
+  if (!bg) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  bg.style.willChange = 'transform';
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const y = window.scrollY;
+    // Only animate while the hero is still on screen.
+    if (y > window.innerHeight) return;
+    bg.style.transform = 'translate3d(0, ' + (y * 0.25).toFixed(1) + 'px, 0)';
+  };
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+  update();
 })();
 
 // Nav: hidden on the landing hero, fades in once the user starts leaving it.
