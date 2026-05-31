@@ -32,14 +32,13 @@
       return;
     }
 
-    // Cinematic three-beat sequence:
-    //   1. Door swings inward (2.2s) — slow, deliberate
-    //   2. Hold (0.3s) — let the viewer see through the open doorway
-    //   3. Walk-through (1.2s) — camera pushes forward through the door
-    //      while the scene fades to dark, then we scroll into the intro
+    // Cinematic two-beat sequence:
+    //   1. Title and cue fade out (0.5s)
+    //   2. Walk-through (1.2s) — camera pushes forward into the scene
+    //      while it fades to dark, then we scroll into the intro
     hero.classList.add('hero-opening');
-    setTimeout(() => hero.classList.add('hero-entering'), 2500); // 2.2s swing + 0.3s hold
-    setTimeout(goToIntro, 3700); // + 1.2s walk-through
+    setTimeout(() => hero.classList.add('hero-entering'), 600); // after the content fade
+    setTimeout(goToIntro, 1800); // + 1.2s walk-through
   };
   cue.addEventListener('click', release);
 })();
@@ -63,15 +62,12 @@
   const IMAGE_FADE_MS  = 4000;     // matches the CSS opacity transition
   const SETTLE_BUFFER_MS = 800;    // pause once the image is in, then settle
 
-  const door = document.querySelector('.hero-door');
-
   const start = Date.now();
   let imageRevealed = false;
   const showImage = () => {
     if (imageRevealed) return;
     imageRevealed = true;
     el.classList.add('is-loaded');
-    if (door) door.classList.add('is-loaded');
     // After the image has finished fading in, dim the mark and brighten the
     // photograph further so the picture becomes the dominant layer.
     setTimeout(() => {
