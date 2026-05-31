@@ -1128,11 +1128,12 @@ footer {
    the source PNG map directly to percentages of .hero-photo, and
    transform-origin lands on the actual door pixels regardless of viewport.
 
-   The wrapper also carries the camera motion: a slow scale-up while the
-   photograph is fading in (approach — walking toward the door), and then
-   a larger scale-up after the door opens (walk-through — passing through
-   the open doorway into the next page). Origin anchored on the doorway
-   so the zoom always feels like motion forward, not a flat scale. */
+   The wrapper also carries the camera motion: a slow pan-out while the
+   photograph is fading in (the frame opens tight on the doorway, then
+   pulls back to reveal the full scene), and then a large scale-up after
+   the door opens (walk-through — passing through the open doorway into
+   the next page). Origin anchored on the doorway so the motion always
+   feels like the camera moving, not a flat scale. */
 .hero-photo {
   position: absolute;
   left: 50%;
@@ -1140,15 +1141,16 @@ footer {
   width: max(100vw, calc(100vh * 6988 / 3930));
   height: max(100vh, calc(100vw * 3930 / 6988));
   transform-origin: 49.7% 36.9%;
-  transform: translate(-50%, -50%) scale(1);
-  transition: transform 7s linear;
+  transform: translate(-50%, -50%) scale(1.18);
+  transition: transform 7s cubic-bezier(0.16, 0.6, 0.2, 1);
   perspective: 1800px;
   perspective-origin: 47% 37%;
 }
-/* Approach: while the photograph fades in, the camera drifts forward
-   imperceptibly. ~5% over 7s — felt, not seen. */
+/* Pan out: the frame opens tight on the doorway, then the camera pulls
+   back to its resting width as the photograph fades in — revealing the
+   full scene. Decelerates into place so it reads as the camera settling. */
 .hero.hero-loaded .hero-photo {
-  transform: translate(-50%, -50%) scale(1.05);
+  transform: translate(-50%, -50%) scale(1);
 }
 /* Walk-through: once the door is open, push forward into the doorway
    over 1.2s — fast enough to feel like motion, slow enough to read. */
