@@ -1,41 +1,34 @@
-/* Told Works — site behaviour
- * Sections added: nav scroll state, reveal-on-scroll, lightbox, mobile menu.
- */
+/* Told Works — site behaviour */
 
-// Landing gate: lock the page on load so the user must click Enter to advance.
-// Once Enter is clicked we release the lock and smooth-scroll into the site.
-(function landingGate() {
-  const cue = document.querySelector('.scroll-cue[href="#intro"]');
-  const target = document.getElementById('intro');
-  if (!cue || !target) return;
-
-
-  document.documentElement.classList.add('landing-locked');
-
-  const release = (e) => {
-    if (e) e.preventDefault();
-
+// Hero fade: as the user scrolls, hero content and photo fade proportionally.
+// The dark background stays, so the intro section rises up seamlessly beneath.
+(function heroFade() {
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  const bg      = hero.querySelector('.hero-bg');
+  const content = hero.querySelector('.hero-content');
+  const foot    = hero.querySelector('.hero-foot');
+  const update = () => {
+    const opacity = Math.max(0, 1 - window.scrollY / (window.innerHeight * 0.55));
+    if (bg)      bg.style.opacity      = opacity;
+    if (content) content.style.opacity = opacity;
+    if (foot)    foot.style.opacity    = opacity;
   };
-  cue.addEventListener('click', release);
+  window.addEventListener('scroll', update, { passive: true });
+  update();
 })();
 
-// Hero entrance: page opens dark; the title fades in first, then the
-// photograph rises behind it, then the Enter cue. Once the image is fully in,
-// the title fades back into the atmosphere and the image brightens further to
-// take over the foreground (.hero-settled). CSS owns the visuals — we toggle
-// classes on the .hero element.
+// Hero entrance: dark open, title fades in, then photograph rises behind it.
 (function heroEntrance() {
   const el = document.querySelector('.hero-image');
   if (!el) return;
   const hero = el.closest('.hero');
 
-  // Title starts revealing on the next frame so the dark state paints first.
-  requestAnimationFrame(() => {
-    if (hero) hero.classList.add('hero-loaded');
-  });
+  requestAnimationFrame(() => { if (hero) hero.classList.add('hero-loaded'); });
 
-  const TEXT_SETTLE_MS = 2000;     // wait this long before the image rises
-
+  const TEXT_SETTLE_MS   = 2000;
+  const IMAGE_FADE_MS    = 4000;
+  const SETTLE_BUFFER_MS = 800;
 
   const start = Date.now();
   let imageRevealed = false;
@@ -43,20 +36,12 @@
     if (imageRevealed) return;
     imageRevealed = true;
     el.classList.add('is-loaded');
-    // After the image has finished fading in, dim the mark and brighten the
-    // photograph further so the picture becomes the dominant layer.
-    setTimeout(() => {
-      if (hero) hero.classList.add('hero-settled');
-    }, IMAGE_FADE_MS + SETTLE_BUFFER_MS);
+    setTimeout(() => { if (hero) hero.classList.add('hero-settled'); }, IMAGE_FADE_MS + SETTLE_BUFFER_MS);
   };
   const reveal = () => {
     const wait = Math.max(0, TEXT_SETTLE_MS - (Date.now() - start));
     setTimeout(showImage, wait);
   };
-
-  // The displayed background lives in CSS (image-set: WebP with a JPEG
-  // fallback); the load-gate preloads the same WebP named on the element so
-  // the reveal waits for the real photograph, not a guess.
   const src = el.dataset.heroSrc;
   if (!src) { reveal(); return; }
   const img = new Image();
@@ -64,25 +49,19 @@
   img.onerror = reveal;
   img.src = src;
   if (img.complete) reveal();
-  // Safety net: never leave the photograph hidden indefinitely.
   setTimeout(showImage, 5000);
 })();
 
-// Hero parallax: the photographic backdrop drifts slower than the page as
-// the visitor scrolls off the landing, giving the frame a sense of depth.
-// Applied to .hero-bg (not .hero-photo, which owns the pan-out transform)
-// so the two motions never fight. Skipped when reduced motion is requested.
+// Hero parallax: photo drifts slower than the page as user scrolls away.
 (function heroParallax() {
   const bg = document.querySelector('.hero .hero-bg');
   if (!bg) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
   bg.style.willChange = 'transform';
   let ticking = false;
   const update = () => {
     ticking = false;
     const y = window.scrollY;
-    // Only animate while the hero is still on screen.
     if (y > window.innerHeight) return;
     bg.style.transform = 'translate3d(0, ' + (y * 0.25).toFixed(1) + 'px, 0)';
   };
@@ -92,26 +71,21 @@
   update();
 })();
 
-// Nav: hidden on the landing hero, fades in once the user starts leaving it.
-// On subpages (no .hero) the nav stays visible so navigation is always available.
+// Nav: hidden on hero, fades in once user scrolls away.
 (function navScroll() {
   const nav = document.getElementById('nav');
   if (!nav) return;
   const hero = document.querySelector('.hero');
-  if (!hero) {
-    nav.classList.add('scrolled');
-    return;
-  }
+  if (!hero) { nav.classList.add('scrolled'); return; }
   const update = () => {
-    const trigger = Math.max(120, window.innerHeight * 0.5);
-    nav.classList.toggle('scrolled', window.scrollY > trigger);
+    nav.classList.toggle('scrolled', window.scrollY > Math.max(120, window.innerHeight * 0.5));
   };
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update, { passive: true });
   update();
 })();
 
-// Reveal-on-scroll using IntersectionObserver
+// Reveal-on-scroll
 (function reveal() {
   const els = document.querySelectorAll('.reveal');
   if (!('IntersectionObserver' in window) || !els.length) {
@@ -120,26 +94,20 @@
   }
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in');
-        io.unobserve(entry.target);
-      }
+      if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-
   els.forEach(el => io.observe(el));
 })();
 
-// Lightbox: click anything with data-lightbox to open overlay
+// Lightbox
 (function lightbox() {
   const lb = document.getElementById('lightbox');
   const lbTitle = document.getElementById('lightboxTitle');
   const lbSub = document.getElementById('lightboxSub');
   const lbClose = document.getElementById('lightboxClose');
   if (!lb) return;
-
   let previousFocus = null;
-
   const open = (title, sub) => {
     previousFocus = document.activeElement;
     lbTitle.textContent = title;
@@ -152,21 +120,15 @@
     lb.classList.remove('on');
     lb.setAttribute('aria-hidden', 'true');
     if (previousFocus && typeof previousFocus.focus === 'function') {
-      previousFocus.focus();
-      previousFocus = null;
+      previousFocus.focus(); previousFocus = null;
     }
   };
-
   document.querySelectorAll('[data-lightbox]').forEach(el => {
     el.addEventListener('click', (e) => {
-      // Allow modifier-click to follow the link as normal
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
       e.preventDefault();
       open(el.getAttribute('data-lightbox'), el.getAttribute('data-lightbox-sub'));
     });
-  });
-
-  document.querySelectorAll('[data-lightbox]').forEach(el => {
     el.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
@@ -174,13 +136,12 @@
       }
     });
   });
-
   lbClose.addEventListener('click', close);
   lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 })();
 
-// Mobile menu toggle
+// Mobile menu
 (function menu() {
   const toggle = document.getElementById('menuToggle');
   const links = document.getElementById('navLinks');
@@ -191,7 +152,5 @@
     toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
   };
   toggle.addEventListener('click', () => setOpen(!links.classList.contains('open')));
-  links.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => setOpen(false));
-  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
 })();
