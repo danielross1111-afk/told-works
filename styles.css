@@ -42,14 +42,6 @@ body {
 }
 
 /* While on the landing screen we lock the page; clicking Enter releases. */
-html.landing-locked,
-html.landing-locked body {
-  overflow: hidden;
-  height: 100vh;
-  height: 100dvh;
-  touch-action: none;
-  overscroll-behavior: none;
-}
 
 /* Keyboard focus — visible outline for all interactive elements unless
    a more specific rule overrides it below. */
@@ -296,16 +288,13 @@ nav.scrolled {
 
 .hero-foot {
   position: absolute;
-  top: 37%;
+  bottom: 2.5rem;
   left: 0;
   right: 0;
-  transform: translate(-1.45vw, -50%);
   z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.6rem;
-  padding: 0 1.5rem;
 }
 
 .hero-meta {
@@ -335,8 +324,8 @@ nav.scrolled {
 
   transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease, letter-spacing 0.3s ease;
 }
-.scroll-cue:hover,
-.scroll-cue:focus-visible {
+.hero.hero-loaded .hero-content > .hero-mark   { transition-delay: 0.5s; }
+.hero.hero-loaded .hero-foot    > .hero-chevron { transition-delay: 2.4s; }
 
   letter-spacing: 0.5em;
   outline: none;
