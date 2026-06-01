@@ -612,6 +612,182 @@ nav.scrolled {
 }
 .work-link:hover { color: var(--serpentine-sage); letter-spacing: 0.34em; }
 
+/* ─── SELECTED WORK · OPTION C EDITORIAL GALLERY ─── */
+/* Feature piece (The Sixteen) on the left at portrait aspect; the right
+   column stacks two secondary pieces (The Cellar, The Threshold) to
+   match the feature's height. Captions sit on a dark scrim at the
+   bottom of each frame. WebP loads when supported, JPEG otherwise.
+   Hover gently zooms the image; the scrim does not move. */
+.gallery-c {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  align-items: stretch;
+}
+.gallery-c-feature {
+  position: relative;
+  min-height: 0;
+}
+.gallery-c-feature .gallery-c-figure {
+  aspect-ratio: 4 / 5;
+}
+.gallery-c-stack {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 1.5rem;
+  min-height: 0;
+}
+.gallery-c-secondary {
+  position: relative;
+  min-height: 0;
+}
+.gallery-c-figure {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--ink);
+  text-decoration: none;
+  color: var(--bone);
+  border: 1px solid var(--line);
+  outline: none;
+}
+.gallery-c-figure picture,
+.gallery-c-figure img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.gallery-c-figure img {
+  transition: transform 900ms cubic-bezier(.2,.7,.2,1);
+  will-change: transform;
+}
+.gallery-c-figure:hover img,
+.gallery-c-figure:focus-visible img {
+  transform: scale(1.04);
+}
+.gallery-c-figure:focus-visible {
+  outline: 2px solid var(--serpentine-sage);
+  outline-offset: 4px;
+}
+.gallery-c-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem 2rem 1.75rem;
+  background: linear-gradient(
+    to top,
+    rgba(14, 13, 11, 0.88) 0%,
+    rgba(14, 13, 11, 0.55) 38%,
+    rgba(14, 13, 11, 0.12) 70%,
+    rgba(14, 13, 11, 0) 100%
+  );
+  color: var(--bone);
+  pointer-events: none;
+}
+.gallery-c-num {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--serpentine-sage);
+  margin-bottom: 0.85rem;
+}
+.gallery-c-title {
+  font-size: clamp(1.6rem, 2.8vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 0 0 0.6rem;
+  letter-spacing: -0.005em;
+  color: var(--bone);
+}
+.gallery-c-title em {
+  font-style: italic;
+  color: var(--serpentine-sage);
+  font-weight: 600;
+}
+.gallery-c-caption {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  margin: 0 0 1rem;
+  max-width: 48ch;
+  color: var(--bone-dim);
+  font-weight: 400;
+}
+.gallery-c-secondary .gallery-c-caption {
+  font-size: 0.85rem;
+  max-width: 40ch;
+  margin-bottom: 0.85rem;
+}
+.gallery-c-secondary .gallery-c-scrim {
+  padding: 1.5rem 1.5rem 1.4rem;
+}
+.gallery-c-link {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--bone);
+  border-bottom: 1px solid var(--serpentine-sage);
+  padding-bottom: 3px;
+  align-self: flex-start;
+  transition: color 0.3s, letter-spacing 0.3s;
+}
+.gallery-c-figure:hover .gallery-c-link,
+.gallery-c-figure:focus-visible .gallery-c-link {
+  color: var(--serpentine-sage);
+  letter-spacing: 0.34em;
+}
+
+/* Responsive: under 900px the gallery becomes a single column —
+   feature on top, then the two secondary pieces stacked below.
+   Aspect ratios soften to landscape so each piece keeps a useful
+   visible area at narrow widths. */
+@media (max-width: 900px) {
+  .gallery-c {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .gallery-c-stack {
+    gap: 1.25rem;
+  }
+  .gallery-c-feature .gallery-c-figure {
+    aspect-ratio: 4 / 3;
+  }
+  .gallery-c-secondary .gallery-c-figure {
+    aspect-ratio: 4 / 3;
+  }
+  .gallery-c-scrim,
+  .gallery-c-secondary .gallery-c-scrim {
+    padding: 1.4rem 1.4rem 1.25rem;
+  }
+  .gallery-c-title {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+  .gallery-c-caption {
+    font-size: 0.88rem;
+  }
+}
+
+@media (hover: none) {
+  .gallery-c-figure:hover img { transform: none; }
+  .gallery-c-figure:hover .gallery-c-link { letter-spacing: 0.28em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-c-figure img { transition: none; }
+}
+
 /* ─── WORKSHOP CODA ─── */
 .workshop-coda {
   background: var(--ink);
