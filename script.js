@@ -9,36 +9,12 @@
   const target = document.getElementById('intro');
   if (!cue || !target) return;
 
-  // Arriving with a section anchor (e.g. #work from a subpage Back link)
-  // means the user is returning to a specific section, not landing fresh.
-  // Skip the gate so the browser can jump them straight to it.
-  const hash = window.location.hash;
-  if (hash && hash !== '#' && hash !== '#hero') return;
 
   document.documentElement.classList.add('landing-locked');
 
   const release = (e) => {
     if (e) e.preventDefault();
-    const hero = document.querySelector('.hero');
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const goToIntro = () => {
-      document.documentElement.classList.remove('landing-locked');
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    };
-
-    if (prefersReduced || !hero) {
-      goToIntro();
-      return;
-    }
-
-    // Cinematic two-beat sequence:
-    //   1. Title and cue fade out (0.5s)
-    //   2. Walk-through (1.2s) — camera pushes forward into the scene
-    //      while it fades to dark, then we scroll into the intro
-    hero.classList.add('hero-opening');
-    setTimeout(() => hero.classList.add('hero-entering'), 600); // after the content fade
-    setTimeout(goToIntro, 1800); // + 1.2s walk-through
   };
   cue.addEventListener('click', release);
 })();
@@ -59,8 +35,7 @@
   });
 
   const TEXT_SETTLE_MS = 2000;     // wait this long before the image rises
-  const IMAGE_FADE_MS  = 4000;     // matches the CSS opacity transition
-  const SETTLE_BUFFER_MS = 800;    // pause once the image is in, then settle
+
 
   const start = Date.now();
   let imageRevealed = false;
