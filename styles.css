@@ -254,7 +254,7 @@ nav.scrolled {
   flex-wrap: nowrap;
   justify-content: center;
   gap: clamp(0.4rem, 1.4vw, 1.2rem);
-  padding: 1.6rem clamp(1rem, 2.5vw, 2rem);
+  padding: 1.6rem clamp(1rem, 2.5vw, 2rem) 1.2rem;
   font-size: clamp(1.15rem, 3.8vw, 3.2rem);
   font-weight: 700;
   font-style: normal;
@@ -284,6 +284,22 @@ nav.scrolled {
 }
 .hero-mark-name {
   color: var(--bone);
+}
+
+/* Quiet sub-line beneath the brand mark — sits inside the same dark
+   plate, no gimmick, just a steady locator. */
+.hero-sub {
+  width: 100%;
+  margin: 0;
+  padding: 0 clamp(1rem, 2.5vw, 2rem) 1.1rem;
+  text-align: center;
+  background: rgba(8, 7, 5, 0.82);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(0.6rem, 1vw, 0.74rem);
+  font-weight: 400;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--bone-mute);
 }
 
 .hero-foot {
@@ -397,6 +413,18 @@ nav.scrolled {
   white-space: nowrap;
 }
 .intro-meta .dot { color: var(--ember); opacity: 0.55; }
+
+/* Soft, balancing welcome line — sits just under the "By invitation"
+   plate so the door reads as open, not closed. */
+.intro-welcome {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--bone-dim);
+  margin: -1.4rem auto 0;
+  letter-spacing: 0.005em;
+}
 
 /* ─── PRESS STRIP ─── */
 .press {
@@ -617,7 +645,11 @@ nav.scrolled {
    column stacks two secondary pieces (The Cellar, The Threshold) to
    match the feature's height. Captions sit on a dark scrim at the
    bottom of each frame. WebP loads when supported, JPEG otherwise.
-   Hover gently zooms the image; the scrim does not move. */
+
+   Behaviour: at rest the image is dimmed (watermark in the background),
+   only the eyebrow and title read. On hover the image brightens to full,
+   the caption + link fade in, and the scrim deepens to keep the text
+   legible against the now-vivid photograph. */
 .gallery-c {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
@@ -663,13 +695,13 @@ nav.scrolled {
   height: 100%;
   object-fit: cover;
 }
+/* Image sits dim and largely desaturated at all times — the work is text-led;
+   the photograph is the watermark. Image does NOT change on hover; only the
+   caption + link block fades in. The scrim deepens slightly on hover so the
+   revealed text reads cleanly. */
 .gallery-c-figure img {
-  transition: transform 900ms cubic-bezier(.2,.7,.2,1);
-  will-change: transform;
-}
-.gallery-c-figure:hover img,
-.gallery-c-figure:focus-visible img {
-  transform: scale(1.04);
+  opacity: 0.36;
+  filter: grayscale(0.85) contrast(0.92);
 }
 .gallery-c-figure:focus-visible {
   outline: 2px solid var(--serpentine-sage);
@@ -682,17 +714,28 @@ nav.scrolled {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 2rem 2rem 1.75rem;
+  padding: 2rem 2rem 1.85rem;
   background: linear-gradient(
     to top,
-    rgba(14, 13, 11, 0.88) 0%,
-    rgba(14, 13, 11, 0.55) 38%,
-    rgba(14, 13, 11, 0.12) 70%,
+    rgba(14, 13, 11, 0.45) 0%,
+    rgba(14, 13, 11, 0.18) 45%,
     rgba(14, 13, 11, 0) 100%
   );
   color: var(--bone);
   pointer-events: none;
+  transition: background 600ms ease;
 }
+.gallery-c-figure:hover .gallery-c-scrim,
+.gallery-c-figure:focus-visible .gallery-c-scrim {
+  background: linear-gradient(
+    to top,
+    rgba(14, 13, 11, 0.78) 0%,
+    rgba(14, 13, 11, 0.42) 45%,
+    rgba(14, 13, 11, 0.1) 80%,
+    rgba(14, 13, 11, 0) 100%
+  );
+}
+.gallery-c-headline { /* always visible: eyebrow + title */ }
 .gallery-c-num {
   font-family: 'Inter', sans-serif;
   font-size: 0.62rem;
@@ -705,7 +748,7 @@ nav.scrolled {
   font-size: clamp(1.6rem, 2.8vw, 2.6rem);
   font-weight: 400;
   line-height: 1.1;
-  margin: 0 0 0.6rem;
+  margin: 0;
   letter-spacing: -0.005em;
   color: var(--bone);
 }
@@ -714,11 +757,23 @@ nav.scrolled {
   color: var(--serpentine-sage);
   font-weight: 600;
 }
+/* Caption + link block: hidden at rest, revealed on hover/focus. */
+.gallery-c-reveal {
+  margin-top: 1rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 500ms ease 80ms, transform 500ms ease 80ms;
+}
+.gallery-c-figure:hover .gallery-c-reveal,
+.gallery-c-figure:focus-visible .gallery-c-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
 .gallery-c-caption {
   font-family: 'Inter', sans-serif;
   font-size: 0.92rem;
   line-height: 1.65;
-  margin: 0 0 1rem;
+  margin: 0 0 0.85rem;
   max-width: 48ch;
   color: var(--bone-dim);
   font-weight: 400;
@@ -726,7 +781,6 @@ nav.scrolled {
 .gallery-c-secondary .gallery-c-caption {
   font-size: 0.85rem;
   max-width: 40ch;
-  margin-bottom: 0.85rem;
 }
 .gallery-c-secondary .gallery-c-scrim {
   padding: 1.5rem 1.5rem 1.4rem;
@@ -749,10 +803,31 @@ nav.scrolled {
   letter-spacing: 0.34em;
 }
 
-/* Responsive: under 900px the gallery becomes a single column —
-   feature on top, then the two secondary pieces stacked below.
-   Aspect ratios soften to landscape so each piece keeps a useful
-   visible area at narrow widths. */
+/* Small, almost-hidden link at the bottom of #work pointing to the
+   Unbidden Works page. Quiet whisper, not a button. */
+.work-foot {
+  text-align: center;
+  margin-top: 4.5rem;
+}
+.work-unbidden {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--bone-mute);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 4px;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+.work-unbidden:hover {
+  color: var(--bone);
+  border-bottom-color: var(--serpentine-sage);
+}
+
+/* Responsive: under 900px the gallery becomes a single column — feature
+   on top, then the two secondary pieces stacked below. On touch devices
+   we drop the dim/hover dance entirely (no hover state to trigger it). */
 @media (max-width: 900px) {
   .gallery-c {
     grid-template-columns: 1fr;
@@ -780,12 +855,30 @@ nav.scrolled {
 }
 
 @media (hover: none) {
-  .gallery-c-figure:hover img { transform: none; }
-  .gallery-c-figure:hover .gallery-c-link { letter-spacing: 0.28em; }
+  /* On touch devices there's no hover state to trigger the reveal — show
+     the caption + link by default. Image stays dim/grayscaled so the
+     text-led aesthetic holds. */
+  .gallery-c-scrim {
+    background: linear-gradient(
+      to top,
+      rgba(14, 13, 11, 0.78) 0%,
+      rgba(14, 13, 11, 0.42) 45%,
+      rgba(14, 13, 11, 0.1) 80%,
+      rgba(14, 13, 11, 0) 100%
+    );
+  }
+  .gallery-c-reveal {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .gallery-c-figure img { transition: none; }
+  .gallery-c-figure img,
+  .gallery-c-scrim,
+  .gallery-c-reveal {
+    transition: none;
+  }
 }
 
 /* ─── WORKSHOP CODA ─── */
@@ -829,6 +922,7 @@ nav.scrolled {
   line-height: 1.85;
   margin-bottom: 1.6rem;
 }
+
 
 /* ─── WORK OF RECORD ─── */
 .record { background: var(--ink); border-bottom: 1px solid var(--line); }
@@ -1142,6 +1236,7 @@ footer {
   .hero-foot { gap: 1.1rem; }
   .hero-meta { flex-wrap: wrap; justify-content: center; gap: 0.6rem; padding: 0.7rem 1rem; }
   .hero-meta .dot { display: none; }
+  .hero-sub { letter-spacing: 0.28em; padding-bottom: 1rem; }
   .intro-h { font-size: clamp(2rem, 7vw, 3.2rem); }
   .intro-meta {
     bottom: 2rem;
@@ -1154,6 +1249,7 @@ footer {
     letter-spacing: 0.25em;
   }
   .intro-meta .dot { display: none; }
+  .intro-welcome { font-size: 0.98rem; }
 
   .practice-grid { grid-template-columns: 1fr; gap: 3rem; }
   .practice-facts { grid-template-columns: 1fr 1fr; }
@@ -1201,6 +1297,20 @@ footer {
   max-width: 680px;
   margin: 0 auto;
   line-height: 1.85;
+}
+
+/* Editorial separator line used on the Unbidden Works page: a quiet
+   note placed near the top to keep the page from being read as a
+   commissioned-works gallery. */
+.subpage-note {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  letter-spacing: 0.04em;
+  color: var(--serpentine-sage);
+  max-width: 480px;
+  margin: 0 auto 1.6rem;
+  text-align: center;
 }
 
 .plates { padding: 6rem 0; background: var(--ink); }
@@ -1460,4 +1570,349 @@ footer {
 
   .cta:hover { letter-spacing: 0.32em; }
   .subpage-footer .back-link:hover { letter-spacing: 0.32em; }
+}
+
+/* ───────────────────────────────────────────────────────────────────
+   EDITORIAL · BONE PAGES
+   ───────────────────────────────────────────────────────────────────
+   Used on sub-pages that read like printed editorial:
+     /work/the-sixteen/, /work/the-cellar/, /work/the-threshold/,
+     /work/workshop/ (Unbidden Works).
+
+   The body switches to a bone (warm cream) ground; type is serif-led,
+   set wider, with generous vertical rhythm. Pages are built from a
+   small set of components — hero, lede, chapter, plate, pull-quote,
+   terms — composed differently per piece.
+
+   Opt-in: add  class="editorial-page"  to <body>.
+   The dark-page styles (.subpage-hero, .plate, etc.) above are kept
+   intact for any page that hasn't been migrated to editorial yet.
+   ─────────────────────────────────────────────────────────────────── */
+
+body.editorial-page {
+  background: var(--bone);
+  color: #2A2520;
+}
+/* The body grain overlay is too dark on bone — switch to a subtle paper grain. */
+body.editorial-page::before {
+  opacity: 0.6;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+}
+/* Nav stays dark glass on bone pages — gives the editorial pages the same
+   "frame" as the home page, so they read as part of one publication. */
+
+/* Hero — large image, then title block below */
+.editorial-hero {
+  padding-top: 0;
+  background: var(--bone);
+}
+.editorial-hero-image {
+  width: 100%;
+  height: 72vh;
+  min-height: 480px;
+  max-height: 880px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+.editorial-hero-image picture,
+.editorial-hero-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.editorial-hero-titleblock {
+  text-align: center;
+  padding: 4.5rem 2rem 2.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.editorial-hero-eyebrow {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--serpentine);
+  margin: 0 0 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+.editorial-hero-eyebrow::before,
+.editorial-hero-eyebrow::after {
+  content: '';
+  width: 30px;
+  height: 1px;
+  background: var(--serpentine);
+}
+.editorial-hero-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.6rem, 7vw, 5.4rem);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: #1A1612;
+  margin: 0;
+}
+.editorial-hero-title em { font-style: italic; color: var(--serpentine); font-weight: 400; }
+.editorial-hero-meta {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #8a8073;
+  margin-top: 1.8rem;
+}
+
+/* Lede — large italic opening paragraph, sits between hero and body */
+.editorial-lede {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.55;
+  color: #2A2520;
+  max-width: 760px;
+  margin: 1rem auto 4.5rem;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+/* Article body — narrow column for reading rhythm */
+.editorial-body {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Chapter — a heading + prose */
+.editorial-chapter {
+  margin: 0 0 4.5rem;
+}
+.editorial-chapter-num {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--serpentine);
+  margin: 0 0 1rem;
+}
+.editorial-chapter-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.005em;
+  color: #1A1612;
+  margin: 0 0 1.8rem;
+}
+.editorial-chapter-title em { font-style: italic; color: var(--serpentine); font-weight: 500; }
+.editorial-prose p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #2A2520;
+  margin: 0 0 1.4rem;
+}
+.editorial-prose p:last-child { margin: 0; }
+.editorial-prose em { font-style: italic; color: #1A1612; }
+
+/* Pull-quote — large italic, set apart, can sit between chapters */
+.editorial-pullquote {
+  margin: 5rem auto;
+  max-width: 860px;
+  padding: 0 2rem;
+  text-align: center;
+}
+.editorial-pullquote p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  line-height: 1.32;
+  letter-spacing: -0.005em;
+  color: var(--serpentine);
+  margin: 0;
+}
+.editorial-pullquote cite,
+.editorial-pullquote-cite {
+  display: block;
+  margin-top: 1.3rem;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-size: 0.7rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: #8a8073;
+}
+
+/* Photo plate — breaks out of the narrow body column to a wider plate.
+   Default is a contained wide plate; .editorial-plate-fullbleed is the
+   edge-to-edge variant. Sits between chapters. */
+.editorial-plate {
+  width: 100%;
+  max-width: 1100px;
+  margin: 4.5rem auto;
+  padding: 0 2rem;
+}
+.editorial-plate-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #1f1611;
+}
+.editorial-plate-img.portrait { aspect-ratio: 4 / 5; max-width: 720px; margin: 0 auto; }
+.editorial-plate-img.square   { aspect-ratio: 1 / 1; max-width: 820px; margin: 0 auto; }
+.editorial-plate-caption {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: #6b6258;
+  margin: 1rem 0 0;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+.editorial-plate-fullbleed {
+  width: 100vw;
+  max-width: none;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
+  padding: 0;
+}
+.editorial-plate-fullbleed .editorial-plate-img {
+  aspect-ratio: 21 / 9;
+}
+
+/* Terms block — for Unbidden Works' THE TERMS list, but reusable.
+   Quiet boxed list with serpentine top + bottom rules. */
+.editorial-terms {
+  margin: 5.5rem auto;
+  max-width: 540px;
+  padding: 2.6rem 2rem 2.8rem;
+  text-align: center;
+  border-top: 1px solid var(--serpentine);
+  border-bottom: 1px solid var(--serpentine);
+}
+.editorial-terms-h {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.48em;
+  text-transform: uppercase;
+  color: var(--serpentine);
+  margin: 0 0 1.8rem;
+}
+.editorial-terms-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.editorial-terms-list li {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.18rem;
+  line-height: 1.35;
+  color: #1A1612;
+}
+
+/* Note — used for short, separator lines like "Not commissions. Not on demand." */
+.editorial-note {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  color: var(--serpentine);
+  text-align: center;
+  letter-spacing: 0.02em;
+  margin: 0 auto 2rem;
+  max-width: 540px;
+}
+
+/* Section heading for in-development / completed sub-sections of a page */
+.editorial-section-head {
+  margin: 5rem auto 2rem;
+  max-width: 680px;
+  padding: 0 2rem;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--serpentine);
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  justify-content: center;
+}
+.editorial-section-head::before,
+.editorial-section-head::after {
+  content: '';
+  flex: 0 0 30px;
+  height: 1px;
+  background: var(--serpentine);
+  opacity: 0.6;
+}
+
+/* Footer back link on bone pages */
+.editorial-footer {
+  padding: 5rem 2rem 6rem;
+  text-align: center;
+  border-top: 1px solid rgba(31, 58, 48, 0.18);
+  margin-top: 5rem;
+  background: var(--bone);
+}
+.editorial-back {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--serpentine);
+  text-decoration: none;
+  border-bottom: 1px solid var(--serpentine);
+  padding-bottom: 4px;
+  transition: letter-spacing 300ms ease, color 300ms ease;
+}
+.editorial-back:hover { letter-spacing: 0.42em; color: #1A1612; }
+
+/* Bottom space between chapters/plates */
+.editorial-body > .editorial-chapter + .editorial-chapter { margin-top: 0; }
+.editorial-pullquote + .editorial-chapter,
+.editorial-plate + .editorial-chapter,
+.editorial-chapter + .editorial-pullquote,
+.editorial-chapter + .editorial-plate { margin-top: 0; }
+
+@media (max-width: 900px) {
+  .editorial-hero-image { height: 56vh; min-height: 380px; }
+  .editorial-hero-titleblock { padding: 3rem 1.5rem 2rem; }
+  .editorial-hero-eyebrow { font-size: 0.62rem; letter-spacing: 0.36em; }
+  .editorial-hero-eyebrow::before,
+  .editorial-hero-eyebrow::after { width: 18px; }
+  .editorial-lede { padding: 0 1.5rem; margin-bottom: 3.5rem; }
+  .editorial-body { padding: 0 1.5rem; }
+  .editorial-chapter { margin-bottom: 3.5rem; }
+  .editorial-prose p { font-size: 1.1rem; line-height: 1.65; }
+  .editorial-pullquote { margin: 3.5rem auto; padding: 0 1.5rem; }
+  .editorial-plate { margin: 3rem auto; padding: 0; }
+  .editorial-plate-img { aspect-ratio: 3 / 2; }
+  .editorial-plate-fullbleed { margin: 3rem 0; }
+  .editorial-terms { margin: 4rem 1.5rem; padding: 2rem 1.5rem 2.2rem; }
+  .editorial-section-head { margin: 3.5rem 1.5rem 1.6rem; padding: 0; }
+  .editorial-footer { padding: 4rem 1.5rem 5rem; margin-top: 3rem; }
 }
