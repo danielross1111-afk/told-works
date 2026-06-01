@@ -28,21 +28,54 @@
 
   <link rel="canonical" href="https://toldworks.netlify.app/">
 
+  <!-- Icons -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="images/icon-180.png">
+  <link rel="manifest" href="site.webmanifest">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
+  <!-- Eagerly fetch the hero photograph so the pan-out can begin without delay -->
+  <link rel="preload" as="image" href="images/guardian-heroes.webp" type="image/webp">
+
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Structured data: the person and the practice behind the work -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Told Works",
+    "image": "https://toldworks.netlify.app/images/og-share.jpg",
+    "url": "https://toldworks.netlify.app/",
+    "email": "dan@toldworks.nz",
+    "description": "Bespoke architectural commissions, installations and objects from Dan Ross's Queenstown workshop.",
+    "founder": {
+      "@type": "Person",
+      "name": "Dan Ross",
+      "jobTitle": "Maker · Builder"
+    },
+    "areaServed": "New Zealand",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "Central Otago",
+      "addressCountry": "NZ"
+    },
+    "knowsAbout": ["Bespoke joinery", "Architectural commissions", "Stone and timber objects"]
+  }
+  </script>
 </head>
 <body>
 
   <nav id="nav">
-    <a href="#" class="brand serif">TOLD<span>·</span>WORKS</a>
+    <a href="#intro" class="brand serif">TOLD<span>·</span>WORKS</a>
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">≡</button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#practice">Practice</a></li>
       <li><a href="#work">Work</a></li>
-      <li><a href="record/">Record</a></li>
       <li><a href="#standard">Standard</a></li>
       <li><a class="nav-enquire" href="#commission">Enquire</a></li>
     </ul>
@@ -53,8 +86,17 @@
   <!-- ───────── HERO ───────── -->
   <header class="hero">
     <div class="hero-bg" aria-hidden="true">
-      <div class="hero-image" style="background-image: url('images/guardian-heroes.jpeg');"></div>
+      <div class="hero-photo">
+        <div class="hero-image" data-hero-src="images/guardian-heroes.webp"></div>
+      </div>
+      <div class="hero-grain"></div>
+      <div class="hero-vignette"></div>
       <div class="hero-glow"></div>
+    </div>
+
+    <div class="hero-foot">
+      <a class="scroll-cue" href="#intro" aria-label="Enter the site">Enter</a>
+      <span class="hero-chevron" aria-hidden="true"></span>
     </div>
 
     <div class="hero-content">
@@ -63,10 +105,6 @@
         <span class="hero-mark-pipe" aria-hidden="true">|</span>
         <span class="hero-mark-name">Dan Ross</span>
       </h1>
-    </div>
-
-    <div class="hero-foot">
-      <a class="scroll-cue" href="#intro" aria-label="Enter the site">Enter</a>
     </div>
   </header>
 
@@ -79,21 +117,20 @@
         the story <em>the place</em><br>
         is already telling.
       </h2>
-      <p class="intro-sub reveal">Dan makes work that aligns with the story a place is trying to tell. Sometimes that begins with an architect's drawing. Sometimes with a homeowner who can't quite name what's missing. Sometimes with a single object — held, leaned against a wall, taken out on the water.</p>
-      <p class="intro-sub reveal">Each piece is shaped in a Central Otago workshop.</p>
+      <p class="intro-sub reveal">Sometimes that begins with an architect's drawing. Sometimes with a homeowner who can't quite name what's missing. Sometimes with a single object — held, leaned against a wall, taken out on the water. Each piece is shaped in a Central Otago workshop.</p>
     </div>
 
     <div class="intro-meta reveal">
       <span>By invitation</span>
       <span class="dot">·</span>
-      <span>Late 2025 availability</span>
+      <span>Late 2026 availability</span>
     </div>
   </section>
 
   <!-- ───────── PRESS STRIP ───────── -->
   <aside class="press" aria-label="Selected credentials">
     <div class="container">
-      <div class="press-eye">Background: Ross Brothers · NZIA-recognised builds</div>
+      <div class="press-eye">Built by Dan · Recognised by NZIA</div>
       <div class="press-row">
         <span class="press-item">Mason &amp; Wales Architects</span>
         <span class="press-sep" aria-hidden="true"></span>
@@ -114,15 +151,12 @@
 
       <div class="practice-grid">
         <div class="practice-text reveal">
-          <p>Dan Ross works from the inside of a place outward. The work begins before drawings are resolved, before materials are named, before form is fixed. It begins by listening for what the place is already asking to hold.</p>
-          <p>Sometimes that story arrives fully formed, set down in an architect's drawings. Sometimes it exists only as an unease — felt by the person who lives there but not yet articulated. Rather than imposing a language, he shapes the story until it finds its own.</p>
-          <p class="practice-beat">What follows is made in answer.</p>
-          <p>The work ranges from singular objects to finished rooms, but the approach does not change. Timber and stone are chosen for where they come from and what they carry. Joins are made visible. Process is allowed to speak. A piece is finished when it feels inevitable rather than complete.</p>
-          <p>Dan no longer builds houses.<br>He works alone, taking on a small number of commissions each year.</p>
-          <p>Not every conversation becomes a piece. He visits sites before agreeing to anything. He turns down work that asks for surface rather than meaning, speed rather than resolution. The commissions he accepts are the ones where place, people, and intent align — where there is time for the work to find its own authority.</p>
-          <p>These pieces are not decorative. They are anchors — presences that hold a room together without announcing themselves. A cellar built like a reliquary. A threshold that withholds until the moment of arrival. Objects shaped to outlast the circumstances that called them into being.</p>
-          <p class="practice-coda"><em>The form changes.<br>The intent does not.</em></p>
-          <p class="practice-coda">To give a place the thing it was already asking for.<br>A room finished so completely it falls quiet.</p>
+          <p>Dan Ross works from the inside of a place outward. His work begins by listening for what a site or object is already asking to hold — sometimes named in drawings, sometimes felt but unspoken by the people who live with it.</p>
+          <p>Rather than imposing a language, he shapes the story until it finds its own.</p>
+          <p>What follows is made in answer.</p>
+          <p>The work ranges from singular objects to finished rooms. The approach does not change. Stone and timber are chosen for where they come from and what they carry. Joins are visible. Process is allowed to speak. A piece is finished when it feels inevitable.</p>
+          <p>Dan works alone and takes on a small number of commissions each year. Not every conversation becomes a piece. The work he accepts is shaped by alignment — of place, people, and intent.</p>
+          <p><em>The aim is simple: to give a place the thing it was already asking for.</em></p>
         </div>
 
         <aside class="pull-quote reveal">
@@ -149,20 +183,20 @@
 
       <div class="work-list">
         <article class="work-card reveal">
-          <a class="work-img placeholder" href="work/the-cellar/" data-lightbox="The Cellar — completed" data-lightbox-sub="Reclaimed timber · stone sculpture · bespoke joinery" aria-label="View The Cellar &amp; The Racks" style="background-image: url('images/cellar-completed.jpeg'); background-size: cover; background-position: center;">
+          <a class="work-img placeholder bg-photo" href="work/the-cellar/" data-lightbox="The Cellar — completed" data-lightbox-sub="Reclaimed timber · stone sculpture · bespoke joinery" aria-label="View The Cellar &amp; The Racks" style="--img-webp: url('images/cellar-completed.webp'); --img-jpg: url('images/cellar-completed.jpeg');">
             <span class="work-img-tag">N° 01</span>
             <span class="placeholder-label">The Cellar — completed</span>
           </a>
           <div class="work-body">
             <div class="work-meta">Commission · Wine cellar</div>
             <h3 class="serif">The Cellar &amp; <em>The Racks.</em></h3>
-            <p>Budget pressure changed what the brief could be. Cellar walls in salvaged timber and hessian, driveway-bank roots set into the walls. Wine racks built from reclaimed stock, conceived as architecture rather than furniture.</p>
+            <p>When the budget tightened, the constraint became the design. Cellar walls in salvaged timber and hessian, driveway-bank roots set into the walls. Wine racks built from reclaimed stock, conceived as architecture rather than furniture.</p>
             <a class="work-link" href="work/the-cellar/">View the full piece →</a>
           </div>
         </article>
 
         <article class="work-card reverse reveal">
-          <a class="work-img placeholder" href="work/the-sixteen/" data-lightbox="The Sixteen — installed" data-lightbox-sub="Private grounds · Ironbark sentinels · Serpentine &amp; Aotea stone" aria-label="View The Sixteen" style="background-image: url('images/sixteen-installed.jpg'); background-size: cover; background-position: center;">
+          <a class="work-img placeholder bg-photo" href="work/the-sixteen/" data-lightbox="The Sixteen — installed" data-lightbox-sub="Private grounds · Ironbark sentinels · Serpentine &amp; Aotea stone" aria-label="View The Sixteen" style="--img-webp: url('images/sixteen-installed.webp'); --img-jpg: url('images/sixteen-installed.jpg');">
             <span class="work-img-tag">N° 02 · Legacy</span>
             <span class="placeholder-label">The Sixteen — installed</span>
           </a>
@@ -175,7 +209,7 @@
         </article>
 
         <article class="work-card reveal">
-          <a class="work-img placeholder" href="work/the-threshold/" data-lightbox="The Threshold — completed" data-lightbox-sub="Aged timber palings · Mountain &amp; lake views revealed" aria-label="View The Threshold" style="background-image: url('images/threshold-complete-evening.jpeg'); background-size: cover; background-position: center;">
+          <a class="work-img placeholder bg-photo" href="work/the-threshold/" data-lightbox="The Threshold — completed" data-lightbox-sub="Aged timber palings · Mountain &amp; lake views revealed" aria-label="View The Threshold" style="--img-webp: url('images/threshold-complete-evening.webp'); --img-jpg: url('images/threshold-complete-evening.jpeg');">
             <span class="work-img-tag">N° 03</span>
             <span class="placeholder-label">The Threshold — completed</span>
           </a>
@@ -198,11 +232,45 @@
       <h2 class="workshop-coda-h serif reveal">From <em>the workshop.</em></h2>
 
       <div class="workshop-coda-grid reveal">
-        <a class="workshop-coda-img" href="work/workshop/" aria-label="View the workshop pieces" style="background-image: url('images/the-finished-goblet.jpg'); background-size: cover; background-position: center;"></a>
+        <a class="workshop-coda-img bg-photo" href="work/workshop/" aria-label="View the workshop pieces" style="--img-webp: url('images/the-finished-goblet.webp'); --img-jpg: url('images/the-finished-goblet.jpg');"></a>
         <div class="workshop-coda-body">
           <p>A stone goblet carved from local quarry stone, gifted on completion. A two-storey dollshouse built with mortise-and-tenon joints at miniature scale, made for his daughter. Nobody asked for either; both exist at the same standard as everything else.</p>
           <a class="work-link" href="work/workshop/">View the workshop pieces →</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── WORK OF RECORD ───────── -->
+  <section class="record">
+    <div class="container">
+      <div class="eyebrow reveal">Work of Record</div>
+      <h2 class="section-title serif reveal">Built to <em>that standard.</em></h2>
+
+      <div class="record-grid">
+        <article class="record-item reveal">
+          <div class="record-name serif">Pinnacle Place</div>
+          <p>1,400m² Mason &amp; Wales residence on Queenstown Hill. Site managed by Dan from foundation to handover. Featured by Sotheby's and Robb Report.</p>
+          <div class="record-meta">Mason &amp; Wales · $23.5M Sotheby's listing</div>
+        </article>
+
+        <article class="record-item reveal">
+          <div class="record-name serif">Lake Hayes Cottage</div>
+          <p>Anna-Marie Chin Architects. Built by Dan.</p>
+          <div class="record-meta">2020 NZIA National Award</div>
+        </article>
+
+        <article class="record-item reveal">
+          <div class="record-name serif">Belfast Terrace</div>
+          <p>685m² Mason &amp; Wales residence. Site managed by Dan for Trinity QT — one of three award-winning Mason &amp; Wales builds run in succession.</p>
+          <div class="record-meta">House of the Year — Regional Supreme &amp; Gold</div>
+        </article>
+
+        <article class="record-item reveal">
+          <div class="record-name serif">Faceted Cedar Ceiling</div>
+          <p>Multi-directional cedar cladding installed throughout the main living volume of a private residence. Each panel hand-fitted; the directions shift across the ceiling planes to catch light differently at every hour.</p>
+          <div class="record-meta">Lake Hayes Residence — Olive Lane</div>
+        </article>
       </div>
     </div>
   </section>
@@ -235,14 +303,14 @@
     <div class="container commission-inner">
       <div class="eyebrow eyebrow-center reveal">Commission</div>
       <h2 class="commission-h serif reveal">Begin a <em>conversation.</em></h2>
-      <p class="commission-sub reveal">Each commission begins in conversation, and not every conversation becomes a piece. Dan takes on the work he believes he is the right hand for — when the place, the people, and the brief are aligned, the rest follows.</p>
+      <p class="commission-sub reveal">The path is short. It begins with you.</p>
 
       <ol class="commission-process reveal">
         <li>
           <span class="step-n serif">i.</span>
           <div class="step-body">
             <div class="step-t">A first email</div>
-            <div class="step-d">A note to Dan describing the place, the people, and what the work needs to do. As detailed or as brief as suits.</div>
+            <div class="step-d">Tell Dan about the place, the people, and what the work needs to do. As detailed or as brief as you'd like.</div>
           </div>
         </li>
         <li>
@@ -256,7 +324,7 @@
           <span class="step-n serif">iii.</span>
           <div class="step-body">
             <div class="step-t">A clear answer</div>
-            <div class="step-d">A yes or a no within a week of the visit, and either way, an honest read on the brief.</div>
+            <div class="step-d">Within a week of the visit, you'll have a yes or a no — and either way, an honest read on the brief.</div>
           </div>
         </li>
       </ol>
@@ -275,7 +343,7 @@
   <!-- ───────── FOOTER ───────── -->
   <footer>
     <div class="container footer-inner">
-      <a class="brand serif" href="#">TOLD<span>·</span>WORKS</a>
+      <a class="brand serif" href="#intro">TOLD<span>·</span>WORKS</a>
       <div class="footer-tagline serif">Made in Central Otago. For the spaces still asking for something.</div>
       <div class="footer-copy">© 2026 Dan Ross · All rights reserved.</div>
     </div>

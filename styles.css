@@ -4,7 +4,7 @@ html { scroll-behavior: smooth; }
 
 /* ─── DESIGN TOKENS ─── */
 /*
- * Palette: Serpentine
+ * Palette: Serpentine (accessibility-passed)
  *   Ink, ink-2, ink-3      — ground tones (near-black, warmed)
  *   Bone, bone-dim, bone-mute — paper / type
  *   Serpentine             — forest deep, the carved-stone green
@@ -180,7 +180,7 @@ nav.scrolled {
   align-items: flex-end;
   justify-content: center;
   overflow: hidden;
-  padding: 6rem 2rem 7rem;
+  padding: 6rem 0 0;
   background: radial-gradient(ellipse at center, var(--ink-2) 0%, var(--ink) 70%);
 }
 
@@ -199,12 +199,36 @@ nav.scrolled {
   opacity: 0.85;
 }
 
+/* Fine film grain over the photograph — deepens the cinematic, gallery feel
+   and masks any banding in the dark areas. SVG fractal noise, tiled. */
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Vignette: darkens the edges so the eye settles on the centre of the frame
+   and the brand mark reads cleanly against it. */
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(ellipse 120% 100% at 50% 42%,
+    transparent 40%, rgba(8, 7, 5, 0.35) 75%, rgba(8, 7, 5, 0.7) 100%);
+}
+
 .hero-content {
   position: relative;
   z-index: 2;
   text-align: center;
-  max-width: 920px;
-  padding-bottom: 1rem;
+  width: 100%;
+  max-width: 100%;
+  padding-bottom: 0;
 }
 
 .eyebrow {
@@ -233,12 +257,12 @@ nav.scrolled {
 }
 
 .hero-mark {
-  display: inline-flex;
+  display: flex;
   align-items: baseline;
   flex-wrap: nowrap;
   justify-content: center;
   gap: clamp(0.4rem, 1.4vw, 1.2rem);
-  padding: 0.85rem clamp(1rem, 2.5vw, 2rem);
+  padding: 1.6rem clamp(1rem, 2.5vw, 2rem);
   font-size: clamp(1.15rem, 3.8vw, 3.2rem);
   font-weight: 700;
   font-style: normal;
@@ -249,8 +273,8 @@ nav.scrolled {
   color: var(--bone);
   background: rgba(8, 7, 5, 0.82);
   border-top: 1px solid var(--line-strong);
-  border-bottom: 1px solid var(--line-strong);
   white-space: nowrap;
+  width: 100%;
   max-width: 100%;
 }
 .hero-mark-title em {
@@ -272,10 +296,11 @@ nav.scrolled {
 
 .hero-foot {
   position: absolute;
-  bottom: 7.5rem;
+  top: 37%;
   left: 0;
   right: 0;
-  z-index: 2;
+  transform: translate(-1.45vw, -50%);
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -300,24 +325,41 @@ nav.scrolled {
 
 .scroll-cue {
   display: inline-block;
-  font-size: 0.78rem;
-  letter-spacing: 0.4em;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.42em;
   text-transform: uppercase;
   color: var(--bone);
   text-decoration: none;
   cursor: pointer;
-  padding: 1.05rem 2.4rem;
-  border: 1px solid var(--bone-mute);
-  background: rgba(8, 7, 5, 0.35);
+
   transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease, letter-spacing 0.3s ease;
 }
 .scroll-cue:hover,
 .scroll-cue:focus-visible {
-  color: var(--bone);
-  border-color: var(--bone);
-  background: rgba(8, 7, 5, 0.55);
+
   letter-spacing: 0.5em;
   outline: none;
+}
+
+/* Downward chevron beneath the Enter cue — a quiet affordance that the
+   action moves the visitor into the site. Gentle bob draws the eye. */
+.hero-chevron {
+  display: block;
+  width: 11px;
+  height: 11px;
+  margin-top: -0.4rem;
+  transform: translateX(-1.5vw) rotate(45deg);
+  border-right: 1px solid rgba(250, 247, 236, 0.55);
+  border-bottom: 1px solid rgba(250, 247, 236, 0.55);
+  animation: chevron-bob 2.4s ease-in-out infinite;
+}
+@keyframes chevron-bob {
+  0%, 100% { transform: translateX(-1.5vw) translateY(0) rotate(45deg); }
+  50%      { transform: translateX(-1.5vw) translateY(4px) rotate(45deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-chevron { animation: none; }
 }
 
 /* ─── INTRO (second screen — was hero copy) ─── */
@@ -438,27 +480,6 @@ nav.scrolled {
 .practice-text p:last-child { margin-bottom: 0; }
 .practice-text em { font-style: italic; color: var(--bone); }
 
-.practice-text .practice-beat {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 1.45rem;
-  line-height: 1.4;
-  color: var(--bone);
-  margin: 0.5rem 0 2rem;
-}
-.practice-text .practice-coda {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem;
-  line-height: 1.5;
-  color: var(--bone);
-  margin-top: 0.6rem;
-  margin-bottom: 1.2rem;
-}
-.practice-text .practice-coda em {
-  font-style: italic;
-  color: var(--bone);
-}
-
 .pull-quote {
   padding: 0.4rem 0 0.4rem 2rem;
   border-left: 1px solid var(--serpentine-sage);
@@ -531,6 +552,7 @@ nav.scrolled {
   aspect-ratio: 4 / 5;
   overflow: hidden;
   text-decoration: none;
+  border: 1px solid var(--line);
   transition: transform 0.6s ease;
 }
 .work-img:hover { transform: translateY(-4px); }
@@ -602,9 +624,6 @@ nav.scrolled {
 .work-link:hover { color: var(--serpentine-sage); letter-spacing: 0.34em; }
 
 /* ─── WORKSHOP CODA ─── */
-/* Sits after Selected Work as a smaller, separate note — the pieces here
-   were made outside obligation, so they don't belong in the commissioned
-   portfolio grid. Restrained treatment to read as coda, not headline. */
 .workshop-coda {
   background: var(--ink);
   padding: 6rem 0;
@@ -872,7 +891,6 @@ footer {
 }
 .reveal.in { opacity: 1; transform: translateY(0); }
 
-/* Stagger children 80ms apart inside containers we mark with .stagger */
 .stagger > .reveal:nth-child(1) { transition-delay: 0ms; }
 .stagger > .reveal:nth-child(2) { transition-delay: 80ms; }
 .stagger > .reveal:nth-child(3) { transition-delay: 160ms; }
@@ -955,8 +973,8 @@ footer {
   .nav-links a::after { display: none; }
   .nav-enquire { text-align: center; }
 
-  .hero { padding: 5rem 1.5rem 5rem; min-height: 600px; }
-  .hero-foot { bottom: 5rem; gap: 1.1rem; }
+  .hero { padding: 5rem 0 0; min-height: 600px; }
+  .hero-foot { gap: 1.1rem; }
   .hero-meta { flex-wrap: wrap; justify-content: center; gap: 0.6rem; padding: 0.7rem 1rem; }
   .hero-meta .dot { display: none; }
   .intro-h { font-size: clamp(2rem, 7vw, 3.2rem); }
@@ -1035,6 +1053,7 @@ footer {
   position: relative;
   aspect-ratio: 4 / 3;
   overflow: hidden;
+  border: 1px solid var(--line);
   background: linear-gradient(135deg, #1f1611 0%, #0a0604 100%);
   background-origin: border-box;
   background-clip: border-box;
@@ -1137,42 +1156,122 @@ footer {
 }
 
 /* ─── HERO IMAGE BACKDROP ─── */
+/* .hero-photo sizes itself to the image's aspect ratio, cover-fitting the
+   viewport. .hero-image (guardian-heroes.jpeg, the original photograph)
+   fills this wrapper at 100% × 100%.
+
+   The wrapper carries the camera motion: a slow pan-out while the
+   photograph is fading in (the frame opens tight, then pulls back to
+   reveal the full scene), and then a large scale-up on Enter (a forward
+   push into the scene before it fades into the next page). Origin anchored
+   on the doorway so the motion always feels like the camera moving, not a
+   flat scale. */
+.hero-photo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100vw, calc(100vh * 6988 / 3930));
+  height: max(100vh, calc(100vw * 3930 / 6988));
+  transform-origin: 49.7% 36.9%;
+  transform: translate(-50%, -50%) scale(1.18);
+  transition: transform 7s cubic-bezier(0.16, 0.6, 0.2, 1);
+  perspective: 1800px;
+  perspective-origin: 47% 37%;
+}
+/* Pan out: the frame opens tight on the doorway, then the camera pulls
+   back to its resting width as the photograph fades in — revealing the
+   full scene. Decelerates into place so it reads as the camera settling. */
+.hero.hero-loaded .hero-photo {
+  transform: translate(-50%, -50%) scale(1);
+}
+/* Walk-through: once the door is open, push forward into the doorway
+   over 1.2s — fast enough to feel like motion, slow enough to read. */
+.hero.hero-entering .hero-photo {
+  transform: translate(-50%, -50%) scale(2.8);
+  transition: transform 1.2s cubic-bezier(0.5, 0, 0.7, 1);
+}
+
+/* Fade-to-dark overlay layered above the photo, used during the walk-through
+   so the scene transitions cleanly into the intro section below. */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  opacity: 0;
+  z-index: 20;
+  pointer-events: none;
+  transition: opacity 1.2s ease-in;
+}
+.hero.hero-entering::after { opacity: 1; }
+
 .hero-image {
   position: absolute;
   inset: 0;
-  background-size: cover;
+  background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
+  /* WebP with a JPEG fallback. The plain url() is used by browsers without
+     image-set(); modern browsers take the lighter WebP. */
+  background-image: url("images/guardian-heroes.jpeg");
+  background-image: image-set(
+    url("images/guardian-heroes.webp") type("image/webp"),
+    url("images/guardian-heroes.jpeg") type("image/jpeg"));
   opacity: 0;
   filter: saturate(0.5);
-  transition: opacity 5s ease-out 0.2s;
+
 }
 .hero-image.is-loaded { opacity: 0.22; }
 
+/* Shared WebP-with-JPEG-fallback background, driven by per-element CSS vars
+   (--img-webp / --img-jpg) set inline on each card. */
+.bg-photo {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: var(--img-jpg);
+  background-image: image-set(
+    var(--img-webp) type("image/webp"),
+    var(--img-jpg) type("image/jpeg"));
+}
+
 /* Once the photograph has faded in, it brightens further to take the
-   foreground while the title settles onto a dark filled plate so the green
-   TOLD stays legible against the now-bright image. */
+   foreground while the title settles onto a dark filled plate. */
 .hero.hero-settled .hero-image {
-  opacity: 0.62;
-  filter: saturate(0.85);
+  opacity: 0.9;
+  filter: saturate(1);
   transition: opacity 4s ease-in-out, filter 4s ease-in-out;
+}
+
+.hero.hero-opening .hero-content,
+.hero.hero-opening .hero-foot {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-photo,
+  .hero::after { transition: none; }
+  .hero.hero-loaded .hero-photo,
+  .hero.hero-entering .hero-photo { transform: translate(-50%, -50%) scale(1); }
 }
 
 /* Sequence: title fades in first, then the image rises behind, then the
    Enter cue appears once the image is on its way in. */
 .hero-content > .hero-mark,
-.hero-foot > .scroll-cue {
+.hero-foot > .scroll-cue,
+.hero-foot > .hero-chevron {
   opacity: 0;
-  transform: translateY(16px);
   transition: opacity 1.2s ease-out, transform 1.2s ease-out;
 }
+.hero-content > .hero-mark,
+.hero-foot > .scroll-cue { transform: translateY(16px); }
 .hero.hero-loaded .hero-content > .hero-mark,
 .hero.hero-loaded .hero-foot > .scroll-cue {
   opacity: 1;
   transform: translateY(0);
 }
-.hero.hero-loaded .hero-content > .hero-mark  { transition-delay: 0.5s; }
-.hero.hero-loaded .hero-foot    > .scroll-cue { transition-delay: 7s; }
+
 
 @media (prefers-reduced-motion: reduce) {
   .hero-image {
@@ -1185,19 +1284,15 @@ footer {
     transform: none;
     transition: none;
   }
+  .hero-foot > .hero-chevron { opacity: 0.85; transition: none; }
 }
 
-
 /* ─── TOUCH DEVICES ─── */
-/* On devices without a hover capability, neutralise the motion-and-spacing
-   hover effects so they do not appear "stuck" after a tap. Colour-only
-   hovers are left untouched — they revert on the next tap and read as
-   subtle feedback rather than a stuck state. */
 @media (hover: none) {
   .work-img:hover,
   .workshop-coda-img:hover { transform: none; }
   .work-link:hover { letter-spacing: 0.28em; }
-  .scroll-cue:hover { letter-spacing: 0.4em; border-color: var(--bone-mute); background: rgba(8, 7, 5, 0.35); }
+
   .cta:hover { letter-spacing: 0.32em; }
   .subpage-footer .back-link:hover { letter-spacing: 0.32em; }
 }
