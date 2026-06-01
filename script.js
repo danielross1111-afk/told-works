@@ -32,14 +32,13 @@
       return;
     }
 
-    // Cinematic three-beat sequence:
-    //   1. Door swings inward (2.2s) — slow, deliberate
-    //   2. Hold (0.3s) — let the viewer see through the open doorway
-    //   3. Walk-through (1.2s) — camera pushes forward through the door
-    //      while the scene fades to dark, then we scroll into the intro
+    // Cinematic two-beat sequence:
+    //   1. Title and cue fade out (0.5s)
+    //   2. Walk-through (1.2s) — camera pushes forward into the scene
+    //      while it fades to dark, then we scroll into the intro
     hero.classList.add('hero-opening');
-    setTimeout(() => hero.classList.add('hero-entering'), 2500); // 2.2s swing + 0.3s hold
-    setTimeout(goToIntro, 3700); // + 1.2s walk-through
+    setTimeout(() => hero.classList.add('hero-entering'), 600); // after the content fade
+    setTimeout(goToIntro, 1800); // + 1.2s walk-through
   };
   cue.addEventListener('click', release);
 })();
@@ -63,15 +62,12 @@
   const IMAGE_FADE_MS  = 4000;     // matches the CSS opacity transition
   const SETTLE_BUFFER_MS = 800;    // pause once the image is in, then settle
 
-  const door = document.querySelector('.hero-door');
-
   const start = Date.now();
   let imageRevealed = false;
   const showImage = () => {
     if (imageRevealed) return;
     imageRevealed = true;
     el.classList.add('is-loaded');
-    if (door) door.classList.add('is-loaded');
     // After the image has finished fading in, dim the mark and brighten the
     // photograph further so the picture becomes the dominant layer.
     setTimeout(() => {
@@ -83,16 +79,42 @@
     setTimeout(showImage, wait);
   };
 
-  const bg = el.style.backgroundImage;
-  const match = bg && bg.match(/url\((['"]?)(.*?)\1\)/);
-  if (!match) { reveal(); return; }
+  // The displayed background lives in CSS (image-set: WebP with a JPEG
+  // fallback); the load-gate preloads the same WebP named on the element so
+  // the reveal waits for the real photograph, not a guess.
+  const src = el.dataset.heroSrc;
+  if (!src) { reveal(); return; }
   const img = new Image();
   img.onload = reveal;
   img.onerror = reveal;
-  img.src = match[2];
+  img.src = src;
   if (img.complete) reveal();
   // Safety net: never leave the photograph hidden indefinitely.
   setTimeout(showImage, 5000);
+})();
+
+// Hero parallax: the photographic backdrop drifts slower than the page as
+// the visitor scrolls off the landing, giving the frame a sense of depth.
+// Applied to .hero-bg (not .hero-photo, which owns the pan-out transform)
+// so the two motions never fight. Skipped when reduced motion is requested.
+(function heroParallax() {
+  const bg = document.querySelector('.hero .hero-bg');
+  if (!bg) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  bg.style.willChange = 'transform';
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const y = window.scrollY;
+    // Only animate while the hero is still on screen.
+    if (y > window.innerHeight) return;
+    bg.style.transform = 'translate3d(0, ' + (y * 0.25).toFixed(1) + 'px, 0)';
+  };
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+  update();
 })();
 
 // Nav: hidden on the landing hero, fades in once the user starts leaving it.
