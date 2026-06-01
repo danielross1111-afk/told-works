@@ -220,3 +220,120 @@
     a.addEventListener('click', () => setOpen(false));
   });
 })();
+
+// Selected Work: 3D coverflow carousel.
+// Cards are placed in 3D by distance from the active one; a caption beneath
+// is cloned from the active card's hidden data node so all copy stays intact.
+// Progressive enhancement: without JS the cards render as a plain grid.
+(function workCarousel() {
+  const root = document.getElementById('workCarousel');
+  if (!root) return;
+  const stage = root.querySelector('.carousel-stage');
+  const caption = root.querySelector('.carousel-caption');
+  const dotsWrap = root.querySelector('.carousel-dots');
+  const cards = Array.from(root.querySelectorAll('.carousel-card'));
+  if (cards.length === 0) return;
+
+  const n = cards.length;
+  let active = 0;
+
+  // Relative position of card i from the active card, wrapped to the nearest
+  // direction so the ring is symmetric (e.g. for 3 cards: -1, 0, 1).
+  const relPos = (i) => {
+    let p = i - active;
+    if (p > n / 2) p -= n;
+    if (p < -n / 2) p += n;
+    return p;
+  };
+
+  const layout = () => {
+    cards.forEach((card, i) => {
+      const p = relPos(i);
+      const isActive = p === 0;
+      card.classList.toggle('is-active', isActive);
+      card.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      if (isActive) {
+        card.style.transform = 'translateX(-50%) translateZ(40px) rotateY(0deg) scale(1)';
+        card.style.opacity = '1';
+        card.style.zIndex = '30';
+      } else {
+        const dir = p > 0 ? 1 : -1;
+        const x = -50 + dir * 58;            // % of the card's own width
+        card.style.transform =
+          'translateX(' + x + '%) translateZ(-160px) rotateY(' + (-dir * 40) + 'deg) scale(0.85)';
+        card.style.opacity = '0.55';
+        card.style.zIndex = String(10 - Math.abs(p));
+      }
+    });
+    if (dotsWrap) {
+      Array.from(dotsWrap.children).forEach((dot, i) =>
+        dot.classList.toggle('is-active', i === active));
+    }
+    setCaption(cards[active]);
+  };
+
+  const setCaption = (card) => {
+    const data = card.querySelector('.carousel-card-data');
+    if (!caption || !data) return;
+    caption.innerHTML = '';
+    Array.from(data.children).forEach((node) => {
+      const clone = node.cloneNode(true);
+      clone.removeAttribute('hidden');
+      caption.appendChild(clone);
+    });
+  };
+
+  const goTo = (i) => { active = (i % n + n) % n; layout(); };
+  const next = () => goTo(active + 1);
+  const prev = () => goTo(active - 1);
+
+  // Dots
+  if (dotsWrap) {
+    cards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'carousel-dot';
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', 'Work ' + (i + 1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+  }
+
+  // Arrows
+  const prevBtn = root.querySelector('.carousel-prev');
+  const nextBtn = root.querySelector('.carousel-next');
+  if (prevBtn) prevBtn.addEventListener('click', prev);
+  if (nextBtn) nextBtn.addEventListener('click', next);
+
+  // Clicking a non-active card brings it to centre instead of navigating.
+  cards.forEach((card, i) => {
+    const link = card.querySelector('.carousel-img');
+    if (!link) return;
+    link.addEventListener('click', (e) => {
+      if (!card.classList.contains('is-active')) {
+        e.preventDefault();
+        goTo(i);
+      }
+    });
+  });
+
+  // Keyboard
+  root.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+  });
+
+  // Touch / pointer swipe
+  let startX = null;
+  root.addEventListener('pointerdown', (e) => { startX = e.clientX; });
+  root.addEventListener('pointerup', (e) => {
+    if (startX === null) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); }
+    startX = null;
+  });
+
+  root.classList.add('is-enhanced');
+  layout();
+})();
