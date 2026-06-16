@@ -12,6 +12,77 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
+
+  <!-- Work index tiles. No equivalent layout exists in styles.css, so the
+       single-column tile rules live here. Colours, fonts and the copper
+       label accent all reuse the existing design tokens / vocabulary. -->
+  <style>
+    .worktiles {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: clamp(6rem, 12vh, 9rem) clamp(1.25rem, 5vw, 2.5rem) clamp(5rem, 10vh, 8rem);
+    }
+    .worktile {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      margin-bottom: clamp(4rem, 9vw, 7rem);
+    }
+    .worktile:last-child { margin-bottom: 0; }
+
+    .worktile-frame {
+      overflow: hidden;
+      background: var(--ink-3);
+    }
+    .worktile-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform 0.7s cubic-bezier(.2,.7,.2,1);
+    }
+    .worktile:hover .worktile-frame img { transform: scale(1.02); }
+
+    .worktile-text { padding-top: clamp(1.1rem, 2.5vw, 1.6rem); }
+
+    /* Label — small-caps sans, copper accent (mirrors .gallery-c-num) */
+    .worktile-num {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--ember);
+      margin: 0 0 0.7rem;
+    }
+    /* Title — serif display, larger than the descriptor */
+    .worktile-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.04;
+      letter-spacing: 0.005em;
+      color: #1A1612;
+      margin: 0 0 0.6rem;
+      transition: color 0.3s;
+    }
+    .worktile:hover .worktile-title { color: var(--ember); }
+    /* Descriptor — small, restrained; the supporting sans voice */
+    .worktile-desc {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 0.92rem;
+      font-weight: 400;
+      line-height: 1.6;
+      letter-spacing: 0.01em;
+      color: rgba(42, 37, 32, 0.66);
+      margin: 0;
+      max-width: 46ch;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .worktile-frame img { transition: none; }
+      .worktile:hover .worktile-frame img { transform: none; }
+    }
+  </style>
 </head>
 <body class="editorial-page">
 
@@ -27,7 +98,53 @@
   </nav>
 
   <main>
-    <!-- Placeholder. Content arrives in the next pass. -->
+    <div class="worktiles">
+
+      <a class="worktile" href="/work/the-sixteen/">
+        <div class="worktile-frame">
+          <img src="../images/sixteen-installed.jpg" alt="The Sixteen — ironbark figures installed at Lake Hayes" loading="lazy">
+        </div>
+        <div class="worktile-text">
+          <p class="worktile-num">N° 01 —</p>
+          <h2 class="worktile-title serif">The Sixteen</h2>
+          <p class="worktile-desc">Sixteen figures. Ironbark, reclaimed.</p>
+        </div>
+      </a>
+
+      <a class="worktile" href="/work/the-cellar/">
+        <div class="worktile-frame">
+          <img src="../images/cellar-completed.jpeg" alt="The Cellar — completed cellar built from salvaged timber" loading="lazy">
+        </div>
+        <div class="worktile-text">
+          <p class="worktile-num">N° 02 —</p>
+          <h2 class="worktile-title serif">The Cellar</h2>
+          <p class="worktile-desc">A cellar. Built from what was forgotten.</p>
+        </div>
+      </a>
+
+      <a class="worktile" href="/work/the-threshold/">
+        <div class="worktile-frame">
+          <img src="../images/threshold-complete-daylight.jpeg" alt="The Threshold — re-clad timber gates in daylight" loading="lazy">
+        </div>
+        <div class="worktile-text">
+          <p class="worktile-num">N° 03 —</p>
+          <h2 class="worktile-title serif">The Threshold</h2>
+          <p class="worktile-desc">Existing gates. Re-clad. Arrival withheld until passing through.</p>
+        </div>
+      </a>
+
+      <a class="worktile" href="/work/unbidden-works/">
+        <div class="worktile-frame">
+          <img src="../images/the-finished-goblet.jpg" alt="Unbidden Works — a goblet carved from quarry stone" loading="lazy">
+        </div>
+        <div class="worktile-text">
+          <p class="worktile-num">N° 04 —</p>
+          <h2 class="worktile-title serif">Unbidden Works</h2>
+          <p class="worktile-desc">Nobody commissioned any of it.</p>
+        </div>
+      </a>
+
+    </div>
   </main>
 
   <script src="/script.js"></script>
