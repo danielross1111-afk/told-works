@@ -37,7 +37,9 @@
     .worktile-frame img {
       display: block;
       width: 100%;
-      height: auto;
+      height: 520px;
+      object-fit: cover;
+      object-position: center;
       transition: transform 0.7s cubic-bezier(.2,.7,.2,1);
     }
     .worktile:hover .worktile-frame img { transform: scale(1.02); }
@@ -63,9 +65,7 @@
       letter-spacing: 0.005em;
       color: #1A1612;
       margin: 0 0 0.6rem;
-      transition: color 0.3s;
     }
-    .worktile:hover .worktile-title { color: var(--ember); }
     /* Descriptor — small, restrained; the supporting sans voice */
     .worktile-desc {
       font-family: 'Inter', -apple-system, sans-serif;
@@ -124,7 +124,7 @@
 
       <a class="worktile" href="/work/the-threshold/">
         <div class="worktile-frame">
-          <img src="../images/threshold-complete-daylight.jpeg" alt="The Threshold — re-clad timber gates in daylight" loading="lazy">
+          <img src="../images/threshold-complete-evening.jpeg" alt="The Threshold — re-clad timber gates in the evening" loading="lazy">
         </div>
         <div class="worktile-text">
           <p class="worktile-num">N° 03 —</p>
