@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Practice — Told Works</title>
-  <meta name="description" content="Dan Ross — practice, standard, work of record.">
+  <meta name="description" content="Dan Ross makes things by hand. The practice behind the work.">
   <meta name="theme-color" content="#FAF7EC">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -12,6 +12,54 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
+
+  <!-- Practice page. Body paragraphs reuse .editorial-body + .editorial-prose
+       (the site's reading column and body voice). Only three things need new
+       rules: top/bottom space (this page has no hero to push content clear of
+       the fixed nav), the display opener, and a quote that reads SMALLER than
+       body — the existing .editorial-pullquote is larger and centred, the
+       opposite of what's wanted here. All values reuse existing tokens. -->
+  <style>
+    .practice-main {
+      padding-top: clamp(7rem, 14vh, 10rem);
+      padding-bottom: clamp(5rem, 12vh, 8rem);
+    }
+    .practice-open {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.1rem, 4.5vw, 3.4rem);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      color: #1A1612;
+      margin: 0 0 clamp(2.2rem, 5vw, 3.4rem);
+    }
+    .practice-quote {
+      margin: clamp(3rem, 7vw, 5rem) 0 0;
+      padding-left: clamp(1.2rem, 3vw, 1.8rem);
+      border-left: 2px solid var(--ember);
+    }
+    .practice-quote p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.08rem;          /* slightly smaller than body (1.2rem) */
+      font-weight: 400;
+      line-height: 1.6;
+      color: #2A2520;
+      margin: 0 0 1.1rem;
+    }
+    .practice-quote p:last-of-type { margin-bottom: 0; }
+    .practice-quote cite {
+      display: block;
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-style: normal;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--ember);
+      margin-top: 1.4rem;
+    }
+  </style>
 </head>
 <body class="editorial-page">
 
@@ -26,8 +74,26 @@
     </ul>
   </nav>
 
-  <main>
-    <!-- Placeholder. Content arrives in the next pass. -->
+  <main class="practice-main">
+    <div class="editorial-body">
+
+      <h1 class="practice-open">Dan Ross makes things by hand.</h1>
+
+      <div class="editorial-prose">
+        <p>The range is broad — singular objects, installations, rooms, thresholds, architectural commissions. The approach does not change. He begins with what is already there: the material, the place, the people, what each is asking to hold. He works until the answer becomes visible.</p>
+        <p>Stone and timber are chosen for where they come from and what they carry. Joins are visible. Process is allowed to speak. A piece is finished when it feels inevitable.</p>
+        <p>He takes what is needed — no more. And he takes what others have set aside. The broken, the abandoned, the forgotten. The beauty was always there. The work lets it be seen.</p>
+        <p>Dan works alone. Only three to four commissions are taken on each year. The first conversation is a site visit — he listens to the place, meets the people, reads the brief. If the alignment isn't there, the conversation ends with respect and without obligation. If it is, what follows is made in answer.</p>
+        <p>Twenty-five years of those choices, made consistently, is not a portfolio. It is a practice.</p>
+      </div>
+
+      <blockquote class="practice-quote">
+        <p>"Most of the work is already there. My job is to pay attention long enough to see it.</p>
+        <p>The material usually knows more than I do. The work begins when I stop trying to force an answer."</p>
+        <cite>— Dan Ross</cite>
+      </blockquote>
+
+    </div>
   </main>
 
   <script src="/script.js"></script>
