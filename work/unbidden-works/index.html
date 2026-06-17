@@ -4,90 +4,161 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Unbidden Works — Told Works</title>
-  <meta name="description" content="Not commissions. Not on demand. Pieces begun in recognition — another maker's work that has caught and held. Made because he has to.">
+  <meta name="description" content="Objects made without commission. Goblet, stone box, surfboard, catapult, puzzle wine boxes, dollshouse. Nobody asked for any of it.">
   <meta name="theme-color" content="#FAF7EC">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../styles.css">
+
+  <!-- Six-object index. Mirrors the Work index tile structure (image frame +
+       520px image, then label / title / descriptor), themed for this editorial
+       (bone) page. Tiles are non-interactive — an index of objects, not links.
+       Hierarchy: title primary, descriptor secondary, label tertiary. -->
+  <style>
+    .objtiles {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: clamp(6rem, 12vh, 9rem) clamp(1.25rem, 5vw, 2.5rem) clamp(5rem, 10vh, 8rem);
+    }
+    .objtile { margin-bottom: clamp(4rem, 9vw, 7rem); }
+    .objtile:last-child { margin-bottom: 0; }
+
+    .objtile-frame {
+      overflow: hidden;
+      background: var(--ink-3);
+    }
+    .objtile-frame img {
+      display: block;
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      object-position: center;
+    }
+    .objtile-text { padding-top: clamp(1.1rem, 2.5vw, 1.6rem); }
+
+    /* Label — tertiary: small, uppercase, understated */
+    .objtile-num {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: rgba(42, 37, 32, 0.45);
+      margin: 0 0 0.7rem;
+    }
+    /* Title — primary: serif display, carries the weight */
+    .objtile-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.04;
+      letter-spacing: 0.005em;
+      color: #1A1612;
+      margin: 0 0 0.6rem;
+    }
+    /* Descriptor — secondary: body voice */
+    .objtile-desc {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 0.95rem;
+      font-weight: 400;
+      line-height: 1.6;
+      letter-spacing: 0.01em;
+      color: rgba(42, 37, 32, 0.7);
+      margin: 0;
+      max-width: 46ch;
+    }
+  </style>
 </head>
 <body class="editorial-page">
 
   <nav id="nav">
-    <a href="../../" class="brand serif">TOLD<span>·</span>WORKS</a>
+    <a href="/" class="brand serif">TOLD<span>·</span>WORKS</a>
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">≡</button>
     <ul class="nav-links" id="navLinks">
-      <li><a href="../../#practice">Practice</a></li>
-      <li><a href="../../#work">Work</a></li>
-      <li><a href="../../#standard">Standard</a></li>
-      <li><a class="nav-enquire" href="../../#commission">Enquire</a></li>
+      <li><a href="/work/">Work</a></li>
+      <li><a href="/work/">Case Studies</a></li>
+      <li><a href="/practice/">Practice</a></li>
+      <li><a class="nav-enquire" href="/enquire/">Enquire</a></li>
     </ul>
   </nav>
 
   <main>
+    <div class="objtiles">
 
-    <!-- Hero: text-only. The page itself enacts the restraint —
-         not shown, not advertised, not announced before it is ready. -->
-    <header class="editorial-hero">
-      <div class="editorial-hero-titleblock" style="padding-top: 9rem;">
-        <p class="editorial-hero-eyebrow">Outside Obligation</p>
-        <h1 class="editorial-hero-title"><em>Unbidden</em> Works.</h1>
-        <p class="editorial-note">Not commissions. Not on demand.</p>
-      </div>
-    </header>
-
-    <p class="editorial-lede">Not all of the work is asked for.</p>
-
-    <div class="editorial-body">
-      <div class="editorial-chapter">
-        <div class="editorial-prose">
-          <p>Each piece begins in recognition — another maker's work that has caught and held.</p>
+      <div class="objtile">
+        <div class="objtile-frame">
+          <img src="/images/the-finished-goblet.jpg" alt="The Goblet — carved from serpentine" loading="lazy">
+        </div>
+        <div class="objtile-text">
+          <p class="objtile-num">N° 01</p>
+          <h2 class="objtile-title">The Goblet</h2>
+          <p class="objtile-desc">Carved from serpentine. Grinder, chisel, and hammer. No prior experience with stone.</p>
         </div>
       </div>
-    </div>
 
-    <blockquote class="editorial-pullquote">
-      <p>He doesn't make these because he must. <br>He makes them because he has to.</p>
-    </blockquote>
-
-    <!-- COMPLETED -->
-    <div class="editorial-section-head">Completed</div>
-    <div class="editorial-body">
-      <div class="editorial-chapter">
-        <h2 class="editorial-chapter-title">Da Vinci Catapult <em>— single artefact.</em></h2>
-        <div class="editorial-prose">
-          <p>A machine, at scale. Built to function. Resolved through making.</p>
+      <div class="objtile">
+        <div class="objtile-frame">
+          <img src="/images/the-stone-box.jpg" alt="The Stone Box — carved from stone with stone hinges" loading="lazy">
+        </div>
+        <div class="objtile-text">
+          <p class="objtile-num">N° 02</p>
+          <h2 class="objtile-title">The Stone Box</h2>
+          <p class="objtile-desc">A box carved from stone. The hinges are stone too.</p>
         </div>
       </div>
-    </div>
 
-    <!-- IN DEVELOPMENT -->
-    <div class="editorial-section-head">In development</div>
-    <div class="editorial-body">
-      <div class="editorial-chapter">
-        <div class="editorial-prose">
-          <p>A new piece occupies the workshop. It will not be named, described, or shown before it is finished. Whether it is released — when, and to whom — will be decided then.</p>
+      <div class="objtile">
+        <div class="objtile-frame" style="height: 520px;">
+          <!-- Awaiting correct image; re-add when /images/the-surfboard.jpg is available:
+          <img src="/images/the-surfboard.jpg" alt="The Surfboard — book-matched packing cedar" loading="lazy">
+          -->
+        </div>
+        <div class="objtile-text">
+          <p class="objtile-num">N° 03</p>
+          <h2 class="objtile-title">The Surfboard</h2>
+          <p class="objtile-desc">Packing cedar scraps, book-matched front to back.</p>
         </div>
       </div>
+
+      <div class="objtile">
+        <div class="objtile-frame">
+          <img src="/images/the-davinci-catapult.jpg" alt="The Da Vinci Catapult — fully functional, timber only" loading="lazy">
+        </div>
+        <div class="objtile-text">
+          <p class="objtile-num">N° 04</p>
+          <h2 class="objtile-title">The Da Vinci Catapult</h2>
+          <p class="objtile-desc">Fully functional. Timber only. No metal.</p>
+        </div>
+      </div>
+
+      <div class="objtile">
+        <div class="objtile-frame">
+          <img src="/images/the-puzzle-box.jpg" alt="The Puzzle Wine Boxes — opens by a method yours to find" loading="lazy">
+        </div>
+        <div class="objtile-text">
+          <p class="objtile-num">N° 05</p>
+          <h2 class="objtile-title">The Puzzle Wine Boxes</h2>
+          <p class="objtile-desc">The box opens. The method is yours to find.</p>
+        </div>
+      </div>
+
+      <div class="objtile">
+        <div class="objtile-frame">
+          <img src="/images/the-dollshouse-finished.jpg" alt="The Dollshouse — mortise-and-tenon joinery at miniature scale" loading="lazy">
+        </div>
+        <div class="objtile-text">
+          <p class="objtile-num">N° 06</p>
+          <h2 class="objtile-title">The Dollshouse</h2>
+          <p class="objtile-desc">Mortise-and-tenon joinery. At miniature scale.</p>
+        </div>
+      </div>
+
     </div>
-
-    <!-- THE TERMS -->
-    <aside class="editorial-terms">
-      <p class="editorial-terms-h">The terms</p>
-      <ul class="editorial-terms-list">
-        <li>Fabricated without pre-sale.</li>
-        <li>Singular.</li>
-        <li>Never as concepts.</li>
-        <li>Never repeated.</li>
-        <li>Never on demand.</li>
-        <li>No piece can be reserved, commissioned, or influenced in its making.</li>
-      </ul>
-    </aside>
-
   </main>
 
   <footer class="editorial-footer">
-    <a class="editorial-back" href="../../#work">← Back to Selected Work</a>
+    <a class="editorial-back" href="/work/">← Back to Work</a>
   </footer>
 
   <script src="../../script.js"></script>

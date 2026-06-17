@@ -28,12 +28,11 @@ html { scroll-behavior: smooth; }
   --gutter: 3rem;
   --section-y: 8rem;
 }
-```css
+
 /* Defensive: cap any uncaptured media at viewport width;
    clip horizontal overflow at the html level for iOS Safari reliability. */
 img, picture, video { max-width: 100%; height: auto; display: block; }
 html { overflow-x: clip; }
-```
 
 /* ─── BODY ─── */
 body {
@@ -1847,7 +1846,6 @@ body.editorial-page::before {
   letter-spacing: 0.01em;
 }
 /* Full-bleed plate breaks out of the body column to viewport-edge width. */
-```css
 .editorial-plate-fullbleed {
   width: 100%;
   max-width: none;

@@ -33,13 +33,11 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="images/icon-180.png">
 
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <!-- Eagerly fetch the hero photograph so the pan-out can begin without delay -->
-  <link rel="preload" as="image" href="images/guardian-heroes.webp" type="image/webp">
+  <link rel="preload" as="image" href="images/guardian-heroes.jpeg">
 
   <link rel="stylesheet" href="styles.css">
 
@@ -71,335 +69,31 @@
 <body>
 
   <nav id="nav">
-    <a href="#intro" class="brand serif">TOLD<span>·</span>WORKS</a>
+    <a href="/" class="brand serif">TOLD<span>·</span>WORKS</a>
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">≡</button>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#practice">Practice</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#standard">Standard</a></li>
-      <li><a class="nav-enquire" href="#commission">Enquire</a></li>
+      <li><a href="/work/">Work</a></li>
+      <li><a href="/work/">Case Studies</a></li>
+      <li><a href="/practice/">Practice</a></li>
+      <li><a class="nav-enquire" href="/enquire/">Enquire</a></li>
     </ul>
   </nav>
 
   <main>
 
-  <!-- ───────── HERO ───────── -->
-  <header class="hero">
-    <div class="hero-bg" aria-hidden="true">
-      <div class="hero-photo">
-        <div class="hero-image" data-hero-src="images/guardian-heroes.webp"></div>
+    <header style="position: relative; height: 100vh; height: 100dvh; min-height: 600px; overflow: hidden; background: #0E0D0B;">
+      <img src="images/guardian-heroes.jpeg" alt="The Sixteen — ironbark figures, hand-carved guardians" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;">
+
+      <div style="position: absolute; left: clamp(1.25rem, 5vw, 4rem); bottom: clamp(2rem, 6vh, 3.5rem); z-index: 2; width: fit-content; max-width: min(92%, 600px); background: rgba(8, 7, 5, 0.82); padding: clamp(1.1rem, 2.5vw, 1.6rem) clamp(1.1rem, 2.4vw, 1.4rem);">
+        <h1 class="hero-mark serif" style="flex-direction: column; align-items: flex-start; justify-content: flex-start; background: transparent; border-top: none; padding: 0; width: auto; white-space: normal; gap: calc(0.5em + 5px);">
+          <span class="hero-mark-title"><em>Told</em><span class="hero-mark-dot">·</span>Works</span>
+          <span class="hero-mark-name" style="font-size: 0.38em; font-weight: 300;">Dan Ross</span>
+        </h1>
+        <p class="hero-sub" style="background: transparent; padding: 0.9rem 0 0; text-align: left;">Begin with the work.</p>
       </div>
-      <div class="hero-grain"></div>
-      <div class="hero-vignette"></div>
-      <div class="hero-glow"></div>
-    </div>
-
-       <div class="hero-foot">
-      <span class="hero-chevron" aria-hidden="true"></span>
-    </div>
-
-    <div class="hero-content">
-      <h1 class="hero-mark serif">
-        <span class="hero-mark-title"><em>Told</em><span class="hero-mark-dot">·</span>Works</span>
-        <span class="hero-mark-pipe" aria-hidden="true">|</span>
-        <span class="hero-mark-name">Dan Ross</span>
-      </h1>
-      <p class="hero-sub">Central Otago workshop &middot; Aotearoa New Zealand</p>
-    </div>
-  </header>
-
-  <!-- ───────── INTRO ───────── -->
-  <section class="intro" id="intro">
-    <div class="container">
-      <div class="eyebrow eyebrow-center reveal">Dan Ross · Selected Works</div>
-      <h2 class="intro-h serif reveal">
-        Pieces that tell<br>
-        the story <em>the place</em><br>
-        is already telling.
-      </h2>
-      <p class="intro-sub reveal">Sometimes it begins with an architect's drawing. Sometimes with a homeowner who can't quite name what's missing. Sometimes with a single object — held, leaned against a wall, taken out on the water. Each piece is shaped in a Central Otago workshop.</p>
-    </div>
-
-    <div class="intro-meta reveal">
-      <span>By invitation</span>
-      <span class="dot">·</span>
-      <span>Late 2026 availability</span>
-    </div>
-    <p class="intro-welcome reveal">Enquiries are welcome.</p>
-  </section>
-
-  <!-- ───────── PRESS STRIP ───────── -->
-  <aside class="press" aria-label="Selected credentials">
-    <div class="container">
-     <div class="press-eye">Architect collaborations</div>
-```
-
-      <div class="press-row">
-        <span class="press-item">Mason &amp; Wales Architects</span>
-        <span class="press-sep" aria-hidden="true"></span>
-        <span class="press-item">Anna-Marie Chin Architects</span>
-        <span class="press-sep" aria-hidden="true"></span>
-        <a class="press-item press-link" href="https://www.nzia.co.nz/awards/new-zealand-architecture-awards/lake-hayes-cottage/9307/" target="_blank" rel="noopener">Lake Hayes Cottage — NZIA National 2020</a>
-        <span class="press-sep" aria-hidden="true"></span>
-        <a class="press-item press-link" href="https://www.nzia.co.nz/awards/local-architecture-awards/maunga-ora/11027/" target="_blank" rel="noopener">Maunga Ora — Southern 2023</a>
-      </div>
-    </div>
-  </aside>
-
-  <!-- ───────── PRACTICE ───────── -->
-  <section id="practice" class="practice">
-    <div class="container">
-      <div class="eyebrow reveal">The Practice</div>
-      <h2 class="section-title serif reveal">He builds the feeling first.</h2>
-
-      <div class="practice-grid">
-        <div class="practice-text reveal">
-          <p>Dan Ross works from the inside of a place outward. The work begins by listening for what a site or object is already asking to hold — sometimes named in drawings, sometimes felt but unspoken by the people who live with it.</p>
-          <p>Rather than imposing a language, he shapes the story until it finds its own. What follows is made in answer.</p>
-          <p>The work ranges from singular objects to finished rooms. The approach does not change. Stone and timber are chosen for where they come from and what they carry. Joins are visible. Process is allowed to speak. A piece is finished when it feels inevitable.</p>
-          <p>Dan works alone and takes on a small number of commissions each year. Not every conversation becomes a piece. The work he accepts is shaped by alignment — of place, people, and intent.</p>
-          <p><em>The aim is simple: to give a place the thing it was already asking for.</em></p>
-        </div>
-
-        <aside class="pull-quote reveal">
-          <p>"Timber passes through many hands. By the time it reaches us, it has already lived a long life. You have to honour that tree — give it justice, let its beauty be seen.</p>
-          <p>When timber, stone and concrete are brought together with care, you reunite elements that once lived together in nature. Done well, they resonate as one."</p>
-          <cite>— Dan Ross</cite>
-        </aside>
-      </div>
-
-    ```html
-      <!-- TODO: practice-facts — copy rewrite required.
-           Current labels ("Building & Making", "5 Builds", "Ross Brothers
-           Residences") frame Dan as contractor / head builder. National
-           Award row is recognition-context and can stay.
-           Hidden from public view until rewrite lands. -->
-      <div class="practice-facts reveal" hidden>
-        <div class="fact"><div class="fact-n serif">25+ Years</div><div class="fact-l">Building &amp; Making</div></div>
-        <div class="fact"><div class="fact-n serif">5 Builds</div><div class="fact-l">Mason &amp; Wales Architect</div></div>
-        <div class="fact"><div class="fact-n serif">2 NZIA</div><div class="fact-l">Ross Brothers Residences</div></div>
-        <div class="fact"><div class="fact-n serif">National Award</div><div class="fact-l">Lake Hayes Cottage · 2020</div></div>
-      </div>
-
-  </section>
-
-  <!-- ───────── SELECTED WORK ───────── -->
-  <section id="work" class="work-section">
-    <div class="container">
-      <div class="eyebrow reveal">Selected Work</div>
-      <h2 class="section-title serif reveal">Three pieces, told <em>through their making.</em></h2>
-
-      <div class="gallery-c reveal">
-        <article class="gallery-c-feature">
-          <a class="gallery-c-figure" href="work/the-sixteen/" aria-label="View The Sixteen">
-            <picture>
-              <source type="image/webp" srcset="images/sixteen-installed.webp">
-              <img src="images/sixteen-installed.jpg" alt="The Sixteen — ironbark sentinels installed in private grounds at Lake Hayes" loading="lazy">
-            </picture>
-            <div class="gallery-c-scrim">
-              <p class="gallery-c-caption">Sixteen ironbark figures reclaimed from a roadside ditch — 300-year-old Western Australian timber. Stripped to heartwood, refined by fire, crowned with hand-carved serpentine and Aotea stone. Set back into the ground as permanent guardians.</p>
-              <span class="gallery-c-link">View the full piece →</span>
-            </div>
-          </a>
-          <div class="gallery-c-plaque">
-            <p class="gallery-c-num">N° 02 · Legacy</p>
-            <h3 class="gallery-c-title">The <em>Sixteen</em></h3>
-          </div>
-        </article>
-
-        <div class="gallery-c-stack">
-          <article class="gallery-c-secondary">
-            <a class="gallery-c-figure" href="work/the-cellar/" aria-label="View The Cellar &amp; The Racks">
-              <picture>
-                <source type="image/webp" srcset="images/cellar-completed.webp">
-                <img src="images/cellar-completed.jpeg" alt="The Cellar — completed wine cellar in salvaged timber" loading="lazy">
-              </picture>
-              <div class="gallery-c-scrim">
-                <p class="gallery-c-caption">Salvaged timber, hessian, and driveway-bank roots set into the walls. Wine racks conceived as architecture, not furniture.</p>
-                <span class="gallery-c-link">View the full piece →</span>
-              </div>
-            </a>
-            <div class="gallery-c-plaque">
-              <p class="gallery-c-num">N° 01</p>
-              <h3 class="gallery-c-title">The Cellar &amp; <em>The Racks</em></h3>
-            </div>
-          </article>
-
-          <article class="gallery-c-secondary">
-            <a class="gallery-c-figure" href="work/the-threshold/" aria-label="View The Threshold">
-              <picture>
-                <source type="image/webp" srcset="images/threshold-complete-evening.webp">
-                <img src="images/threshold-complete-evening.jpeg" alt="The Threshold — aged timber paling gates at evening" loading="lazy">
-              </picture>
-              <div class="gallery-c-scrim">
-                <p class="gallery-c-caption">Re-clad over the existing gates in aged timber palings at varied heights. The mountain and lake are revealed only once you pass through.</p>
-                <span class="gallery-c-link">View the full piece →</span>
-              </div>
-            </a>
-            <div class="gallery-c-plaque">
-              <p class="gallery-c-num">N° 03</p>
-              <h3 class="gallery-c-title">The <em>Threshold</em></h3>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ───────── FROM THE WORKSHOP (TEASER) ───────── -->
-  <section id="workshop" class="workshop-coda">
-    <div class="container">
-      <div class="eyebrow eyebrow-center reveal">Outside Obligation</div>
-      <h2 class="workshop-coda-h serif reveal">From <em>the workshop.</em></h2>
-
-      <div class="workshop-coda-grid reveal">
-        <a class="workshop-coda-img bg-photo" href="work/workshop/" aria-label="View the workshop pieces" style="--img-webp: url('images/the-finished-goblet.webp'); --img-jpg: url('images/the-finished-goblet.jpg');"></a>
-        <div class="workshop-coda-body">
-          <p>A stone goblet carved from local quarry stone, gifted on completion. A two-storey dollshouse built with mortise-and-tenon joints at miniature scale, made for his daughter. Nobody asked for either; both exist at the same standard as everything else.</p>
-          <a class="work-link" href="work/workshop/">View the workshop pieces →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ───────── UNBIDDEN WORKS POINTER ───────── -->
-  <aside class="unbidden-pointer">
-    <div class="container">
-      <a class="unbidden-pointer-link" href="work/unbidden-works/">
-        <span class="unbidden-pointer-eyebrow">There is also</span>
-        <span class="unbidden-pointer-title serif"><em>Unbidden</em> Works.</span>
-      </a>
-    </div>
-  </aside>
-
-  <!-- ───────── WORK OF RECORD ───────── -->
-  <section class="record">
-    <div class="container">
-      <div class="eyebrow reveal">Work of Record</div>
-      <h2 class="section-title serif reveal">Built to <em>that standard.</em></h2>
-
-      <div class="record-grid">
-        ```html
-        <!-- TODO: Pinnacle Place — copy rewrite required.
-             Sotheby's / Robb Report / listing-price credentials stripped.
-             Builder-for-hire framing also removed; reposition as
-             "Mason & Wales commissioned [scope of work]" once new copy lands. -->
-        <article class="record-item reveal" hidden>
-          <div class="record-name serif">Pinnacle Place</div>
-          <p>Mason &amp; Wales residence on Queenstown Hill.</p>
-          <div class="record-meta">Mason &amp; Wales Architects</div>
-        </article>
-```
-
-        <article class="record-item reveal">
-          <div class="record-name serif">Lake Hayes Cottage</div>
-          <p>Anna-Marie Chin Architects. Built by Dan.</p>
-          <div class="record-meta">2020 NZIA National Award</div>
-        </article>
-
-        ```html
-        <!-- TODO: Lake Hayes Cottage — copy rewrite required.
-             "Built by Dan" framing removed. Reframe as architect-commission
-             context once new copy lands. -->
-        <article class="record-item reveal">
-          <div class="record-name serif">Lake Hayes Cottage</div>
-          <p>Anna-Marie Chin Architects.</p>
-          <div class="record-meta">2020 NZIA National Award</div>
-        </article>
-```
-
-
-        <article class="record-item reveal">
-          <div class="record-name serif">Faceted Cedar Ceiling</div>
-          <p>Multi-directional cedar cladding installed throughout the main living volume of a private residence. Each panel hand-fitted; the directions shift across the ceiling planes to catch light differently at every hour.</p>
-          <div class="record-meta">Lake Hayes Residence — Olive Lane</div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ───────── THE STANDARD ───────── -->
-  <section id="standard" class="standard">
-    <div class="container standard-inner">
-      <div class="eyebrow reveal">The Standard</div>
-      <h2 class="section-title serif reveal">Reputation <em>observed,</em> <br>not claimed.</h2>
-
-      <div class="standard-text reveal">
-        <p class="standard-lead">The work does not lie about the person who made it.</p>
-        <p>There is a pattern across Dan's career that no single project illustrates — only the full body of work makes it visible.</p>
-        <p>When projects have hit pressure — and they have — Dan has not walked away, renegotiated downward, or settled for less. He has absorbed the cost, found the material, and finished what he committed to finish.</p>
-        <p>It runs the other way too. He chooses the people he works for as carefully as he chooses the timber he works with. Three to four commissions a year. The first conversation is a site visit. If the brief, the place and the person are not aligned, the conversation ends there, with respect and without obligation.</p>
-        <p class="standard-close">Twenty-five years of those choices, made consistently, is not a portfolio. It is a practice.</p>
-      </div>
-
-     ```html
-      <ul class="standard-facts reveal">
-        <li>Every current commission sourced through referral or firsthand experience.</li>
-        <li>Three to four commissions a year, made by one person.</li>
-        <li>Repeat clients across multiple commissions spanning years.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ───────── COMMISSION ───────── -->
-  <section id="commission" class="commission">
-    <div class="container commission-inner">
-      <div class="eyebrow eyebrow-center reveal">Commission</div>
-      <h2 class="commission-h serif reveal">Begin a <em>conversation.</em></h2>
-      <p class="commission-sub reveal">The path is short. It begins with you.</p>
-
-      <ol class="commission-process reveal">
-        <li>
-          <span class="step-n serif">i.</span>
-          <div class="step-body">
-            <div class="step-t">A first email</div>
-            <div class="step-d">Tell Dan about the place, the people, and what the work needs to do. As detailed or as brief as you'd like.</div>
-          </div>
-        </li>
-        <li>
-          <span class="step-n serif">ii.</span>
-          <div class="step-body">
-            <div class="step-t">A site visit</div>
-            <div class="step-d">Dan visits in person. He listens to the place. No commitment in either direction at this point.</div>
-          </div>
-        </li>
-        <li>
-          <span class="step-n serif">iii.</span>
-          <div class="step-body">
-            <div class="step-t">A clear answer</div>
-            <div class="step-d">Within a week of the visit, you'll have a yes or a no — and either way, an honest read on the brief.</div>
-          </div>
-        </li>
-      </ol>
-
-      <a class="cta reveal" href="mailto:dan@toldworks.nz">Begin the conversation</a>
-
-      <p class="commission-note reveal">
-        Dan Ross · Central Otago, New Zealand<br>
-        <a href="mailto:dan@toldworks.nz">dan@toldworks.nz</a>
-      </p>
-    </div>
-  </section>
+    </header>
 
   </main>
-
-  <!-- ───────── FOOTER ───────── -->
-  <footer>
-    <div class="container footer-inner">
-      <a class="brand serif" href="#intro">TOLD<span>·</span>WORKS</a>
-      <div class="footer-tagline serif">Made in Central Otago. For the spaces still asking for something.</div>
-      <div class="footer-copy">© 2026 Dan Ross · All rights reserved.</div>
-    </div>
-  </footer>
-
-  <!-- ───────── LIGHTBOX ───────── -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
-    <button class="lightbox-close" id="lightboxClose" aria-label="Close">Close ✕</button>
-    <div class="lightbox-content">
-      <p class="lightbox-title serif" id="lightboxTitle"></p>
-      <p class="lightbox-sub" id="lightboxSub"></p>
-    </div>
-  </div>
 
   <script src="script.js"></script>
 </body>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enquire — Told Works</title>
+  <meta name="description" content="Begin a conversation with Dan Ross. The path is short.">
+  <meta name="theme-color" content="#0E0D0B">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+
+  <!-- The Commission section's only action style (.cta) is an uppercase,
+       wide-tracked button — unsuitable for an email address. This one rule
+       gives a plain, lowercase, styled mailto link in the section's palette. -->
+  <style>
+    .enquire-email {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: clamp(1.1rem, 2.4vw, 1.45rem);
+      letter-spacing: 0.04em;
+      color: var(--ember);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(197, 117, 74, 0.35);
+      padding-bottom: 0.35rem;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+    .enquire-email:hover { color: var(--bone); border-bottom-color: var(--bone); }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="/" class="brand serif">TOLD<span>·</span>WORKS</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">≡</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/work/">Work</a></li>
+      <li><a href="/work/">Case Studies</a></li>
+      <li><a href="/practice/">Practice</a></li>
+      <li><a class="nav-enquire" href="/enquire/">Enquire</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- ───────── ENQUIRE ───────── -->
+    <section id="enquire" class="commission">
+      <div class="container commission-inner">
+        <div class="eyebrow eyebrow-center reveal">Enquire</div>
+        <h2 class="commission-h serif reveal">Begin <em>here.</em></h2>
+        <p class="commission-sub reveal">The path is short.</p>
+
+        <ol class="commission-process reveal">
+          <li>
+            <span class="step-n serif">i.</span>
+            <div class="step-body">
+              <div class="step-t">A first email</div>
+              <div class="step-d">Tell Dan about the work — the brief, the people, what it needs to do. As detailed or as brief as you'd like.</div>
+            </div>
+          </li>
+          <li>
+            <span class="step-n serif">ii.</span>
+            <div class="step-body">
+              <div class="step-t">A site visit</div>
+              <div class="step-d">Dan comes in person. He listens. No commitment in either direction at this point.</div>
+            </div>
+          </li>
+          <li>
+            <span class="step-n serif">iii.</span>
+            <div class="step-body">
+              <div class="step-t">A clear answer</div>
+              <div class="step-d">Within a week of the visit, you'll have a yes or a no — and either way, an honest read on the brief.</div>
+            </div>
+          </li>
+        </ol>
+
+        <a class="enquire-email reveal" href="mailto:dan@toldworks.nz">dan@toldworks.nz</a>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="/script.js"></script>
+</body>
+</html>
